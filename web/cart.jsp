@@ -62,26 +62,28 @@
                                                 <th class="product-price">Price</th>
                                                 <th class="product_quantity">Quantity</th>
                                                 <th class="product_total">Total</th>
+                                                <th class="product_remove">Update</th>
                                                 <th class="product_remove">Delete</th>
                                                 
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:set var="o" value="${sessionScope.cart}"/>
-                                            <c:forEach items="${o.items}" var="i">
+
+                                            <c:forEach items="${sessionScope.cart.items}" var="i">
                                                 <tr>
-                                                    
-                                                    <td class="product_thumb"><a href="product?action=productdetail&product_id=${i.product.product_id}"><img src="${i.product.img}" alt=""></a></td>
-                                                    <td class="product_name"><a href="product?action=productdetail&product_id=${i.product.product_id}">${i.product.product_name}</a></td>
-                                                    <td class="product-price"><fmt:formatNumber pattern="##########" value="${i.product.product_price}"/></td>
-                                                    <td class="product_quantity"><input name="quantity" min="1" max="100" value="${i.quantity}" type="number"></td>
-                                                    <td class="product_total"> <fmt:formatNumber pattern="##########" value="${i.product.product_price * i.quantity }"/></td>
-                                                    <td class="product_remove"><a href="cart?action=deletecart&product_id=${i.product.product_id}"><i class="fa fa-trash-o"></i></a></td>
+                                                    <td class="product_thumb"><a href="product?action=productdetail&product_id=${i.key.product_id}"><img src="${i.key.img}" alt=""></a></td>
+                                                    <td class="product_name"><a href="product?action=productdetail&product_id=${i.key.product_id}">${i.key.product_name}</a></td>
+                                                    <td class="product-price"><fmt:formatNumber pattern="##########" value="${i.key.product_price}"/></td>
+                                                    <td class="product_quantity"><input name="quantity" min="1" max="100" value="${i.value}" type="number"></td>
+                                                    <td class="product_total"> <fmt:formatNumber pattern="##########" value="${i.key.product_price * i.value }"/></td>
+                                                    <td class="product_remove"> <a href="MainController?action=updateItemsInCart&product_id=${i.key.product_id}"><i class="fa fa-pencil"></i></a></td>
+                                                    <td class="product_remove"><a href="MainController?action=deleteFromCart&product_id=${i.key.product_id}"><i class="fa fa-trash-o"></i></a></td>
                                                     
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
-                                    </table>   
+                                    </table>
+                                    
                                 </div> 
 <!--                                <div class="cart_submit">
                                     <button type="submit">update cart</button>
@@ -100,7 +102,7 @@
                                     <div class="coupon_inner">
                                         <div class="cart_subtotal">
                                             <p>Tổng đơn hàng</p>
-                                            <p class="cart_amount"><fmt:formatNumber pattern="##########" value="${sessionScope.total}"/></p>
+                                            <p class="cart_amount"><fmt:formatNumber pattern="##########" value="${sessionScope.cart.getTotalMoney()}"/></p>
                                         </div>
                                         <div class="cart_subtotal ">
                                             <p>Phí ship</p>
@@ -109,7 +111,7 @@
 
                                         <div class="cart_subtotal">
                                             <p>Total</p>
-                                            <p class="cart_amount"><fmt:formatNumber pattern="##########" value="${sessionScope.total + 15000}"/></p>
+                                            <p class="cart_amount"><fmt:formatNumber pattern="##########" value="${sessionScope.cart.getTotalMoney() + 15000}"/></p>
                                         </div>
                                         <div class="checkout_btn">
                                             <a href="checkout">Thanh toán</a>

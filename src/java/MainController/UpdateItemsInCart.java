@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ROG STRIX
+ * @author luong
  */
-public class MainController extends HttpServlet {
+public class UpdateItemsInCart extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,69 +27,20 @@ public class MainController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final String ERROR = "404.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
-        String action = request.getParameter("action");
-        try  {
-            if (action.equals("Login")){
-                url = "checkLogin";
-            }
-             if (action.equals("logout")){
-                url = "logout";
-            }
-             if (action.equals("signup")){
-                url = "checkSignup";
-            }
-             if (action.equals("product")){
-                url = "Shop";
-            }
-             if (action.equals("productdetail")){
-                url = "Productdetail";
-            }
-             if (action.equals("listByCategory")){
-                url = "ListByCategory";
-            }
-             if (action.equals("sortlow")){
-                url = "Sortlow";
-            }
-             if (action.equals("sorthigh")){
-                url = "Sorthigh";
-            }
-             if (action.equals("sorta")){
-                url = "Sorta";
-            }
-             if (action.equals("search")){
-                url = "Search";
-            }
-             if (action.equals("updateinfo")){
-                url = "Updateinfo";
-            }
-             if (action.equals("updatepassword")){
-                url = "Updatepassword";
-            }
-             if (action.equals("dashboard")){
-                url = "Manager";
-            }
-             if (action.equals("customermanager")){
-                url = "Customermanager";
-            }
-             if (action.equals("addToCart")){
-                url = "AddToCart";
-            } 
-             if (action.equals("deleteFromCart")){
-                url = "DeleteFromCart";
-            } 
-             if (action.equals("updateItemsInCart")){
-                url = "UpdateItemsInCart";
-            } 
-             
-        }catch(Exception ex){
-            log("Error at: MainController" + ex.toString());
-        }finally {
-            request.getRequestDispatcher(url).forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet UpdateItemsInCart</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet UpdateItemsInCart at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

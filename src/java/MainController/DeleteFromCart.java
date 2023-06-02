@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.Home;
+package MainController;
 
 import DAO.productDAO;
-import Entity.Item;
+import Entity.Cart;
 import Entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
-import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author luong
  */
-public class Cart extends HttpServlet {
+public class DeleteFromCart extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,54 +34,20 @@ public class Cart extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession(true);
-        String action = request.getParameter("action");
-        
-        if (action == null) {
-            
-            Entity.Cart cart = null;
-            Object o = session.getAttribute("cart");
-            if (o != null) {
-                cart = (Entity.Cart) o;
-            } else {
-                cart = new Entity.Cart();
-            }
-            String Squantity = request.getParameter("quantity");
-            String product_id = request.getParameter("product_id");
-            
-            try {
-                int quanity = Integer.parseInt(Squantity);
-                productDAO pdao = new productDAO();
-                Product product = pdao.getProductByID(product_id);
-                Item item = new Item(product, quanity);
-                cart.addItem(item);
-
-            } catch (Exception e) {
-            }
-            List<Item> list = cart.getItems();
+        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        String URL = "cart.jsp";
+        try{
+            String id = request.getParameter("product_id");
+            Product product = new productDAO().getProductByID(id);
+            HttpSession session = request.getSession(false);
+            Cart cart = (Cart) session.getAttribute("cart");
+            cart.deleteFromCart(product);
             session.setAttribute("cart", cart);
-            session.setAttribute("total", cart.getTotalMoney());
-            request.getRequestDispatcher("product?action=productdetail&product_id=" + product_id).forward(request, response);
+        }finally{
+            RequestDispatcher rd = request.getRequestDispatcher(URL);
+            rd.forward(request, response);
         }
-        if (action.equalsIgnoreCase("showcart")) {
-            request.getRequestDispatcher("cart.jsp").forward(request, response);
-        }
-        if (action.equals("deletecart")) {
-            Entity.Cart cart = null;
-            Object o = session.getAttribute("cart");
-            if (o != null) {
-                cart = (Entity.Cart) o;
-            } else {
-                cart = new Entity.Cart();
-            }
-            String product_id = request.getParameter("product_id");
-            cart.removeItem(product_id);
-            List<Item> list = cart.getItems();
-            session.setAttribute("cart", cart);
-            session.setAttribute("total", cart.getTotalMoney());
-            response.sendRedirect("cart.jsp");
-        }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

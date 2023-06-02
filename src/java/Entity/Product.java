@@ -5,6 +5,8 @@
  */
 package Entity;
 
+import java.util.Objects;
+
 /**
  *
  * @author ROG STRIX
@@ -60,6 +62,31 @@ public class Product {
 
     public void setProduct_id(String product_id) {
         this.product_id = product_id;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.product_id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Product other = (Product) obj;
+        if (!Objects.equals(this.product_id, other.product_id)) {
+            return false;
+        }
+        return true;
     }
 
     public String getProduct_name() {

@@ -5,18 +5,24 @@
  */
 package MainController;
 
+import DAO.productDAO;
+import Entity.Cart;
+import Entity.Product;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ROG STRIX
+ * @author luong
  */
-public class MainController extends HttpServlet {
+public class AddToCart extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,69 +33,28 @@ public class MainController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final String ERROR = "404.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
-        String action = request.getParameter("action");
-        try  {
-            if (action.equals("Login")){
-                url = "checkLogin";
+        String URL = "MainController?action=productdetail&product_id=";
+        try{
+            String id = request.getParameter("product_id");
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            URL += id;
+            
+            Product product = new productDAO().getProductByID(id);
+            HttpSession session = request.getSession();
+            Cart cart = (Cart) session.getAttribute("cart");
+            if (cart == null){
+                
+                cart = new Cart();
             }
-             if (action.equals("logout")){
-                url = "logout";
-            }
-             if (action.equals("signup")){
-                url = "checkSignup";
-            }
-             if (action.equals("product")){
-                url = "Shop";
-            }
-             if (action.equals("productdetail")){
-                url = "Productdetail";
-            }
-             if (action.equals("listByCategory")){
-                url = "ListByCategory";
-            }
-             if (action.equals("sortlow")){
-                url = "Sortlow";
-            }
-             if (action.equals("sorthigh")){
-                url = "Sorthigh";
-            }
-             if (action.equals("sorta")){
-                url = "Sorta";
-            }
-             if (action.equals("search")){
-                url = "Search";
-            }
-             if (action.equals("updateinfo")){
-                url = "Updateinfo";
-            }
-             if (action.equals("updatepassword")){
-                url = "Updatepassword";
-            }
-             if (action.equals("dashboard")){
-                url = "Manager";
-            }
-             if (action.equals("customermanager")){
-                url = "Customermanager";
-            }
-             if (action.equals("addToCart")){
-                url = "AddToCart";
-            } 
-             if (action.equals("deleteFromCart")){
-                url = "DeleteFromCart";
-            } 
-             if (action.equals("updateItemsInCart")){
-                url = "UpdateItemsInCart";
-            } 
-             
-        }catch(Exception ex){
-            log("Error at: MainController" + ex.toString());
-        }finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            cart.addItem(product, quantity);   
+
+            session.setAttribute("cart", cart);
+        }finally{
+            RequestDispatcher rd = request.getRequestDispatcher(URL);
+            rd.forward(request, response);
         }
     }
 

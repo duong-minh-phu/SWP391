@@ -10,73 +10,49 @@ package Entity;
  * @author ROG STRIX
  */
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Cart {
 
-    List<Item> items;
+    private Map<Product, Integer> items;
 
-    public Cart() {
-        items = new ArrayList<>();
-    }
-
-    public Cart(List<Item> items) {
-        this.items = items;
-    }
-
-    public List<Item> getItems() {
+    public Map<Product, Integer> getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(Map<Product, Integer> items) {
         this.items = items;
     }
 
-    // số lượng 1 sản phẩm trong giỏ - khách sẽ mua
-    public int getQuantityById(String id) {
-        return getItemById(id).getQuantity();
+    public Cart(Map<Product, Integer> items) {
+        this.items = items;
     }
 
-    private Item getItemById(String id) {
-        for (Item i : items) {
-            if (i.getProduct().getProduct_id().equals(id)) {
-                return i;
-            }
-        }
-        return null;
+    public Cart() {
+        items = new HashMap<>();
     }
-    private Item CheckItem(String id) {
-        for (Item i : items) {
-            if (i.getProduct().getProduct_id().equals(id)) {
-                return i;
-            }
-        }
-        return null;
+    
+    public void addItem(Product key, int value){
+       Integer currentValue = items.get(key);
+       if (currentValue == null){
+           items.put(key, value);
+       } else {
+           items.put(key, currentValue + value);
+       }
     }
-
-    // add 1 sản phẩm vào giỏ, nếu có rồi thì tăng số lượng
-    public void addItem(Item t) {
-        if (getItemById(t.getProduct().getProduct_id()) != null && CheckItem(t.getProduct().getProduct_id()) != null) {
-            Item m = getItemById(t.getProduct().getProduct_id());
-            m.setQuantity(m.getQuantity() + t.getQuantity());
-        } else {
-            items.add(t);
-        }
+    
+    public void deleteFromCart(Product key){
+        items.remove(key);
     }
-    //loại sản phẩm khỏi giỏ
-    public void removeItem(String id) {
-        if (getItemById(id) != null) {
-            items.remove(getItemById(id));
+    
+    public int getTotalMoney(){
+        int result = 0;
+        for (Product product : items.keySet()){
+            result += product.getProduct_price()*items.get(product);
         }
-    }
-    //tổng tiền của cả giỏ hàng – sẽ add vào bảng Order
-
-    public double getTotalMoney() {
-        double t = 0;
-        for (Item i : items) {
-            t += (i.getQuantity() * i.getProduct().product_price);
-        }
-        return t;
+        return result;
     }
 
 }

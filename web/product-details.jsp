@@ -70,7 +70,7 @@
 
                     <div class="col-lg-7 col-md-7">
                         <div class="product_d_right">
-                            <form action="MainController?action=cart&&product_id=${ProductData.product_id}" method="POST">
+                            <form action="MainController?action=addToCart&&product_id=${ProductData.product_id}" method="POST">
                                 <h1>${ProductData.product_name}</h1>
                                 <div class="product_price">
                                     <span class="current_price">${ProductData.product_price} VNĐ</span>
