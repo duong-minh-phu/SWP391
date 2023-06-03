@@ -40,7 +40,7 @@
                             <td>${p.product_price}</td>
                             <td>${p.product_describe}</td>
                             <td>${p.quantity}</td>
-                            <td><img src="${p.img}" width="200px;"></td>
+                            <td><img src="${p.img}" width="250px;"></td>
                             <td>
                                 <button type="button" onclick="showConfirmDialog('${p.product_id}')">Xóa</button>
                                 <button type="button" onclick="editProduct('${p.product_id}')">Sửa</button>
