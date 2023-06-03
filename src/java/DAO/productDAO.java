@@ -19,6 +19,7 @@ import java.util.List;
  * @author ROG STRIX
  */
 public class productDAO {
+
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
@@ -40,6 +41,52 @@ public class productDAO {
             System.out.println(e);
         }
         return list;
+    }
+
+    public void insertProduct(Product product) {
+        String sql = "insert dbo.product(product_id,category_id,product_name,product_price,product_describe,quantity,img) values(?,?,?,?,?,?,?)";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, product.getProduct_id());
+            ps.setInt(2, product.getCate().getCategory_id());
+            ps.setString(3, product.getProduct_name());
+            ps.setFloat(4, product.getProduct_price());
+            ps.setString(5, product.getProduct_describe());
+            ps.setInt(6, product.getQuantity());
+            ps.setString(7, product.getImg());
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
+    public void deleteProduct(String product_id) {
+        String sq2 = "delete from product where product_id=?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sq2);
+            ps.setString(1, product_id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void updateProduct(Product product) {
+        String sq3 = "update product set category_id=? ,product_name=? ,product_price=? ,product_describe=? ,quantity=? ,img=? where product_id=?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sq3);
+            ps.setInt(1, product.getCate().getCategory_id());
+            ps.setString(2, product.getProduct_name());
+            ps.setFloat(3, product.getProduct_price());
+            ps.setString(4, product.getProduct_describe());
+            ps.setInt(5, product.getQuantity());
+            ps.setString(6, product.getImg());
+            ps.setString(7, product.getProduct_id());
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
     }
 
     public List<Category> getCategory() {
@@ -71,12 +118,6 @@ public class productDAO {
         }
         return null;
     }
-
-  
-
-  
-
-
 
     public List<Product> getProductLow() {
         List<Product> list = new ArrayList<>();
@@ -174,9 +215,6 @@ public class productDAO {
         return null;
     }
 
-   
-    
-
     public int CountProduct() {
         int count = 0;
         String sql = "SELECT COUNT(*) as 'count'\n"
@@ -243,16 +281,16 @@ public class productDAO {
 
     public List<Product> SearchAll(String text) {
         List<Product> list = new ArrayList<>();
-        String sql = "SELECT DISTINCT c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img \n" +
-                    " FROM product p inner join category c on c.category_id = p.category_id \n" +
-                    "WHERE product_name LIKE ? OR  product_price LIKE ?  OR c.category_name LIKE ?";
-        
+        String sql = "SELECT DISTINCT c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img \n"
+                + " FROM product p inner join category c on c.category_id = p.category_id \n"
+                + "WHERE product_name LIKE ? OR  product_price LIKE ?  OR c.category_name LIKE ?";
+
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, "%" + text + "%");
-            ps.setString(2, "%" +text + "%");
-            
+            ps.setString(2, "%" + text + "%");
+
             ps.setString(3, "_%" + text + "%_");
             rs = ps.executeQuery();
             while (rs.next()) {

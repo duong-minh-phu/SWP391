@@ -1,0 +1,73 @@
+body{
+    background: #ccc;
+}
+form {
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    overflow: hidden;
+    box-sizing: border-box; 
+    width: 100%; 
+    padding: 1rem; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
+    transition: all 0.3s ease-in-out; 
+}
+
+form:hover {
+  transform: scale(0.85); 
+}
+.product-field {
+    width: 45%;
+    margin-bottom: 1rem;
+}
+
+.product-field label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.product-field input[type="text"],
+.product-field select,
+.product-field textarea,
+.product-field input[type="number"] {
+    border: 2px solid #ccc;
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+}
+
+.product-field input[type="file"] {
+    margin-top: 0.5rem;
+}
+
+.product-field button[type="submit"]:hover {
+    background-color: #0069d9;
+}
+
+
+.product-image-preview {
+    max-width: 100%;
+    max-height: 100%;
+}
+.product-image-container {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-field button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    align-self: flex-start; /* căn nút bấm theo chiều dọc */
+}
