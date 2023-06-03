@@ -11,11 +11,27 @@
 
             <div id="header_product">
                 <h1>Quản lý sản phẩm</h1>
+            </div>
+
+            <div id="side_bar">
                 <p> Welcome,<b>${sessionScope.user.user_name}</b></p>
+                <ul class="app-menu">
+                    <li><a href="dashboard"><span class="app-menu__label">Bảng điều khiển</span></a></li>
+                    <li><a href="customermanager"><span class="app-menu__label">Quản lý khách hàng</span></a></li>
+                    <li><a href="productmanager"><span class="app-menu__label">Quản lý sản phẩm</span></a></li>
+                    <li><a href="ordermanager"><span class="app-menu__label">Quản lý đơn hàng</span></a></li>
+                </ul>
             </div>
 
             <div id="insert_product">
                 <a href="productmanager?action=insert" >Tạo mới sản phẩm</a>
+            </div>
+
+            <div id="search_product">
+                <form>
+                    <input type="text" placeholder="Tìm kiếm...">
+                    <button type="submit">Tìm kiếm</button>
+                </form>
             </div>
 
             <div id="product_menu">
@@ -71,9 +87,9 @@
                                         <label for="quantity_${p.product_id}">Quantity:</label>
                                         <input type="number" id="quantity_${p.product_id}" name="quantity" value="${p.quantity}" required>
 
-                                        <label for="image_${p.product_id}">Image:</label>
+                                        <<label for="image_${p.product_id}">Image:</label>
                                         <input type="file" id="image_${p.product_id}" name="img">
-                                        <img id="imagePreview_${p.product_id}" src="${p.img}" style="max-width:600px; max-height:600px">
+                                        <img id="imagePreview_${p.product_id}" src="${p.img}" >
 
                                         <button type="submit" id="editBtn_${p.product_id}">Update</button>
                                         <button type="button" onclick="hideEditForm('${p.product_id}')">Cancel</button>
@@ -137,21 +153,20 @@
                 }
             </script>
             <script>
-                const input = document.querySelector('#image_${p.product_id}');
-                const preview = document.querySelector('#imagePreview_${p.product_id}');
+                const input_${p.product_id} = document.querySelector('#image_${p.product_id}');
+                const preview_${p.product_id} = document.querySelector('#imagePreview_${p.product_id}');
 
-                input.addEventListener('change', () => {
-                    const file = input.files[0];
+                input_${p.product_id}.addEventListener('change', () => {
+                    const file = input_${p.product_id}.files[0];
                     const reader = new FileReader();
 
                     reader.addEventListener('load', () => {
-                        preview.src = reader.result;
+                        preview_${p.product_id}.src = reader.result;
                     });
 
                     reader.readAsDataURL(file);
                 });
             </script>
-
             <style>
 
                 #confirmDialog {
@@ -224,109 +239,211 @@
                     background-color: #28A745;
                     color: white;
                 }
-                /* Global Styles */
-                html {
-                    font-family: Arial, sans-serif;
-                    font-size: 16px;
+                * {
+                    box-sizing: border-box;
                 }
+
                 body {
+                    font-family: Arial, sans-serif;
                     margin: 0;
                     padding: 0;
                 }
 
-                /* Header Styles */
+                * {
+                    box-sizing: border-box;
+                }
+
+                body {
+                    font-family: Arial, sans-serif;
+                    margin: 0;
+                    padding: 0;
+                }
+
+                /* Header styles */
+
                 #header_product {
                     background-color: #333;
-                    color: #fff;
-                    padding: 10px;
+                    color: white;
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
+                    padding: 10px 20px;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    z-index: 9999;
                 }
+
                 #header_product h1 {
                     margin: 0;
+                    font-size: 24px;
                 }
-                #header_product p {
-                    margin: 0;
+
+                /* Side bar styles */
+
+                #side_bar {
+                    background-color: #f2f2f2;
+                    padding: 20px;
+                    width: 19%;
+                    position: fixed;
+                    top: 30px; 
+                    left: 0;
+                    bottom: 0;
+                    overflow: auto;
+                }
+
+                #side_bar p {
+                    margin-top: 30;
                     font-weight: bold;
                 }
 
-                /* Insert Product Styles */
-                #insert_product a {
+                .app-menu {
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                }
+
+                .app-menu li {
+                    margin-bottom: 10px;
+                }
+
+                .app-menu__label {
                     display: block;
-                    width: 150px;
-                    background-color: #007bff;
-                    color: #fff;
-                    text-align: center;
                     padding: 10px;
-                    border-radius: 5px;
-                    margin: 20px auto;
+                    color: #333;
                     text-decoration: none;
                 }
 
-                /* Product Menu Styles */
+                /* Main content styles */
+
+                #wrapper {
+                    margin-top: 60px; /* tùy chỉnh khoảng cách giữa header và phần nội dung chính */
+                    margin-left: 20%;
+                    padding: 20px;
+                }
+
+                #search_product {
+                    float: right;
+                    margin: 20px;
+                }
+
+                #search_product form {
+                    display: inline-block;
+                }
+
+                #search_product input[type="text"],
+                #search_product button[type="submit"] {
+                    height: 30px;
+                    font-size: 14px;
+                    border-radius: 3px;
+                    border: none;
+                    background-color: #DDD;
+                    padding: 5px 10px;
+                }
+
+                #search_product input[type="text"] {
+                    width: 200px;
+                    margin-right: 5px;
+                }
+
+                #search_product button[type="submit"] {
+                    color: #fff;
+                    background-color: #888888;
+                    cursor: pointer;
+                    transition: all 0.3s ease-in-out;
+                }
+
+                #search_product button[type="submit"]:hover {
+                    background-color: #0062cc;
+                }
+
+                #insert_product {
+                    text-align: right;
+                    margin: 20px;
+                }
+
+                #insert_product a {
+                    display: inline-block;
+                    padding: 10px 20px;
+                    background-color: #5cc6ee;
+                    color: black;
+                    text-decoration: none;
+                    border-radius: 5px;
+                }
+
+                /* Product menu styles */
+
                 #product_menu {
-                    margin: 20px auto;
+                    margin: 20px;
                 }
+
                 #product_menu h2 {
-                    font-size: 24px;
-                    margin: 0;
+                    margin-top: 0;
+                    font-size: 20px;
                 }
-                #product_menu table {
+
+                table {
                     width: 100%;
                     border-collapse: collapse;
                 }
-                #product_menu th,
-                #product_menu td {
+
+                th, td {
                     padding: 10px;
-                    text-align: center;
+                    text-align: left;
                 }
-                #product_menu th {
-                    background-color: #eee;
+
+                th {
+                    background-color: #333;
+                    color: white;
                 }
-                #product_menu tr:nth-child(even) {
+
+                tr:nth-child(even) {
                     background-color: #f2f2f2;
                 }
-                #product_menu img {
-                    max-width: 100px;
-                }
-                #product_menu button {
+
+                button[type="button"] {
                     padding: 5px 10px;
-                    border-radius: 5px;
-                    margin-right: 10px;
-                }
-                #product_menu form label {
-                    display: block;
-                    margin-bottom: 10px;
-                }
-                #product_menu form input[type="text"],
-                #product_menu form select,
-                #product_menu form textarea,
-                #product_menu form input[type="number"] {
-                    width: 95%;
-                    padding: 5px;
-                    border-radius: 5px;
-                    border: 1px solid #ccc;
-                    margin-bottom: 10px;
-                }
-                #product_menu form button[type="submit"],
-                #product_menu form button[type="button"] {
-                    background-color: #007bff;
-                    color: #fff;
+                    background-color: #333;
+                    color: white;
                     border: none;
-                    padding: 10px;
                     border-radius: 5px;
                     cursor: pointer;
+                    margin-right: 5px;
                 }
-                #product_menu form button[type="button"] {
-                    background-color: #dc3545;
+
+                button[type="submit"] {
+                    padding: 5px 10px;
+                    background-color: #333;
+                    color: white;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    margin-right: 5px;
                 }
-                #edit_form_container {
-                    overflow: auto;
+
+                #edit_form_container input,
+                #edit_form_container select,
+                #edit_form_container textarea {
+                    display: block;
+                    margin-bottom: 10px;
+                    width: 100%;
+                    padding: 5px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                }
+
+                #edit_form_container label {
+                    font-weight: bold;
+                }
+
+                #edit_form_container img {
+                    display: block;
+                    max-width: 200px;
+                    margin-top: 10px;
                 }
             </style>
 
         </div>   
     </body>
 </html>
-
