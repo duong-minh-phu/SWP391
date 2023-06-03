@@ -84,7 +84,16 @@ public class MainController extends HttpServlet {
             } 
              if (action.equals("updateItemsInCart")){
                 url = "UpdateItemsInCart";
+            }
+             if (action.equals("insert")){
+                url = "productInsert.jsp";
             } 
+             if (action.equals("addProduct")){
+                url = "addProduct";
+            }
+             if (action.equals("deleteproduct")){
+                url = "deleteProduct";
+            }
              
         }catch(Exception ex){
             log("Error at: MainController" + ex.toString());

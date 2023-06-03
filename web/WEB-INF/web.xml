@@ -60,6 +60,10 @@
         <servlet-name>ProductManager</servlet-name>
         <servlet-class>Controller.Admin.ProductManager</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addProduct</servlet-name>
+        <servlet-class>MainController.addProduct</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
@@ -115,6 +119,10 @@
     <servlet-mapping>
         <servlet-name>ProductManager</servlet-name>
         <url-pattern>/productmanager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addProduct</servlet-name>
+        <url-pattern>/addProduct</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

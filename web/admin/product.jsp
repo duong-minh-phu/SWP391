@@ -36,7 +36,7 @@
 
             <div id="product_menu">
                 <h2>Danh sách sản phẩm</h2>
-                <table action="productmanager?action=updateproduct"  border="1">
+                <table action="MainController?action=updateproduct"  border="1">
                     <tr>
                         <th>Product ID</th>
                         <th>Product Name</th>
@@ -135,7 +135,7 @@
 
                     const confirmBtn = document.getElementById('confirmBtn');
                     confirmBtn.onclick = function () {
-                        window.location.href = "productmanager?action=deleteproduct&product_id=" + productId;
+                        window.location.href = "MainController?action=deleteproduct&product_id=" + productId;
                     };
 
                     const cancelBtn = document.getElementById('cancelBtn');

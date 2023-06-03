@@ -13,7 +13,7 @@
     </head>
     <body>
         <div class="product-form">
-            <form action="productmanager?action=addProduct" method="post">
+            <form action="MainController?action=addProduct" method="post">
                 <div class="product-field">
                     <h1>Thêm sản phẩm mới</h1>
                     <label for="productName">Product ID:</label>
