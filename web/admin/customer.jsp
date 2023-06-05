@@ -136,7 +136,7 @@
                  data-keyboard="false">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <form method="POST" action="customermanager?action=update">
+                        <form method="POST" action="MainController?action=update">
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="form-group  col-md-12">
@@ -197,7 +197,7 @@
                     })
                             .then((willDelete) => {
                                 if (willDelete) {
-                                    window.location = "customermanager?action=deleteuser&user_id=" + $(this).attr("value");
+                                    window.location = "MainController?action=deleteuser&user_id=" + $(this).attr("value");
                                     swal("Đã xóa thành công.!", {
                                     });
                                 }
