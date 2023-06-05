@@ -57,6 +57,7 @@ public class ListByCategory extends HttpServlet {
             List<Entity.Product> product = c.getListByPage(productList, start, end);
             request.setAttribute("page", page);
             request.setAttribute("num", num);
+            request.setAttribute("size", size);
             request.setAttribute("CategoryData", category);
             request.setAttribute("ProductData", product);
             request.getRequestDispatcher("shop_category.jsp").forward(request, response);

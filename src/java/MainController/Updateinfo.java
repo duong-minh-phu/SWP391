@@ -46,7 +46,8 @@ public class Updateinfo extends HttpServlet {
                     dao.updateUser(user_id, user_name, user.getUser_pass(),user_phone);
                     Entity.User user1 = new Entity.User(user.getUser_id(), user_name, user.getUser_email(), user.getUser_pass(), user.getIsAdmin(),user_phone);
                     session.setAttribute("user", user1);
-                    response.sendRedirect("my-account.jsp");
+                    request.setAttribute("infor", "Cập nhật thành công!!!");
+                    request.getRequestDispatcher("my-account.jsp").forward(request, response);
                 } else {
                     response.sendRedirect("login.jsp");
                 }

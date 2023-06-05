@@ -56,7 +56,11 @@ public class checkLogin extends HttpServlet {
                 response.addCookie(email);
                 response.addCookie(pass);
                 response.addCookie(rem);
+                if("ADMIN".equals(user.getIsAdmin())||"STAFF".equals(user.getIsAdmin())){
+                    response.sendRedirect("MainController?action=dashboard");
+                }else if ("CUS".equals(user.getIsAdmin())){
                 response.sendRedirect("home");
+                }
             }
            
         }catch(Exception ex){

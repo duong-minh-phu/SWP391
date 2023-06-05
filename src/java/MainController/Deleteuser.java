@@ -37,7 +37,7 @@ public class Deleteuser extends HttpServlet {
                 String user_id=request.getParameter("user_id");
                     int id=Integer.parseInt(user_id);
                     userDAO dao=new userDAO();
-                    dao.deleteuser(id);
+                    dao.deleteuser1(id);
                     response.sendRedirect("MainController?action=customermanager");
         }catch(Exception ex){
             response.sendRedirect("404.jsp");

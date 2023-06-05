@@ -34,7 +34,7 @@
                     <div class="col-12">
                         <div class="breadcrumb_content">
                             <ul>
-                                <li><a href="index.html">Trang chủ</a></li>
+                                <li><a href="index.jsp">Trang chủ</a></li>
                                 <li>/</li>
                                 <li>Giỏ hàng</li>
                             </ul>
@@ -71,8 +71,8 @@
 
                                             <c:forEach items="${sessionScope.cart.items}" var="i">
                                                 <tr>
-                                                    <td class="product_thumb"><a href="product?action=productdetail&product_id=${i.key.product_id}"><img src="${i.key.img}" alt=""></a></td>
-                                                    <td class="product_name"><a href="product?action=productdetail&product_id=${i.key.product_id}">${i.key.product_name}</a></td>
+                                                    <td class="product_thumb"><a href="MainController?action=productdetail&product_id=${i.key.product_id}"><img src="${i.key.img}" alt=""></a></td>
+                                                    <td class="product_name"><a href="MainController?action=productdetail&product_id=${i.key.product_id}">${i.key.product_name}</a></td>
                                                     <td class="product-price"><fmt:formatNumber pattern="##########" value="${i.key.product_price}"/></td>
                                                     <td class="product_quantity"><input name="quantity" min="1" max="100" value="${i.value}" type="number"></td>
                                                     <td class="product_total"> <fmt:formatNumber pattern="##########" value="${i.key.product_price * i.value }"/></td>

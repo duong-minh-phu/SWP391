@@ -18,7 +18,7 @@ public class userDAO {
 
     public User checkUser(String user_email, String user_pass) {
         try {
-            String query = "select * from users where user_email = ? and user_pass = ?";
+            String query = "select * from users where user_email = ? and user_pass = ? and( role='ADMIN' or role='STAFF' or role='CUS')";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, user_email);
@@ -108,7 +108,7 @@ public class userDAO {
     
     public List<User> getUser() {
         List<User> list = new ArrayList<>();
-        String sql = "select * from users";
+        String sql = "select * from users where role='ADMIN' or role='STAFF' or role='CUS'";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -146,5 +146,20 @@ public class userDAO {
         }
         
     }
+    
+    public void deleteuser1(int user_id){
+        String sql = "update users set role= ? where user_id = ?";
+        try {
+        conn = new DBContext().getConnection();
+        ps = conn.prepareStatement(sql);
+        ps.setInt(2, user_id);
+        ps.setString(1,"FALSE");
+        ps.executeUpdate();
+        } catch (Exception e) {
+        }
+        
+    }
+   
+    
 
 }

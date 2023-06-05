@@ -16,8 +16,8 @@
             <div id="side_bar">
                 <p> Welcome,<b>${sessionScope.user.user_name}</b></p>
                 <ul class="app-menu">
-                    <li><a href="dashboard"><span class="app-menu__label">Bảng điều khiển</span></a></li>
-                    <li><a href="customermanager"><span class="app-menu__label">Quản lý khách hàng</span></a></li>
+                    <li><a href="MainController?action=dashboard"><span class="app-menu__label">Bảng điều khiển</span></a></li>
+                    <li><a href="MainController?action=customermanager"><span class="app-menu__label">Quản lý khách hàng</span></a></li>
                     <li><a href="productmanager"><span class="app-menu__label">Quản lý sản phẩm</span></a></li>
                     <li><a href="ordermanager"><span class="app-menu__label">Quản lý đơn hàng</span></a></li>
                 </ul>

@@ -76,6 +76,9 @@
                                         <div class="login_form_container">
                                             <div class="account_login_form">
                                                 <form action="MainController?action=updateinfo" method="POST">
+                                                    <p style="color: blue; align-content: center;">
+                                                        ${requestScope.infor}
+                                                </p>
                                                     <label>Tên người dùng</label>
                                                     <input type="text" name="user_name" value="${sessionScope.user.user_name}">
                                                     <label>Email</label>
@@ -102,11 +105,11 @@
                                                         ${requestScope.error_pass1}
                                                 </p>
                                                     <label>Nhập mật khẩu hiện tại</label>
-                                                    <input type="password" name="oldpassword" >
+                                                    <input type="password" name="oldpassword" required="" >
                                                     <label>Nhập mật khẩu mới</label>
-                                                    <input type="password"  name="newpass" >
+                                                    <input type="password"  name="newpass" required="" >
                                                     <label>Nhập mật lại mật khẩu</label>
-                                                    <input type="password"  name="pass" >                                                    
+                                                    <input type="password"  name="pass" required="" >                                                    
                                                     <div class="cart_submit">
                                                         <button type="submit">save</button>
                                                     </div> 

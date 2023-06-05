@@ -62,7 +62,7 @@
                                 <div class="widget_list widget_categories">
                                     <h2>Danh mục</h2>
                                     <ul>
-                                        <li><a href="product">TẤT CẢ</a></li>
+                                        <li><a href="MainController?action=product">TẤT CẢ</a></li>
                                         <c:forEach items="${CategoryData}" var="c">
                                             <li><a href="MainController?action=listByCategory&category_id=${c.category_id}">${c.category_name}</a></li>
                                             </c:forEach>
@@ -109,17 +109,19 @@
                                     </div>
                                 </c:forEach>
                             </div>
+                            <c:if test="${num != 1}"> 
                             <c:set var="page" value="${page}"/>
                             <div class="shop_toolbar t_bottom" style="border: none;">
                                 <div class="pagination">
                                     <ul>
                                         <c:forEach begin="${1}" end="${num}" var="i">
-                                            <li class="${i==page?"current":""}"><a href="MainController?page=${i}">${i}</a></li>
+                                            <li class="${i==page?"current":""}"><a href="MainController?action=product&page=${i}">${i}</a></li>
                                             </c:forEach>
 
                                     </ul>
                                 </div>
                             </div>
+                            </c:if>
                         </div>
                     </div>
                 </div>
