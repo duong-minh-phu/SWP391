@@ -33,7 +33,7 @@
 
 
                 <!-- User Menu-->
-                <li><a class="app-nav__item" href="dashboard"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+                <li><a class="app-nav__item" href="MainController?action=dashboard"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
                 </li>
             </ul>
@@ -48,16 +48,7 @@
                     <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
                 </div>
             </div>
-<<<<<<< Updated upstream
 
-            <div id="side_bar">
-                <p> Welcome,<b>${sessionScope.user.user_name}</b></p>
-                <ul class="app-menu">
-                    <li><a href="MainController?action=dashboard"><span class="app-menu__label">Bảng điều khiển</span></a></li>
-                    <li><a href="MainController?action=customermanager"><span class="app-menu__label">Quản lý khách hàng</span></a></li>
-                    <li><a href="productmanager"><span class="app-menu__label">Quản lý sản phẩm</span></a></li>
-                    <li><a href="ordermanager"><span class="app-menu__label">Quản lý đơn hàng</span></a></li>
-=======
             <hr>
             <ul class="app-menu">
                 <li><a class="app-menu__item" href="MainController?action=dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
@@ -75,7 +66,6 @@
             <div class="app-title">
                 <ul class="app-breadcrumb breadcrumb side">
                     <li class="breadcrumb-item active"><a href="#"><b>Danh sách sản phẩm</b></a></li>
->>>>>>> Stashed changes
                 </ul>
                 <div id="clock"></div>
             </div>
