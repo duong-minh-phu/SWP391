@@ -230,7 +230,7 @@
                                 </div>
                                 <button class="btn btn-save" type="submit">Lưu lại</button>
                                 &nbsp;
-                                <a class="btn btn-cancel" href="productmanager">Hủy bỏ</a>
+                                <a class="btn btn-cancel" href="Productmanager">Hủy bỏ</a>
                             </form>
                         </div>
 
