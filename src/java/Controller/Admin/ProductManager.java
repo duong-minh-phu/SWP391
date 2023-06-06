@@ -81,7 +81,7 @@ public class ProductManager extends HttpServlet {
                     float productPrice = Float.parseFloat(request.getParameter("product_price"));
                     String productDesc = request.getParameter("product_describe");
                     int productQuantity = Integer.parseInt(request.getParameter("product_quantity"));
-                    String productImage = "images/" + request.getParameter("img");
+                    String productImage = "images/" + request.getParameter("product_img");
                     productDAO c = new productDAO();
 
                     Product product = new Product(productId, productName, productPrice, productDesc, productQuantity, productImage);

@@ -172,7 +172,7 @@
                                                             </div>
                                                         </div>
                                                         <BR>
-                                                        <button class="btn btn-save" type="submit" value="updateproduct">Lưu lại</button>
+                                                        <button class="btn btn-save" type="submit" >Lưu lại</button>
                                                         <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
                                                         <BR>
                                                     </div>
