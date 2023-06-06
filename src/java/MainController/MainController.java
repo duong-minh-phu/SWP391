@@ -7,6 +7,7 @@ package MainController;
 
 import DAO.productDAO;
 import Entity.Category;
+import Entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -111,6 +112,11 @@ public class MainController extends HttpServlet {
                 url = "DeleteProduct";
             }
             if (action.equals("updateproduct")){
+                productDAO c = new productDAO();
+                List<Product> product = c.getProduct();
+                request.setAttribute("ProductData", product);
+                List<Category> category = c.getCategory();
+                request.setAttribute("CategoryData", category);
                 url = "UpdateProduct";
             }
 

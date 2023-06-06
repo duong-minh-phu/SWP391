@@ -21,27 +21,27 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class UpdateProduct extends HttpServlet {
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        // Get the form data
-        String productId = request.getParameter("product_id");
-        int categoryId = Integer.parseInt(request.getParameter("category_id"));
-        String productName = request.getParameter("product_name");
-        float productPrice = Float.parseFloat(request.getParameter("product_price"));
-        String productDescribe = request.getParameter("product_describe");
+        String category_id = request.getParameter("category_id");
+        String product_name = request.getParameter("product_name");
+        float product_price = Float.parseFloat(request.getParameter("product_price"));
+        String product_describe = request.getParameter("product_describe");
         int quantity = Integer.parseInt(request.getParameter("product_quantity"));
         String img = request.getParameter("product_img");
-        Category cate = new Category(categoryId);
-        productDAO dao = new productDAO();
-        // Create a new Product object with the form data
-        Product product = new Product(productId , productName, productPrice, productDescribe, quantity, img);
+        int cid = Integer.parseInt(category_id);
+        Category cate = new Category(cid);
 
-        // Call the DAO to update the product in the database
+        // Tạo đối tượng Product mới
+        Product product = new Product(product_name, product_price, product_describe, quantity, img);
         product.setCate(cate);
+
+        // Gọi phương thức updateProduct trong lớp DAO để thực hiện cập nhật
+        productDAO dao = new productDAO();
         dao.updateProduct(product);
-        
-        // Redirect back to the product list page
+
+        // Chuyển hướng về trang danh sách sản phẩm
         response.sendRedirect("Productmanager");
     }
-    }
+}

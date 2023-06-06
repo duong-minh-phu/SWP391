@@ -131,7 +131,7 @@
                                                         <div class="row">
                                                             <div class="form-group col-md-6">
                                                                 <label for="exampleSelect1" class="control-label">Danh mục</label>
-                                                                <select name="category_id" class="form-control" id="exampleSelect1" required value="${p.cate.category_name}>
+                                                                <select name="category_id" class="form-control" id="exampleSelect1" >
                                                                     <option>-- Chọn danh mục --</option>
                                                                     <c:forEach items="${CategoryData}" var="cat">
                                                                         <option value="${cat.category_id}">${cat.category_name}</option>
@@ -143,7 +143,7 @@
                                                                 <input class="form-control" type="text" name="product_name" required value="${p.product_name}">
                                                             </div>
                                                             <div class="form-group col-md-6">
-                                                                <label class="control-label">Giá</label>
+                                                                <label class="control-label" >Giá</label>
                                                                 <input class="form-control" type="number" name="product_price" required value="${p.product_price}">
                                                             </div>
                                                                     <div class="form-group col-md-6">
@@ -172,7 +172,7 @@
                                                             </div>
                                                         </div>
                                                         <BR>
-                                                        <button class="btn btn-save" type="submit">Lưu lại</button>
+                                                        <button class="btn btn-save" type="submit" value="updateproduct">Lưu lại</button>
                                                         <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
                                                         <BR>
                                                     </div>

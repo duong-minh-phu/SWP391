@@ -77,10 +77,10 @@ public class ProductManager extends HttpServlet {
                 if (action.equalsIgnoreCase("updateproduct")) {
                     String productId = request.getParameter("product_id");
                     String productName = request.getParameter("product_name");
-                    int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+                    int categoryId = Integer.parseInt(request.getParameter("category_id"));
                     float productPrice = Float.parseFloat(request.getParameter("product_price"));
                     String productDesc = request.getParameter("product_describe");
-                    int productQuantity = Integer.parseInt(request.getParameter("quantity"));
+                    int productQuantity = Integer.parseInt(request.getParameter("product_quantity"));
                     String productImage = "images/" + request.getParameter("img");
                     productDAO c = new productDAO();
 
@@ -89,7 +89,7 @@ public class ProductManager extends HttpServlet {
                     product.setCate(category);
 
                     c.updateProduct(product);
-                    response.sendRedirect("productmanager");
+                    response.sendRedirect("Productmanager");
 
                 } else {
                     response.sendRedirect("404.jsp");
