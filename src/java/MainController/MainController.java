@@ -5,8 +5,11 @@
  */
 package MainController;
 
+import DAO.productDAO;
+import Entity.Category;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,73 +31,92 @@ public class MainController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     private static final String ERROR = "404.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         String action = request.getParameter("action");
-        try  {
-            if (action.equals("Login")){
+        try {
+            if (action.equals("Login")) {
                 url = "checkLogin";
             }
-             if (action.equals("logout")){
+            if (action.equals("logout")) {
                 url = "logout";
             }
-             if (action.equals("signup")){
+            if (action.equals("signup")) {
                 url = "checkSignup";
             }
-             if (action.equals("product")){
+            if (action.equals("product")) {
                 url = "Shop";
             }
-             if (action.equals("productdetail")){
+            if (action.equals("productdetail")) {
                 url = "Productdetail";
             }
-             if (action.equals("listByCategory")){
+            if (action.equals("listByCategory")) {
                 url = "ListByCategory";
             }
-             if (action.equals("sortlow")){
+            if (action.equals("sortlow")) {
                 url = "Sortlow";
             }
-             if (action.equals("sorthigh")){
+            if (action.equals("sorthigh")) {
                 url = "Sorthigh";
             }
-             if (action.equals("sorta")){
+            if (action.equals("sorta")) {
                 url = "Sorta";
             }
-             if (action.equals("search")){
+            if (action.equals("search")) {
                 url = "Search";
             }
-             if (action.equals("updateinfo")){
+            if (action.equals("updateinfo")) {
                 url = "Updateinfo";
             }
-             if (action.equals("updatepassword")){
+            if (action.equals("updatepassword")) {
                 url = "Updatepassword";
             }
-             if (action.equals("dashboard")){
+            if (action.equals("dashboard")) {
                 url = "Manager";
             }
-             if (action.equals("customermanager")){
+            if (action.equals("customermanager")) {
                 url = "Customermanager";
             }
-             if (action.equals("update")){
+            if (action.equals("productmanager")) {
+                url = "Productmanager";
+            }
+            if (action.equals("update")) {
                 url = "Update";
-            }  
-             if (action.equals("deleteuser")){
+            }
+            if (action.equals("deleteuser")) {
                 url = "Deleteuser";
             }
-             if (action.equals("addToCart")){
+            if (action.equals("addToCart")) {
                 url = "AddToCart";
-            } 
-             if (action.equals("deleteFromCart")){
+            }
+            if (action.equals("deleteFromCart")) {
                 url = "DeleteFromCart";
-            } 
-             if (action.equals("updateItemsInCart")){
+            }
+            if (action.equals("updateItemsInCart")) {
                 url = "UpdateItemsInCart";
-            } 
-             
-        }catch(Exception ex){
+            }
+            if (action.equals("insert")) {
+                productDAO c = new productDAO();
+                List<Category> category = c.getCategory();
+                request.setAttribute("CategoryData", category);
+                url = "admin/productInsert.jsp";
+            }
+            if (action.equals("insertproduct")) {
+                url = "InsertProduct";
+            }
+            if (action.equals("deleteproduct")){
+                url = "DeleteProduct";
+            }
+            if (action.equals("updateproduct")){
+                url = "UpdateProduct";
+            }
+
+        } catch (Exception ex) {
             log("Error at: MainController" + ex.toString());
-        }finally {
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

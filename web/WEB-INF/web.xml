@@ -60,6 +60,22 @@
         <servlet-name>ProductManager</servlet-name>
         <servlet-class>Controller.Admin.ProductManager</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Productmanager</servlet-name>
+        <servlet-class>MainController.Productmanager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertProduct</servlet-name>
+        <servlet-class>MainController.InsertProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteProduct</servlet-name>
+        <servlet-class>MainController.DeleteProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProduct</servlet-name>
+        <servlet-class>MainController.UpdateProduct</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
@@ -113,8 +129,20 @@
         <url-pattern>/DeleteFromCart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ProductManager</servlet-name>
-        <url-pattern>/productmanager</url-pattern>
+        <servlet-name>Productmanager</servlet-name>
+        <url-pattern>/Productmanager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertProduct</servlet-name>
+        <url-pattern>/InsertProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteProduct</servlet-name>
+        <url-pattern>/DeleteProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProduct</servlet-name>
+        <url-pattern>/UpdateProduct</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

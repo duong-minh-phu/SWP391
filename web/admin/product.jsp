@@ -1,17 +1,54 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Quản lý sản phẩm</title>
-    </head>
-    <body>
-        <div id="wrapper">
 
-            <div id="header_product">
-                <h1>Quản lý sản phẩm</h1>
+    <head>
+        <title>Danh sách sản phẩm | Quản trị Admin</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Main CSS-->
+        <link rel="stylesheet" type="text/css" href="admin/css/main.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+        <!-- or -->
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+        <!-- Font-icon css-->
+        <link rel="stylesheet" type="text/css"
+              href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+    </head>
+
+    <body onload="time()" class="app sidebar-mini rtl">
+        <!-- Navbar-->
+        <header class="app-header">
+            <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
+                                            aria-label="Hide Sidebar"></a>
+            <!-- Navbar Right Menu-->
+            <ul class="app-nav">
+
+
+                <!-- User Menu-->
+                <li><a class="app-nav__item" href="dashboard"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+
+                </li>
+            </ul>
+        </header>
+        <!-- Sidebar menu-->
+        <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+        <aside class="app-sidebar">
+            <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="admin/images/user.png" width="50px"
+                                                alt="User Image">
+                <div>
+                    <p class="app-sidebar__user-name"><b>${sessionScope.user.user_name}</b></p>
+                    <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
+                </div>
             </div>
+<<<<<<< Updated upstream
 
             <div id="side_bar">
                 <p> Welcome,<b>${sessionScope.user.user_name}</b></p>
@@ -20,430 +57,239 @@
                     <li><a href="MainController?action=customermanager"><span class="app-menu__label">Quản lý khách hàng</span></a></li>
                     <li><a href="productmanager"><span class="app-menu__label">Quản lý sản phẩm</span></a></li>
                     <li><a href="ordermanager"><span class="app-menu__label">Quản lý đơn hàng</span></a></li>
+=======
+            <hr>
+            <ul class="app-menu">
+                <li><a class="app-menu__item" href="MainController?action=dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
+                            class="app-menu__label">Bảng điều khiển</span></a></li>
+                <li><a class="app-menu__item" href="MainController?action=customermanager"><i class='app-menu__icon bx bx-user-voice'></i><span
+                            class="app-menu__label">Quản lý khách hàng</span></a></li>
+                            <li><a class="app-menu__item" href="MainController?action=productmanager"><i
+                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
+                </li>
+                <li><a class="app-menu__item" href="ordermanager"><i class='app-menu__icon bx bx-task'></i><span
+                            class="app-menu__label">Quản lý đơn hàng</span></a></li>
+            </ul>
+        </aside>
+        <main class="app-content">
+            <div class="app-title">
+                <ul class="app-breadcrumb breadcrumb side">
+                    <li class="breadcrumb-item active"><a href="#"><b>Danh sách sản phẩm</b></a></li>
+>>>>>>> Stashed changes
                 </ul>
+                <div id="clock"></div>
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tile">
+                        <div class="tile-body">
+                            <div class="row element-button">
+                                <div class="col-sm-2">
+                                    <a class="btn btn-add btn-sm" href="MainController?action=insert" title="Thêm"><i class="fas fa-plus"></i>
+                                        Tạo mới sản phẩm</a>
+                                </div>
+                            </div>
+                            <form href="MainController?action=updateproduct" method="POST">
+                                <table class="table table-hover table-bordered" id="sampleTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Danh mục</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Giá</th>
+                                            <th>Thông tin</th>
+                                            <th>Số lượng</th>
+                                            <th>Ảnh</th>
+                                            <th>Chức năng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${ProductData}" var="p">
+                                            <tr>
+                                                <td>${p.cate.category_name}</td>
+                                                <td>${p.product_name}</td>
+                                                <td>${p.product_price}</td>
+                                                <td>${p.product_describe}</td>
+                                                <td>${p.quantity}</td>
+                                                <td><img src="${p.img}" alt="" width="100px;"></td>
 
-            <div id="insert_product">
-                <a href="productmanager?action=insert" >Tạo mới sản phẩm</a>
-            </div>
+                                                <td>
+                                                    <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" value="${p.product_id}"><i
+                                                            class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
+                                                            data-toggle="modal" data-target="#ModalUP${p.product_id}"><i class="fas fa-edit"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
 
-            <div id="search_product">
-                <form>
-                    <input type="text" placeholder="Tìm kiếm...">
-                    <button type="submit">Tìm kiếm</button>
-                </form>
-            </div>
+                                            <!--
+                                            MODAL
+                                            -->
 
-            <div id="product_menu">
-                <h2>Danh sách sản phẩm</h2>
-                <table action="productmanager?action=updateproduct"  border="1">
-                    <tr>
-                        <th>Product ID</th>
-                        <th>Product Name</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Description</th>
-                        <th>Quantity</th>
-                        <th>Image</th>
-                        <th>Option</th>
-                    </tr>
+                                        <div class="modal fade" id="ModalUP${p.product_id}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+                                             data-keyboard="false">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="form-group  col-md-12">
+                                                                <span class="thong-tin-thanh-toan">
+                                                                    <h5>Chỉnh sửa thông tin sản phẩm</h5>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-6">
+                                                                <label for="exampleSelect1" class="control-label">Danh mục</label>
+                                                                <select name="category_id" class="form-control" id="exampleSelect1" required value="${p.cate.category_name}>
+                                                                    <option>-- Chọn danh mục --</option>
+                                                                    <c:forEach items="${CategoryData}" var="cat">
+                                                                        <option value="${cat.category_id}">${cat.category_name}</option>
+                                                                    </c:forEach>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label class="control-label">Tên sản phẩm</label>
+                                                                <input class="form-control" type="text" name="product_name" required value="${p.product_name}">
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label class="control-label">Giá</label>
+                                                                <input class="form-control" type="number" name="product_price" required value="${p.product_price}">
+                                                            </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label class="control-label">Thông tin</label>
+                                                                        <input class="form-control" type="text" name="product_describe" value="${p.product_describe}">
+                                                            </div>
 
-                    <c:forEach var="p" items="${productList}">
-                        <tr>
-                            <td>${p.product_id}</td>
-                            <td>${p.product_name}</td>
-                            <td>${p.cate.category_name}</td>
-                            <td>${p.product_price}</td>
-                            <td>${p.product_describe}</td>
-                            <td>${p.quantity}</td>
-                            <td><img src="${p.img}" width="250px;"></td>
-                            <td>
-                                <button type="button" onclick="showConfirmDialog('${p.product_id}')">Xóa</button>
-                                <button type="button" onclick="editProduct('${p.product_id}')">Sửa</button>
-                            </td>
-                        </tr>
-                        <div id="edit_form_container">
-                            <tr id="editForm_${p.product_id}" style="display:none;">
-                                <td colspan="8">
-                                    <form method="post" action="productmanager?action=updateproduct">
-                                        <input type="hidden" name="product_id" value="${p.product_id}">
-
-                                        <label for="productName_${p.product_id}">Product Name:</label>
-                                        <input type="text" id="productName_${p.product_id}" name="product_name" value="${p.product_name}" required>
-
-                                        <label for="category_${p.product_id}">Category:</label>
-                                        <select id="category_${p.product_id}" name="categoryId">
-                                            <c:forEach var="c" items="${categoryList}">
-                                                <option value="${c.category_id}" ${c.category_id == p.cate.category_id ? 'selected':''}>${c.category_name}</option>
-                                            </c:forEach>
-                                        </select>
-
-                                        <label for="price_${p.product_id}">Price:</label>
-                                        <input type="number" id="price_${p.product_id}" name="product_price" value="${p.product_price}" required>
-
-                                        <label for="description_${p.product_id}">Description:</label>
-                                        <textarea id="description_${p.product_id}" name="product_describe" rows="5" required>${p.product_describe}</textarea>
-
-                                        <label for="quantity_${p.product_id}">Quantity:</label>
-                                        <input type="number" id="quantity_${p.product_id}" name="quantity" value="${p.quantity}" required>
-
-                                        <<label for="image_${p.product_id}">Image:</label>
-                                        <input type="file" id="image_${p.product_id}" name="img">
-                                        <img id="imagePreview_${p.product_id}" src="${p.img}" >
-
-                                        <button type="submit" id="editBtn_${p.product_id}">Update</button>
-                                        <button type="button" onclick="hideEditForm('${p.product_id}')">Cancel</button>
-                                    </form>
-                                </td>
-                            </tr>
+                                                            <div class="form-group col-md-6">
+                                                                <label class="control-label">Số lượng</label>
+                                                                <input class="form-control" type="text" name="product_quantity" value="${p.quantity}">
+                                                            </div>
+                                                            <!--anh san pham-->
+                                                            <div class="form-group col-md-12">
+                                                                <label class="control-label">Ảnh sản phẩm</label>
+                                                                <div id="myfileupload">
+                                                                    <input type="file" id="uploadfile" name="product_img" value="${p.img}" onchange="readURL(this);" />
+                                                                </div>
+                                                                <div id="thumbbox">
+                                                                    <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
+                                                                    <a class="removeimg" href="javascript:"></a>
+                                                                </div>
+                                                                <div id="boxchoice">
+                                                                    <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
+                                                                    <p style="clear:both"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <BR>
+                                                        <button class="btn btn-save" type="submit">Lưu lại</button>
+                                                        <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+                                                        <BR>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--
+                                      MODAL
+                                        -->
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </form>
                         </div>
-                    </c:forEach>
-                </table>
-            </div>
-            <div id="confirmDialog" style="display: none" >
-                <div class="dialogBox">
-                    <div class="titleBar">
-                        <span class="title">Thông báo</span>
-                        <button class="closeBtn">&times;</button>
-                    </div>
-                    <div class="content">
-                        <p>Bạn có chắc chắn muốn xóa sản phẩm này không?</p>
-                    </div>
-                    <div class="buttonBar">
-                        <button id="confirmBtn">Xác nhận</button>
-                        <button id="cancelBtn">Hủy</button>
                     </div>
                 </div>
             </div>
-            <script>
-                // Hiển thị form chỉnh sửa sản phẩm tương ứng với product_id
-                function editProduct(product_id) {
-                    var editForm = document.getElementById("editForm_" + product_id);
-                    editForm.style.display = "table-row";
-                }
+        </main>
 
-                // Ẩn form chỉnh sửa sản phẩm tương ứng với product_id
-                function hideEditForm(product_id) {
-                    var editForm = document.getElementById("editForm_" + product_id);
-                    editForm.style.display = "none";
-                }
-            </script>
-            <script>
-                function showConfirmDialog(productId) {
-                    const confirmDialog = document.getElementById('confirmDialog');
-                    confirmDialog.style.display = 'block';
 
-                    const confirmBtn = document.getElementById('confirmBtn');
-                    confirmBtn.onclick = function () {
-                        window.location.href = "productmanager?action=deleteproduct&product_id=" + productId;
-                    };
 
-                    const cancelBtn = document.getElementById('cancelBtn');
-                    cancelBtn.onclick = function () {
-                        confirmDialog.style.display = 'none';
-                    };
+        <!-- Essential javascripts for application to work-->
+        <script src="admin/js/jquery-3.2.1.min.js"></script>
+        <script src="admin/js/popper.min.js"></script>
+        <script src="admin/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="admin/js/main.js"></script>
+        <!-- The javascript plugin to display page loading on top-->
+        <script src="admin/js/plugins/pace.min.js"></script>
+        <!-- Page specific javascripts-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+        <!-- Data table plugin-->
+        <script type="text/javascript" src="admin/js/plugins/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="admin/js/plugins/dataTables.bootstrap.min.js"></script>
+        <script type="text/javascript">
+                                                                        $('#sampleTable').DataTable();
+                                                                        //Thời Gian
+                                                                        function time() {
+                                                                            var today = new Date();
+                                                                            var weekday = new Array(7);
+                                                                            weekday[0] = "Chủ Nhật";
+                                                                            weekday[1] = "Thứ Hai";
+                                                                            weekday[2] = "Thứ Ba";
+                                                                            weekday[3] = "Thứ Tư";
+                                                                            weekday[4] = "Thứ Năm";
+                                                                            weekday[5] = "Thứ Sáu";
+                                                                            weekday[6] = "Thứ Bảy";
+                                                                            var day = weekday[today.getDay()];
+                                                                            var dd = today.getDate();
+                                                                            var mm = today.getMonth() + 1;
+                                                                            var yyyy = today.getFullYear();
+                                                                            var h = today.getHours();
+                                                                            var m = today.getMinutes();
+                                                                            var s = today.getSeconds();
+                                                                            m = checkTime(m);
+                                                                            s = checkTime(s);
+                                                                            nowTime = h + " giờ " + m + " phút " + s + " giây";
+                                                                            if (dd < 10) {
+                                                                                dd = '0' + dd
+                                                                            }
+                                                                            if (mm < 10) {
+                                                                                mm = '0' + mm
+                                                                            }
+                                                                            today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+                                                                            tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                                                                                    '</span>';
+                                                                            document.getElementById("clock").innerHTML = tmp;
+                                                                            clocktime = setTimeout("time()", "1000", "Javascript");
 
-                    const closeBtn = document.querySelector('.closeBtn');
-                    closeBtn.addEventListener('click', function () {
-                        confirmDialog.style.display = 'none';
-                    });
-                    confirmDialog.addEventListener('click', function (event) {
-                        event.stopPropagation();
-                    });
-                }
-            </script>
-            <script>
-                const input_${p.product_id} = document.querySelector('#image_${p.product_id}');
-                const preview_${p.product_id} = document.querySelector('#imagePreview_${p.product_id}');
+                                                                            function checkTime(i) {
+                                                                                if (i < 10) {
+                                                                                    i = "0" + i;
+                                                                                }
+                                                                                return i;
+                                                                            }
+                                                                        }
+        </script>
+        <script>
 
-                input_${p.product_id}.addEventListener('change', () => {
-                    const file = input_${p.product_id}.files[0];
-                    const reader = new FileReader();
-
-                    reader.addEventListener('load', () => {
-                        preview_${p.product_id}.src = reader.result;
-                    });
-
-                    reader.readAsDataURL(file);
+            $(document).ready(jQuery(function () {
+                jQuery(".trash").click(function () {
+                    swal({
+                        title: "Cảnh báo",
+                        text: "Bạn có chắc chắn là muốn xóa sản phẩm này?",
+                        buttons: ["Hủy bỏ", "Đồng ý"],
+                    })
+                            .then((willDelete) => {
+                                if (willDelete) {
+                                    window.location = "MainController?action=deleteproduct&product_id=" + $(this).attr("value");
+                                    swal("Đã xóa thành công !!!!", {
+                                    });
+                                }
+                            });
                 });
-            </script>
-            <style>
-
-                #confirmDialog {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background-color: rgba(0,0,0,0.5);
+            }));
+        </script>
+        <script>
+            var myApp = new function () {
+                this.printTable = function () {
+                    var tab = document.getElementById('sampleTable');
+                    var win = window.open('', '', 'height=700,width=700');
+                    win.document.write(tab.outerHTML);
+                    win.document.close();
+                    win.print();
                 }
-
-                .dialogBox {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    max-width: 100%;
-                    max-height: 100%;
-                    background-color: white;
-                }
-
-                .titleBar {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 5px 10px;
-                    background-color: #2196F3;
-                    color: white;
-                }
-
-                .title {
-                    font-size: 20px;
-                    font-weight: bold;
-                }
-
-                .closeBtn {
-                    background-color: transparent;
-                    border: none;
-                    color: white;
-                    font-size: 25px;
-                    cursor: pointer;
-                }
-
-                .content {
-                    padding: 10px;
-                    text-align: center;
-                }
-
-                .buttonBar {
-                    display: flex;
-                    justify-content: space-between;
-                    padding: 10px;
-                    border-top: 1px solid #DDD;
-                }
-
-                #confirmBtn,
-                #cancelBtn {
-                    padding: 10px;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                }
-
-                #confirmBtn {
-                    background-color: #DC3545;
-                    color: white;
-                }
-
-                #cancelBtn {
-                    background-color: #28A745;
-                    color: white;
-                }
-                * {
-                    box-sizing: border-box;
-                }
-
-                body {
-                    font-family: Arial, sans-serif;
-                    margin: 0;
-                    padding: 0;
-                }
-
-                * {
-                    box-sizing: border-box;
-                }
-
-                body {
-                    font-family: Arial, sans-serif;
-                    margin: 0;
-                    padding: 0;
-                }
-
-                /* Header styles */
-
-                #header_product {
-                    background-color: #333;
-                    color: white;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 10px 20px;
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    z-index: 9999;
-                }
-
-                #header_product h1 {
-                    margin: 0;
-                    font-size: 24px;
-                }
-
-                /* Side bar styles */
-
-                #side_bar {
-                    background-color: #f2f2f2;
-                    padding: 20px;
-                    width: 19%;
-                    position: fixed;
-                    top: 30px; 
-                    left: 0;
-                    bottom: 0;
-                    overflow: auto;
-                }
-
-                #side_bar p {
-                    margin-top: 30;
-                    font-weight: bold;
-                }
-
-                .app-menu {
-                    list-style: none;
-                    margin: 0;
-                    padding: 0;
-                }
-
-                .app-menu li {
-                    margin-bottom: 10px;
-                }
-
-                .app-menu__label {
-                    display: block;
-                    padding: 10px;
-                    color: #333;
-                    text-decoration: none;
-                }
-
-                /* Main content styles */
-
-                #wrapper {
-                    margin-top: 60px; /* tùy chỉnh khoảng cách giữa header và phần nội dung chính */
-                    margin-left: 20%;
-                    padding: 20px;
-                }
-
-                #search_product {
-                    float: right;
-                    margin: 20px;
-                }
-
-                #search_product form {
-                    display: inline-block;
-                }
-
-                #search_product input[type="text"],
-                #search_product button[type="submit"] {
-                    height: 30px;
-                    font-size: 14px;
-                    border-radius: 3px;
-                    border: none;
-                    background-color: #DDD;
-                    padding: 5px 10px;
-                }
-
-                #search_product input[type="text"] {
-                    width: 200px;
-                    margin-right: 5px;
-                }
-
-                #search_product button[type="submit"] {
-                    color: #fff;
-                    background-color: #888888;
-                    cursor: pointer;
-                    transition: all 0.3s ease-in-out;
-                }
-
-                #search_product button[type="submit"]:hover {
-                    background-color: #0062cc;
-                }
-
-                #insert_product {
-                    text-align: right;
-                    margin: 20px;
-                }
-
-                #insert_product a {
-                    display: inline-block;
-                    padding: 10px 20px;
-                    background-color: #5cc6ee;
-                    color: black;
-                    text-decoration: none;
-                    border-radius: 5px;
-                }
-
-                /* Product menu styles */
-
-                #product_menu {
-                    margin: 20px;
-                }
-
-                #product_menu h2 {
-                    margin-top: 0;
-                    font-size: 20px;
-                }
-
-                table {
-                    width: 100%;
-                    border-collapse: collapse;
-                }
-
-                th, td {
-                    padding: 10px;
-                    text-align: left;
-                }
-
-                th {
-                    background-color: #333;
-                    color: white;
-                }
-
-                tr:nth-child(even) {
-                    background-color: #f2f2f2;
-                }
-
-                button[type="button"] {
-                    padding: 5px 10px;
-                    background-color: #333;
-                    color: white;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    margin-right: 5px;
-                }
-
-                button[type="submit"] {
-                    padding: 5px 10px;
-                    background-color: #333;
-                    color: white;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    margin-right: 5px;
-                }
-
-                #edit_form_container input,
-                #edit_form_container select,
-                #edit_form_container textarea {
-                    display: block;
-                    margin-bottom: 10px;
-                    width: 100%;
-                    padding: 5px;
-                    border: 1px solid #ccc;
-                    border-radius: 5px;
-                }
-
-                #edit_form_container label {
-                    font-weight: bold;
-                }
-
-                #edit_form_container img {
-                    display: block;
-                    max-width: 200px;
-                    margin-top: 10px;
-                }
-            </style>
-
-        </div>   
+            }
+        </script>
     </body>
+
 </html>
