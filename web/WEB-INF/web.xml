@@ -144,10 +144,6 @@
         <servlet-name>UpdateProduct</servlet-name>
         <url-pattern>/updateproduct</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ProductManager</servlet-name>
-        <url-pattern>/productmanager</url-pattern>
-    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

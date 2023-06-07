@@ -43,8 +43,8 @@ public class productDAO {
         return list;
     }
 
-    public void insertProduct(Product product) {
-        String sql = "insert dbo.product(product_id,category_id,product_name,product_price,product_describe,quantity,img) values(?,?,?,?,?,?,?)";
+    public boolean insertProduct(Product product) {
+        String sql = "insert into dbo.product(product_id,category_id,product_name,product_price,product_describe,quantity,img) values(?,?,?,?,?,?,?)";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -58,6 +58,7 @@ public class productDAO {
             ps.executeUpdate();
         } catch (Exception e) {
         }
+        return false;
     }
 
     public void deleteProduct(String product_id) {
