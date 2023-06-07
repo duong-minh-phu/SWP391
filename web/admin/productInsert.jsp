@@ -188,7 +188,7 @@
                                 </div>
                             </div>
 
-                            <form class="row" action="MainController?action=insertproduct" method="POST" enctype="multipart/form-data">
+                            <form class="row" action="MainController?action=insertproduct" method="Post" enctype="multipart/form-data">
                                 <div class="form-group col-md-3">
                                     <label for="exampleSelect1" class="control-label">Danh mục</label>
                                     <select name="category_id" class="form-control" id="exampleSelect1">

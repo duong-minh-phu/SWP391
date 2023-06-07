@@ -16,6 +16,7 @@ import javax.servlet.http.Part;
 @WebServlet(name = "InsertProduct", urlPatterns = "/InsertProduct")
 public class InsertProduct extends HttpServlet {
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             String category_id = request.getParameter("category_id");
@@ -39,7 +40,7 @@ public class InsertProduct extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "admin/product.jsp");
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/error.jsp");
+            response.sendRedirect(request.getContextPath() + "/404.jsp");
         }
     }
 }
