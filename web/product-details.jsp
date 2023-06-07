@@ -89,7 +89,7 @@
                                 <c:if test="${(ProductData.quantity) != 0}">                                                                        
                                 <div class="product_variant quantity">
                                     <label>quantity</label>
-                                    <input min="1" max="${ProductData.quantity}" name="quantity" type="number">
+                                    <input min="1" max="${ProductData.quantity}" name="quantity" type="number" value="1">
                                     <button class="button" type="submit">Thêm vào giở hàng</button>  
                                 </div>
                                 </c:if>

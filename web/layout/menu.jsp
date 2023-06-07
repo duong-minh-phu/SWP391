@@ -169,7 +169,7 @@
                     <div class="col-lg-3">
                         <div class="cart_area">
                             <div class="cart_link">
-                                <a href="cart.jsp"><i class="fa fa-shopping-basket"></i> Sản Phẩm</a>
+                                <a href="cart.jsp"><i class="fa fa-shopping-basket"> ${sessionScope.size}</i> Sản Phẩm</a>
                             </div>
                         </div>
                     </div>

@@ -44,6 +44,7 @@ public class DeleteFromCart extends HttpServlet {
             Cart cart = (Cart) session.getAttribute("cart");
             cart.deleteFromCart(product);
             session.setAttribute("cart", cart);
+            session.setAttribute("size", cart.size());
         }finally{
             RequestDispatcher rd = request.getRequestDispatcher(URL);
             rd.forward(request, response);

@@ -62,7 +62,6 @@
                                                 <th class="product-price">Price</th>
                                                 <th class="product_quantity">Quantity</th>
                                                 <th class="product_total">Total</th>
-                                                <th class="product_remove">Update</th>
                                                 <th class="product_remove">Delete</th>
                                                 
                                             </tr>
@@ -76,10 +75,21 @@
                                                     <td class="product-price"><fmt:formatNumber pattern="##########" value="${i.key.product_price}"/></td>
                                                     <td class="product_quantity"><input name="quantity" min="1" max="100" value="${i.value}" type="number"></td>
                                                     <td class="product_total"> <fmt:formatNumber pattern="##########" value="${i.key.product_price * i.value }"/></td>
-                                                    <td class="product_remove"> <a href="MainController?action=updateItemsInCart&product_id=${i.key.product_id}"><i class="fa fa-pencil"></i></a></td>
-                                                    <td class="product_remove"><a href="MainController?action=deleteFromCart&product_id=${i.key.product_id}"><i class="fa fa-trash-o"></i></a></td>
-                                                    
+                                                    <td class="product_remove"> <a href="#" onclick="confirmDelete()"> <i class="fa fa-trash-o"></i> </a> </td>
                                                 </tr>
+                                                
+                                                <script>
+                                                function confirmDelete() {
+                                                    var message = "Bạn có chắc chắn muốn loại bỏ sản phẩm khỏi giỏ hàng không?";
+                                                    var result = confirm(message);
+                                                    if (result) {
+                                                        // The user clicked OK, so delete the product.
+                                                        window.location.href = "MainController?action=deleteFromCart&product_id=${i.key.product_id}";
+                                                    } else {
+                                                        // The user clicked Cancel, so do nothing.
+                                                    }
+                                                }
+                                                 </script>
                                             </c:forEach>
                                         </tbody>
                                     </table>

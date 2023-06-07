@@ -47,6 +47,10 @@ public class Cart {
         items.remove(key);
     }
     
+        public int size(){
+        return items.size();
+    }
+    
     public int getTotalMoney(){
         int result = 0;
         for (Product product : items.keySet()){
