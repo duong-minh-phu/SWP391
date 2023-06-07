@@ -50,7 +50,7 @@ public class AddToCart extends HttpServlet {
                 cart = new Cart();
             }
             cart.addItem(product, quantity);   
-
+            session.setAttribute("size", cart);
             session.setAttribute("cart", cart);
         }finally{
             RequestDispatcher rd = request.getRequestDispatcher(URL);
