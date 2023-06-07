@@ -257,7 +257,7 @@
                                 <h2 style="color: red; padding-left: 10px">
                                     ${error}</h2>
                                 <label class="control-label">Nhập tên danh mục mới</label>
-                                <form action="productmanager?action=insertcategory" method="post"> 
+                                <form action="MainController?action=insertcategory" method="post"> 
                                     <input class="form-control" type="text" name="name" required>
                                     <br>
                                     <button class="btn btn-save" type="submit">Lưu lại</button>

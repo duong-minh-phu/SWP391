@@ -169,6 +169,17 @@ public class productDAO {
         }
         return list;
     }
+    
+    public void insertCategory(String name) {
+        String sql = " insert into Category (category_name) values(?)";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
 
     public List<Product> getListByPage(List<Product> list,
             int start, int end) {
@@ -196,6 +207,8 @@ public class productDAO {
         }
         return list;
     }
+    
+    
 
     public Product getProductByID(String product_id) {
         List<Product> list = new ArrayList<>();
