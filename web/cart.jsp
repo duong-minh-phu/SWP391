@@ -73,7 +73,9 @@
                                                     <td class="product_thumb"><a href="MainController?action=productdetail&product_id=${i.key.product_id}"><img src="${i.key.img}" alt=""></a></td>
                                                     <td class="product_name"><a href="MainController?action=productdetail&product_id=${i.key.product_id}">${i.key.product_name}</a></td>
                                                     <td class="product-price"><fmt:formatNumber pattern="##########" value="${i.key.product_price}"/></td>
-                                                    <td class="product_quantity"><input name="quantity" min="1" max="100" value="${i.value}" type="number"></td>
+                                                    
+                                                    <td class="product_quantity"><input name="quantity" min="1" max="100" value="${i.value}" onchange="handleEvent(event)" type="number"></td>
+                                                    
                                                     <td class="product_total"> <fmt:formatNumber pattern="##########" value="${i.key.product_price * i.value }"/></td>
                                                     <td class="product_remove"> <a href="#" onclick="confirmDelete()"> <i class="fa fa-trash-o"></i> </a> </td>
                                                 </tr>
@@ -89,7 +91,26 @@
                                                         // The user clicked Cancel, so do nothing.
                                                     }
                                                 }
-                                                 </script>
+                                 
+                                                      function update(quantity) {
+                                                       //gọi ra class XMLHTTPRequst() làm gì k cần biết
+                                                      const xhttp = new XMLHttpRequest();
+
+                                                      // gắn function
+                                                      xhttp.onload = function() {
+                                                         //lấy phần tử có id là demo trong html, và thay đổi thành this response text
+                                                   document.getElementById("demo").innerHTML = this.responseText;
+                                                 document.getElementById("demo2").innerHTML = parseInt(this.responseText) + 15000;
+                                                      }
+                                                     xhttp.open("GET", "UpdateItemsInCart?id=${i.key.product_id}&quantity=" + quantity);
+                                                     xhttp.send();
+                                                    }
+                                                   
+                                                function handleEvent(event) {
+                                                  // Handle the event here, for example:
+                                                    update(event.target.value);
+                                                }
+                                            </script>                          
                                             </c:forEach>
                                         </tbody>
                                     </table>
@@ -112,7 +133,7 @@
                                     <div class="coupon_inner">
                                         <div class="cart_subtotal">
                                             <p>Tổng đơn hàng</p>
-                                            <p class="cart_amount"><fmt:formatNumber pattern="##########" value="${sessionScope.cart.getTotalMoney()}"/></p>
+                                            <p  id="demo"  class="cart_amount"><fmt:formatNumber pattern="##########" value="${sessionScope.cart.getTotalMoney()}"/></p>
                                         </div>
                                         <div class="cart_subtotal ">
                                             <p>Phí ship</p>
@@ -121,7 +142,7 @@
 
                                         <div class="cart_subtotal">
                                             <p>Total</p>
-                                            <p class="cart_amount"><fmt:formatNumber pattern="##########" value="${sessionScope.cart.getTotalMoney() + 15000}"/></p>
+                                            <p id="demo2" class="cart_amount"><fmt:formatNumber pattern="##########" value="${sessionScope.cart.getTotalMoney() + 15000}"/></p>
                                         </div>
                                         <div class="checkout_btn">
                                             <a href="MainController?action=checkout">Thanh toán</a>
@@ -144,21 +165,6 @@
 
         <!-- JS
         ============================================ -->
-
-
-        <!--map js code here-->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdWLY_Y6FL7QGW5vcO3zajUEsrKfQPNzI"></script>
-        <script  src="https://www.google.com/jsapi"></script>
-        <script src="assets/js/map.js"></script>
-
-
-        <!-- Plugins JS -->
-        <script src="assets/js/plugins.js"></script>
-
-        <!-- Main JS -->
-        <script src="assets/js/main.js"></script>
-
-
 
     </body>
 

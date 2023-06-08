@@ -35,26 +35,29 @@ public class UpdateItemsInCart extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String URL = "MainController?action=productdetail&product_id=";
-        try{
-            String id = request.getParameter("product_id");
-            int quantity = Integer.parseInt(request.getParameter("quantity1"));
-            URL += id;
-            
-            Product product = new productDAO().getProductByID(id);
-            HttpSession session = request.getSession();
-            Cart cart = (Cart) session.getAttribute("cart");            
-            cart.deleteFromCart(product);
-            if (cart == null){                
-                cart = new Cart();
-            }
-            cart.addItem(product, quantity);   
+        // Set content type to application/json
+        response.setContentType("application/json");
+        int total = 0;
+        try {
 
+            String updated_quantity = request.getParameter("quantity");
+            String id = request.getParameter("id");
+            
+            HttpSession session = request.getSession();
+            Cart cart = (Cart) session.getAttribute("cart");
+            if (cart == null){
+                
+                cart = new Cart();
+               
+            }
+            Product product =  new productDAO().getProductByID(id);
+            cart.alterItem(product, Integer.parseInt(updated_quantity));   
             session.setAttribute("cart", cart);
-        }finally{
-            RequestDispatcher rd = request.getRequestDispatcher("cart.jsp");
-            rd.forward(request, response);
-        }
+             total = cart.getTotalMoney();
+        } finally {
+            response.getWriter().write(String.valueOf(total));
+        // Write JSON data to response
+    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

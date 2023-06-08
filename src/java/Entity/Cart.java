@@ -43,12 +43,16 @@ public class Cart {
        }
     }
     
+    public void alterItem(Product product, int updatedQuantity) {
+    items.put(product, updatedQuantity);
+    }
+    
     public void deleteFromCart(Product key){
         items.remove(key);
     }
     
-        public int size(){
-        return items.size();
+    public int size(){
+    return items.size();
     }
     
     public int getTotalMoney(){
