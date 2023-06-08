@@ -75,15 +75,15 @@
                                     <div class="col-lg-4 col-md-4 col-12 ">
                                         <div class="single_product">
                                             <div class="product_thumb">
-                                                <a class="primary_img" href="MainController?action=productdetail&product_id=${b.blog_id}"><img src="${b.img}" alt=""></a>
+                                                <a class="primary_img" href="MainController?action=blogdetails&blog_id=${b.blog_id}"><img src="${b.img}" alt=""></a>
 
                                                 <div class="quick_button">
-                                                    <a href="MainController?action=productdetail&product_id=${b.blog_id}"title="quick_view">Xem sản phẩm</a>
+                                                    <a href="MainController?action=blogdetails&blog_id=${b.blog_id}"title="quick_view">Xem sản phẩm</a>
                                                 </div>
                                             </div>
 
                                             <div class="product_content grid_content">
-                                                <h3><a href="MainController?action=productdetail&product_id=${b.blog_id}">${b.blog_name}</a></h3>
+                                                <h3><a href="MainController?action=blogdetails&blog_id=${b.blog_id}">${b.blog_name}</a></h3>
                                                 <span class="current_price">${b.date}</span>
                                             </div>
                                         </div>
@@ -96,7 +96,7 @@
                                 <div class="pagination">
                                     <ul>
                                         <c:forEach begin="${1}" end="${num1}" var="i">
-                                            <li class="${i==page1?"current":""}"><a href="MainController?action=product&page=${i}">${i}</a></li>
+                                            <li class="${i==page1?"current":""}"><a href="MainController?action=blog&page=${i}">${i}</a></li>
                                             </c:forEach>
 
                                     </ul>
