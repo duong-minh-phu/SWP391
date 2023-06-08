@@ -5,23 +5,23 @@
  */
 package MainController;
 
-import DAO.productDAO;
-import Entity.Cart;
-import Entity.Product;
+import DAO.userDAO;
+import Entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author luong
+ * @author ROG STRIX
  */
-public class UpdateItemsInCart extends HttpServlet {
+@WebServlet(name = "Customermanager1", urlPatterns = {"/Customermanager1"})
+public class Customermanager1 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,25 +35,13 @@ public class UpdateItemsInCart extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String URL = "MainController?action=productdetail&product_id=";
-        try{
-            String id = request.getParameter("product_id");
-            int quantity = Integer.parseInt(request.getParameter("quantity1"));
-            URL += id;
-            
-            Product product = new productDAO().getProductByID(id);
-            HttpSession session = request.getSession();
-            Cart cart = (Cart) session.getAttribute("cart");            
-            cart.deleteFromCart(product);
-            if (cart == null){                
-                cart = new Cart();
-            }
-            cart.addItem(product, quantity);   
-
-            session.setAttribute("cart", cart);
-        }finally{
-            RequestDispatcher rd = request.getRequestDispatcher("cart.jsp");
-            rd.forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            userDAO dao = new userDAO();
+            List<User> userdelete = dao.getUserdelete();
+            request.setAttribute("user", userdelete);
+            request.getRequestDispatcher("admin/customer_1.jsp").forward(request, response);
+        }catch (Exception e) {
+            response.sendRedirect("404.jsp");
         }
     }
 

@@ -78,8 +78,14 @@ public class MainController extends HttpServlet {
             if (action.equals("dashboard")) {
                 url = "Manager";
             }
+            if (action.equals("payment")) {
+                url = "Payment";
+            }
             if (action.equals("customermanager")) {
                 url = "Customermanager";
+            }
+            if (action.equals("customermanager1")) {
+                url = "Customermanager1";
             }
             if (action.equals("productmanager")) {
                 url = "Productmanager";
@@ -111,6 +117,10 @@ public class MainController extends HttpServlet {
             if (action.equals("deleteproduct")){
                 url = "DeleteProduct";
             }
+            if (action.equals("recoveruser")){
+                url = "Recoveruser";
+            }
+            
             if (action.equals("updateproduct")){
                 productDAO c = new productDAO();
                 List<Product> product = c.getProduct();

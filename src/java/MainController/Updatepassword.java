@@ -40,8 +40,7 @@ public class Updatepassword extends HttpServlet {
             String pass1=request.getParameter("oldpassword");
             String pass2=request.getParameter("newpass");
             String pass3=request.getParameter("pass");
-            int user_id = user.getUser_id();
-            
+            int user_id = user.getUser_id();            
             if(!pass2.equals(pass3)){
                 request.setAttribute("error_pass1", "Mật khẩu không trùng khớp. Hãy nhập lại...");
                 request.getRequestDispatcher("my-account.jsp").forward(request, response);
@@ -52,14 +51,15 @@ public class Updatepassword extends HttpServlet {
                     request.setAttribute("error_pass1", "Mật khẩu cũ giống mật khẩu mới(không cập nhật)!!!");
                     request.getRequestDispatcher("my-account.jsp").forward(request, response);
                 }
-                if(a==null){
-                    request.setAttribute("error_pass1", "Mật Khẩu cũ không chính xác");
-                    request.getRequestDispatcher("my-account.jsp").forward(request, response);
-                }else{
+                if(a!=null&&pass1!=pass2){
                     dao.updateUserpass(user_id, pass3);                    
                     session.removeAttribute("user");
                     request.setAttribute("error", "Cập nhật Mật Khẩu mới thành công.Xin đăng nhập lại!!!");
                     request.getRequestDispatcher("login.jsp").forward(request, response);
+                }
+                if(a==null){
+                    request.setAttribute("error_pass1", "Mật Khẩu cũ không chính xác");
+                    request.getRequestDispatcher("my-account.jsp").forward(request, response);
                 }
             }
         }catch(Exception ex){

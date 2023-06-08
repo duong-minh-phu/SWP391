@@ -27,7 +27,7 @@ public class productDAO {
     public List<Product> getProduct() {
         List<Product> list = new ArrayList<>();
         String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from  \n"
-                + "product p inner join category c on p.category_id = c.category_id";
+                + "product p inner join category c on p.category_id = c.category_id and p.status='TRUE'";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -122,7 +122,7 @@ public class productDAO {
 
     public List<Product> getProductLow() {
         List<Product> list = new ArrayList<>();
-        String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from product p inner join category c on p.category_id = c.category_id ORDER BY p.product_price ASC";
+        String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from product p inner join category c on p.category_id = c.category_id and p.status='TRUE' ORDER BY p.product_price ASC";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -139,7 +139,7 @@ public class productDAO {
 
     public List<Product> getProductHigh() {
         List<Product> list = new ArrayList<>();
-        String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from product p inner join category c on p.category_id = c.category_id ORDER BY p.product_price DESC";
+        String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from product p inner join category c on p.category_id = c.category_id and p.status='TRUE' ORDER BY p.product_price DESC";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -156,7 +156,7 @@ public class productDAO {
 
     public List<Product> getProductAZ() {
         List<Product> list = new ArrayList<>();
-        String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from product p inner join category c on p.category_id = c.category_id ORDER BY p.product_name";
+        String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from product p inner join category c on p.category_id = c.category_id and p.status='TRUE' ORDER BY p.product_name";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -193,7 +193,7 @@ public class productDAO {
 
     public List<Product> getProductByCategory(int category_id) {
         List<Product> list = new ArrayList<>();
-        String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from product p inner join category c on p.category_id = c.category_id WHERE p.category_id=?";
+        String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from product p inner join category c on p.category_id = c.category_id WHERE p.category_id=? and p.status='TRUE'";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -213,7 +213,7 @@ public class productDAO {
 
     public Product getProductByID(String product_id) {
         List<Product> list = new ArrayList<>();
-        String sql = "select c.category_id, c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from product p inner join category c on p.category_id = c.category_id WHERE p.product_id=?";
+        String sql = "select c.category_id, c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from product p inner join category c on p.category_id = c.category_id WHERE p.product_id=? and p.status='TRUE'";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -297,7 +297,7 @@ public class productDAO {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT DISTINCT c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img \n"
                 + " FROM product p inner join category c on c.category_id = p.category_id \n"
-                + "WHERE product_name LIKE ? OR  product_price LIKE ?  OR c.category_name LIKE ?";
+                + "WHERE p.status='TRUE' and  product_name LIKE ? OR  product_price LIKE ?  OR c.category_name LIKE ?";
 
         try {
             conn = new DBContext().getConnection();

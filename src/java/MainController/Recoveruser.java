@@ -5,23 +5,21 @@
  */
 package MainController;
 
-import DAO.productDAO;
-import Entity.Cart;
-import Entity.Product;
+import DAO.userDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author luong
+ * @author ROG STRIX
  */
-public class UpdateItemsInCart extends HttpServlet {
+@WebServlet(name = "Recoveruser", urlPatterns = {"/Recoveruser"})
+public class Recoveruser extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,25 +33,14 @@ public class UpdateItemsInCart extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String URL = "MainController?action=productdetail&product_id=";
-        try{
-            String id = request.getParameter("product_id");
-            int quantity = Integer.parseInt(request.getParameter("quantity1"));
-            URL += id;
-            
-            Product product = new productDAO().getProductByID(id);
-            HttpSession session = request.getSession();
-            Cart cart = (Cart) session.getAttribute("cart");            
-            cart.deleteFromCart(product);
-            if (cart == null){                
-                cart = new Cart();
-            }
-            cart.addItem(product, quantity);   
-
-            session.setAttribute("cart", cart);
-        }finally{
-            RequestDispatcher rd = request.getRequestDispatcher("cart.jsp");
-            rd.forward(request, response);
+        try  {
+            String user_id=request.getParameter("user_id");
+                    int id=Integer.parseInt(user_id);
+                    userDAO dao=new userDAO();
+                    dao.Recoveruser(id);
+                    response.sendRedirect("MainController?action=customermanager1");
+        }catch(Exception ex){
+            response.sendRedirect("404.jsp");
         }
     }
 

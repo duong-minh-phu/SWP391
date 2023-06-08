@@ -101,7 +101,9 @@
         </div>
         <!--product details end-->
         <!--product info end-->
-
+        <div>
+            
+        </div>
         <!--product section area start-->
         <section class="product_section related_product">
             <div class="container">

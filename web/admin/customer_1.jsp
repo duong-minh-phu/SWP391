@@ -23,7 +23,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
 
     <body onload="time()" class="app sidebar-mini rtl">
@@ -112,10 +112,8 @@
                                             <td>${u.isAdmin}</td>
                                             <td>${u.user_phone}</td> 
                                             <c:if test="${fn: toUpperCase(sessionScope.user.isAdmin) == 'ADMIN'}">
-                                        <td><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                                                        data-target="#ModalUP${u.user_id}"><i class="fas fa-edit"></i></button>
-                                                <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" value="${u.user_id}"><i
-                                                            class="fas fa-trash-alt"></i>
+                                        <td>
+                                                <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" value="${u.user_id}"><i class="fa-solid fa-recycle"></i>
                                                     </button>        
                                             
                                             </td>
@@ -194,13 +192,13 @@
                 jQuery(".trash").click(function () {
                     swal({
                         title: "Cảnh báo",
-                        text: "Bạn có chắc chắn là muốn xóa sản phẩm này?",
+                        text: "Bạn có chắc chắn là muốn phục hồi lại tài khoản này????",
                         buttons: ["Hủy bỏ", "Đồng ý"],
                     })
                             .then((willDelete) => {
                                 if (willDelete) {
-                                    window.location = "MainController?action=deleteuser&user_id=" + $(this).attr("value");
-                                    swal("Đã xóa thành công.!", {
+                                    window.location = "MainController?action=recoveruser&user_id=" + $(this).attr("value");
+                                    swal("Đã phục hồi thành công!", {
                                     });
                                 }
                             });

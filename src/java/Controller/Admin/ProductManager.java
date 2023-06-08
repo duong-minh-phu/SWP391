@@ -83,14 +83,14 @@ public class ProductManager extends HttpServlet {
                     int productQuantity = Integer.parseInt(request.getParameter("product_quantity"));
                     String productImage = "images/" + request.getParameter("product_img");
                     productDAO c = new productDAO();
-
+                    
                     Product product = new Product(productId, productName, productPrice, productDesc, productQuantity, productImage);
                     Category category = new Category(categoryId);
                     product.setCate(category);
 
                     c.updateProduct(product);
                     response.sendRedirect("Productmanager");
-
+                    
                 } else {
                     response.sendRedirect("404.jsp");
                 }

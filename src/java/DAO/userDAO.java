@@ -122,6 +122,22 @@ public class userDAO {
         }
         return list;
     }
+    public List<User> getUserdelete() {
+        List<User> list = new ArrayList<>();
+        String sql = "select * from users where role='FALSE'";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6)));
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
     
     public void setAdmin(int user_id, String isAdmin){
         String sql = "update users set role= ? where user_id = ?";
@@ -159,6 +175,20 @@ public class userDAO {
         }
         
     }
+    
+     public void Recoveruser(int user_id){
+        String sql = "update users set role= ? where user_id = ?";
+        try {
+        conn = new DBContext().getConnection();
+        ps = conn.prepareStatement(sql);
+        ps.setInt(2, user_id);
+        ps.setString(1,"CUS");
+        ps.executeUpdate();
+        } catch (Exception e) {
+        }
+        
+    }
+   
    
     
 
