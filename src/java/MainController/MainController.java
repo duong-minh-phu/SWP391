@@ -54,6 +54,9 @@ public class MainController extends HttpServlet {
             if (action.equals("productdetail")) {
                 url = "Productdetail";
             }
+            if (action.equals("blog")) {
+                url = "Blog";
+            }
             if (action.equals("listByCategory")) {
                 url = "ListByCategory";
             }

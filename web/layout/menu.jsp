@@ -194,6 +194,7 @@
                             <ul>
                                 <li><a href="about">Chúng tôi</a></li>
                                 <li><a href="contact">Liên hệ</a></li>
+                                <li><a href="MainController?action=blog">Blog</a></li>
                             </ul> 
                         </nav> 
                     </div>
@@ -216,6 +217,7 @@
                                     <li><a href="MainController?action=product">Sản phẩm</a></li>
                                     <li><a href="about">Chúng tôi</a></li>
                                     <li><a href="contact">Liên hệ</a></li>
+                                    <li><a href="MainController?action=blog">Blog</a></li>;
                                 </ul>   
                             </nav> 
                         </div>
