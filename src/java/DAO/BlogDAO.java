@@ -27,7 +27,7 @@ public class BlogDAO {
 
     public List<Blog> getBlog() {
         List<Blog> list = new ArrayList<>();
-        String sql = "select p.blog_id,c.user_name,p.blog_name,p.blog_describe,p.img\n" +
+        String sql = "select p.blog_id,c.user_name,p.blog_name,p.blog_describe,p.img,p.date\n" +
 "                        from blog p inner join users c on p.user_id=c.user_id";
         try {
             conn = new DBContext().getConnection();
@@ -35,7 +35,7 @@ public class BlogDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 User c = new User(rs.getString(1));
-                list.add(new Blog(rs.getInt(1), c, rs.getString(5), rs.getString(3), rs.getString(4)));                
+                list.add(new Blog(rs.getInt(1), rs.getString(2), rs.getString(5), rs.getString(3), rs.getString(4),rs.getDate(6)));                
             }
 
         } catch (Exception e) {

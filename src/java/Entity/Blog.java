@@ -5,26 +5,30 @@
  */
 package Entity;
 
+import java.sql.Date;
+
 /**
  *
  * @author ROG STRIX
  */
 public class Blog {
     int blog_id;
-    User user;
+    String user;
     String img;
     String blog_name;
     String blog_describe;
+    Date date;
 
     public Blog() {
     }
 
-    public Blog(int blog_id, User user, String img, String blog_name, String blog_describe) {
+    public Blog(int blog_id, String user, String img, String blog_name, String blog_describe,Date date ) {
         this.blog_id = blog_id;
         this.user = user;
         this.img = img;
         this.blog_name = blog_name;
         this.blog_describe = blog_describe;
+        this.date=date;
     }
 
     public Blog(int blog_id, String img, String blog_name, String blog_describe) {
@@ -42,11 +46,11 @@ public class Blog {
         this.blog_id = blog_id;
     }
 
-    public User getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(String user) {
         this.user = user;
     }
 
@@ -72,6 +76,14 @@ public class Blog {
 
     public void setBlog_describe(String blog_describe) {
         this.blog_describe = blog_describe;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
     
     

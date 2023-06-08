@@ -84,7 +84,7 @@
 
                                             <div class="product_content grid_content">
                                                 <h3><a href="MainController?action=productdetail&product_id=${b.blog_id}">${b.blog_name}</a></h3>
-                                                <span class="current_price">${b.user}</span>
+                                                <span class="current_price">${b.date}</span>
                                             </div>
                                         </div>
                                     </div>
