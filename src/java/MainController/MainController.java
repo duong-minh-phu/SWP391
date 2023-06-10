@@ -105,6 +105,9 @@ public class MainController extends HttpServlet {
             if (action.equals("deleteuser")) {
                 url = "Deleteuser";
             }
+            if (action.equals("productdelete")){
+                url = "ProductDelete";
+            }
             if (action.equals("addToCart")) {
                 url = "AddToCart";
             }
@@ -125,6 +128,9 @@ public class MainController extends HttpServlet {
             }
             if (action.equals("deleteproduct")){
                 url = "DeleteProduct";
+            }
+            if (action.equals("recoverproduct")){
+                url = "RecoverProduct";
             }
             if (action.equals("recoveruser")){
                 url = "Recoveruser";

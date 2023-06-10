@@ -42,6 +42,25 @@ public class productDAO {
         }
         return list;
     }
+    
+    public List<Product> getProductDelete() {
+        List<Product> list = new ArrayList<>();
+        String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from  \n"
+                + "product p inner join category c on p.category_id = c.category_id and p.status='FALSE'";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Category c = new Category(rs.getString(1));
+                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
 
     public boolean insertProduct(Product product) {
         String sql = "insert into dbo.product(product_id,category_id,product_name,product_price,product_describe,quantity,img) values(?,?,?,?,?,?,?)";
@@ -60,13 +79,28 @@ public class productDAO {
         }
         return false;
     }
+    public void RecoverProduct(String product_id){
+        String sq = "update product set quantity=?,status=? where product_id = ?";
+        try {
+        conn = new DBContext().getConnection();
+        ps = conn.prepareStatement(sq);
+        ps.setInt(1, 1);
+        ps.setString(2, "True");
+        ps.setString(3, product_id);
+        ps.executeUpdate();
+        } catch (Exception e) {
+        }
+        
+    }
 
     public void deleteProduct(String product_id) {
-        String sq2 = "delete from product where product_id=?";
+        String sq2 = "UPDATE product SET quantity = ? , status = ? WHERE product_id = ?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sq2);
-            ps.setString(1, product_id);
+            ps.setInt(1, 0);
+            ps.setString(2, "FALSE");
+            ps.setString(3, product_id);
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);

@@ -20,7 +20,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
 
     <body onload="time()" class="app sidebar-mini rtl">
@@ -55,7 +55,9 @@
                             class="app-menu__label">Bảng điều khiển</span></a></li>
                 <li><a class="app-menu__item" href="MainController?action=customermanager"><i class='app-menu__icon bx bx-user-voice'></i><span
                             class="app-menu__label">Quản lý khách hàng</span></a></li>
-                            <li><a class="app-menu__item" href="MainController?action=productmanager"><i
+                <li><a class="app-menu__item" href="MainController?action=customermanager1"><i class='app-menu__icon bx bx-user-voice'></i><span
+                            class="app-menu__label">Quản lý khách hàng đã xóa</span></a></li>
+                <li><a class="app-menu__item" href="MainController?action=productmanager"><i
                             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
                 </li>
                 <li><a class="app-menu__item" href="ordermanager"><i class='app-menu__icon bx bx-task'></i><span
@@ -77,6 +79,9 @@
                                 <div class="col-sm-2">
                                     <a class="btn btn-add btn-sm" href="MainController?action=insert" title="Thêm"><i class="fas fa-plus"></i>
                                         Tạo mới sản phẩm</a>
+                                </div>
+                                <div class="col-sm-2">
+                                    <a class="btn btn-add btn-sm" href="MainController?action=productdelete" >Sản phẩm đã hết hàng</a>
                                 </div>
                             </div>
                             <form href="MainController?action=updateproduct" method="POST">
@@ -146,9 +151,9 @@
                                                                 <label class="control-label" >Giá</label>
                                                                 <input class="form-control" type="number" name="product_price" required value="${p.product_price}">
                                                             </div>
-                                                                    <div class="form-group col-md-6">
-                                                                        <label class="control-label">Thông tin</label>
-                                                                        <input class="form-control" type="text" name="product_describe" value="${p.product_describe}">
+                                                            <div class="form-group col-md-6">
+                                                                <label class="control-label">Thông tin</label>
+                                                                <input class="form-control" type="text" name="product_describe" value="${p.product_describe}">
                                                             </div>
 
                                                             <div class="form-group col-md-6">
@@ -182,6 +187,20 @@
                                         <!--
                                       MODAL
                                         -->
+                                    </c:forEach>
+                                    <c:forEach items="${ProductDelete}" var="p">
+                                        <tr>
+                                            <td>${p.cate.category_name}</td>
+                                            <td>${p.product_name}</td>
+                                            <td>${p.product_price}</td>
+                                            <td>${p.product_describe}</td>
+                                            <td>${p.quantity}</td>
+                                            <td><img src="${p.img}" alt="" width="100px;"></td>
+
+                                            <td>
+                                                <button class="btn btn-primary btn-sm trash" type="button" title="Phục hồi" value="${p.product_id}"><i class="fa-solid fa-recycle"></i>
+                                                    </button>  
+                                        </tr>
                                     </c:forEach>
                                     </tbody>
                                 </table>
@@ -263,6 +282,25 @@
                                 if (willDelete) {
                                     window.location = "MainController?action=deleteproduct&product_id=" + $(this).attr("value");
                                     swal("Đã xóa thành công !!!!", {
+                                    });
+                                }
+                            });
+                });
+            }));
+        </script>
+        <script>
+
+            $(document).ready(jQuery(function () {
+                $('button[title="Phục hồi"]').click(function () {
+                    swal({
+                        title: "Cảnh báo",
+                        text: "Bạn có chắc chắn là muốn phục hồi sản phẩm này?",
+                        buttons: ["Hủy bỏ", "Đồng ý"],
+                    })
+                            .then((willDelete) => {
+                                if (willDelete) {
+                                    window.location = "MainController?action=recoverproduct&product_id=" + $(this).attr("value");
+                                    swal("Đã Phục hồi thành công !", {
                                     });
                                 }
                             });
