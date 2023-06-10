@@ -39,7 +39,7 @@ public class Blogcomment extends HttpServlet {
             int id_blog=Integer.parseInt(blog_id);
             BlogCommentDAO dao=new BlogCommentDAO();
             dao.BlogComment(user_id, id_blog, comment);
-            request.getRequestDispatcher("home").forward(request, response);
+            request.getRequestDispatcher("MainController?action=blogdetails").forward(request, response);
             }
         }catch(Exception ex){
             response.sendRedirect("404.jsp");

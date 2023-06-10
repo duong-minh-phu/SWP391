@@ -13,6 +13,7 @@ import java.sql.Date;
  */
 public class BlogComment {
     int user_id;
+    String user_name;
     int blog_id;
     String date;
     String comment;
@@ -23,6 +24,22 @@ public class BlogComment {
         this.date = date;
         this.comment = comment;
     }
+
+    public BlogComment(String user_name, int blog_id, String date, String comment) {
+        this.user_name = user_name;
+        this.blog_id = blog_id;
+        this.date = date;
+        this.comment = comment;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+    
 
     public BlogComment() {
     }

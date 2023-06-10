@@ -5,8 +5,10 @@
  */
 package MainController;
 
+import DAO.BlogCommentDAO;
 import DAO.BlogDAO;
 import DAO.productDAO;
+import Entity.BlogComment;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -38,8 +40,11 @@ public class Blogdetails extends HttpServlet {
                 try  {
             String blog_id = request.getParameter("blog_id");
             BlogDAO c = new BlogDAO();
+            BlogCommentDAO dao= new BlogCommentDAO();
+            List<BlogComment> comment = dao.getComment(blog_id);
             Entity.Blog product = c.getBlogByID(blog_id);
-            request.setAttribute("BlogData", product);            
+            request.setAttribute("BlogData", product);
+            request.setAttribute("BlogCommentByid", comment);
             request.getRequestDispatcher("Blog_details.jsp").forward(request, response);
         }catch(Exception ex){
             

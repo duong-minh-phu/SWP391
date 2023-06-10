@@ -89,6 +89,18 @@
         </div>
         <!--product details end-->
         <!--product info end-->
+        <div>
+            <c:forEach items="${BlogCommentByid}" var="c">
+                                            ${c.user_name}
+                                            ${c.date}
+                                            ${c.comment}</br>
+                                           
+                                            </c:forEach>
+        </div>
+        
+        
+        
+        
         <form action="MainController?action=blogcomment&&blog_id=${BlogData.blog_id}" method="POST">
         <div>
             <h1>bình luận</h1>

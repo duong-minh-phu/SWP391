@@ -6,12 +6,17 @@
 package DAO;
 
 import Context.DBContext;
+import Entity.BlogComment;
+import Entity.Category;
+import Entity.Product;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -40,5 +45,25 @@ public class BlogCommentDAO {
                 ps.executeUpdate();
             } catch (Exception e) {
             };
+    }
+    
+     public List<BlogComment> getComment(String blogid) {
+        List<BlogComment> list = new ArrayList<>();
+        String sql = "select c.user_name,p.blog_id,p.date,p.comment\n" +
+                        "from bogcomment p inner join users c on p.user_id=c.user_id and p.blog_id=?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, blogid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                
+                list.add(new BlogComment(rs.getString(1), rs.getInt(2), rs.getString(3),rs.getString(4)));
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
     }
 }

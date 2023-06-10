@@ -59,11 +59,8 @@
                             class="app-menu__label">Quản lý khách hàng</span></a></li>
                 <li><a class="app-menu__item" href="MainController?action=customermanager1"><i class='app-menu__icon bx bx-user-voice'></i><span
                             class="app-menu__label">Quản lý khách hàng đã xóa</span></a></li>
-                <li><a class="app-menu__item" href="Productmanager"><i
-                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
-                </li>
-                <li><a class="app-menu__item" href="ordermanager"><i class='app-menu__icon bx bx-task'></i><span
-                            class="app-menu__label">Quản lý đơn hàng</span></a></li>
+                
+                
             </ul>
         </aside>
         <main class="app-content">
