@@ -122,7 +122,10 @@ a, button {
     text-decoration: none;
     cursor: pointer;
 }
-
+.d-flex {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important; }
 a, button, img, input, span {
     transition: all 0.3s ease 0s;
 }

@@ -114,7 +114,7 @@
                                 <li class="top_links"><a href="#">Xin chào ${sessionScope.user.user_name}<i class="ion-chevron-down"></i></a>
                                     </c:if>
                                     <c:if test="${sessionScope.user == null}">
-                                <li class="top_links"><a href="#">Đăng nhập<i class="ion-chevron-down"></i></a>
+                                <li class="top_links"><a href="login.jsp">Đăng nhập<i class="ion-chevron-down"></i></a>
                                     </c:if>
                                 <ul class="dropdown_links">
                                     <c:if test="${sessionScope.user != null}">

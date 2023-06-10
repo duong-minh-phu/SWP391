@@ -9,7 +9,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Product details</title>
+        <title>Blog detail</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon -->
@@ -72,6 +72,7 @@
                         <div class="product_d_right">
                             <form action="MainController?action=addToCart&&product_id=${BlogData.blog_id}" method="POST">
                                 <h1>${BlogData.blog_name}</h1>
+                                <h1>${BlogData.user}</h1>
                                 <div class="product_price">
                                     <span class="current_price">${BlogData.date} </span>
                                 </div>
@@ -88,9 +89,13 @@
         </div>
         <!--product details end-->
         <!--product info end-->
+        <form action="MainController?action=blogcomment&&blog_id=${BlogData.blog_id}" method="POST">
         <div>
-            
+            <h1>bình luận</h1>
+            <input name="blograting" type="text"  required="">
+            <button type="submit" >gửi</button>
         </div>
+        </form>
         <!--product section area start-->
         
         <!--product section area end-->
