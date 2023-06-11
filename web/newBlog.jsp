@@ -53,28 +53,25 @@
                 </div>
             </div>         
         </div>
-        <!--breadcrumbs area end-->
-
-        <!--shop  area start-->
-        <div class="shop_area shop_reverse">
-            <div class="container">
-                <div class="shop_inner_area">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-12">
-                            <!--sidebar widget start-->
-                            
-                            <!--sidebar widget end-->
-                        </div>
-                        <div class="col-lg-9 col-md-12">
-                            <!--shop wrapper start-->
-                            <!--shop toolbar start-->
-                        <c:forEach items="${BlogData}" var="b">    
-                            
-                            <div class="col-lg-8">
+        
+        
+        <div>
+        <div class="blog-entry d-flex blog-entry-search-item">
+            
+            <div>
+              <span class="date">Apr. 14th, 2022 &bullet; <a href="#">Business</a></span>
+              <h2><a href="single.html">Thought you loved Python? Wait until you meet Rust</a></h2>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</p>
+              <p><a href="single.html" class="btn btn-sm btn-outline-primary">Read More</a></p>
+            </div>
+          </div>
+        </div>
+        
+        
+        
+            <c:forEach items="${BlogData}" var="b">                                                         
           <div class="blog-entry d-flex blog-entry-search-item">
-            <a href="single.html" class="img-link me-4">
-              <img src="${b.img}" alt="Image" class="img-fluid">
-            </a>
+            
             <div>
               <span class="date">${b.date} &bullet; <a href="#">Business</a></span>
               <h2><a href="single.html">${b.blog_name}</a></h2>
@@ -82,7 +79,7 @@
               <p><a href="single.html" class="btn btn-sm btn-outline-primary">Read More</a></p>
             </div>
           </div>
-                                </c:forEach>
+         </c:forEach>
                             <c:if test="${num1 != 1}"> 
                             <c:set var="page" value="${page1}"/>
                             <div class="shop_toolbar t_bottom" style="border: none;">
@@ -96,11 +93,7 @@
                                 </div>
                             </div>
                             </c:if>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        
         <!--shop  area end-->
 
         <!--footer area start-->

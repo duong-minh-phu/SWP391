@@ -72,9 +72,9 @@
                         <div class="product_d_right">
                             <form action="MainController?action=addToCart&&product_id=${BlogData.blog_id}" method="POST">
                                 <h1>${BlogData.blog_name}</h1>
-                                <h1>${BlogData.user}</h1>
+                                <h1>người đăng: ${BlogData.user}</h1>
                                 <div class="product_price">
-                                    <span class="current_price">${BlogData.date} </span>
+                                    <span class="current_price"> ngày đăng :${BlogData.date} </span>
                                 </div>
                                 <div class="product_desc">
                                     <p>${BlogData.blog_describe}</p>
@@ -89,13 +89,23 @@
         </div>
         <!--product details end-->
         <!--product info end-->
+        
+        <div class="comment-body">
+                  <h3>Jean Doe</h3>
+                  <div class="meta">January 9, 2018 at 2:21pm</div>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                  <p><a href="#" class="reply rounded">Reply</a></p>
+                </div>
         <div>
-            <c:forEach items="${BlogCommentByid}" var="c">
-                                            ${c.user_name}
-                                            ${c.date}
-                                            ${c.comment}</br>
-                                           
-                                            </c:forEach>
+            
+                                            <c:forEach items="${BlogCommentByid}" var="c">                            
+            <div class="comment-body">
+                  <h4>${c.user_name}</h4>
+                  <div class="meta">${c.date}</div>
+                  <p>${c.comment}</p>
+                  
+                </div>
+            </c:forEach>  
         </div>
         
         

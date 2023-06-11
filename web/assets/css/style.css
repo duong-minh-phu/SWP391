@@ -64,6 +64,36 @@
 html, body {
     height: 100%;
 }
+.img-link {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  border-radius: 10px;
+  margin-bottom: 10px; }
+.img-link {
+    width: 280px;
+    border-radius: 0; }
+.img-link img {
+      margin-bottom: 0;
+      border-radius: 10px; }
+.img-link {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 10px; }
+.img-link img {
+    margin-bottom: 0; }
+.img-link {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  border-radius: 10px;
+  margin-bottom: 10px; }
+.img-fluid {
+  max-width: 186px;
+  height: 186px; }
+
 
 body {
     line-height: 24px;
@@ -106,6 +136,7 @@ h5 {
     font-size: 14px;
     line-height: 18px;
 }
+.img-fluid{max-width:100%;height:auto}
 
 h6 {
     font-size: 12px;

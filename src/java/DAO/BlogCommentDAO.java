@@ -50,7 +50,7 @@ public class BlogCommentDAO {
      public List<BlogComment> getComment(String blogid) {
         List<BlogComment> list = new ArrayList<>();
         String sql = "select c.user_name,p.blog_id,p.date,p.comment\n" +
-                        "from bogcomment p inner join users c on p.user_id=c.user_id and p.blog_id=?";
+                        "from bogcomment p inner join users c on p.user_id=c.user_id and p.blog_id=?  ORDER BY p.date desc";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
