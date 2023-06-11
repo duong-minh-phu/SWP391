@@ -35,9 +35,4 @@
 <img src="./Preview/Order.png" style="border-radius:4%" width="30%" height="49%" />&nbsp;<img src="./Preview/Orderdetail.png" style="border-radius:4%" width="30%" height="49%" />&nbsp;<img src="./Preview/AdminHome.png" style="border-radius:4%" width="30%" height="49%" />
 <img src="./Preview/OrderManager.png" style="border-radius:4%" width="30%" height="49%" />&nbsp;<img src="./Preview/Customer.png" style="border-radius:4%" width="30%" height="49%" />&nbsp;<img src="./Preview/ProductManager.png" style="border-radius:4%" width="30%" height="49%" />
 <br>
-ETC...
-
-## Contribute
-- Thank Vo Truong for sharing the CRUD theme
-
-Copyright (c) 2021, Khuong Hung
+ETC..
