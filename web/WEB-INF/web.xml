@@ -39,6 +39,10 @@
     <servlet>
         <servlet-name>Checkout</servlet-name>
         <servlet-class>Controller.Home.Checkout</servlet-class>
+    </servlet>        
+    <servlet>
+        <servlet-name>PaymentBill</servlet-name>
+        <servlet-class>MainController.PaymentBill</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MainController</servlet-name>
@@ -76,14 +80,7 @@
         <servlet-name>ProductManager</servlet-name>
         <servlet-class>Controller.Admin.ProductManager</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>ProductDelete</servlet-name>
-        <servlet-class>MainController.ProductDelete</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>RecoverProduct</servlet-name>
-        <servlet-class>MainController.RecoverProduct</servlet-class>
-    </servlet>
+    
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
@@ -119,6 +116,10 @@
     <servlet-mapping>
         <servlet-name>Checkout</servlet-name>
         <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>        
+    <servlet-mapping>
+        <servlet-name>PaymentBill</servlet-name>
+        <url-pattern>/PaymentBill</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -151,14 +152,6 @@
     <servlet-mapping>
         <servlet-name>UpdateProduct</servlet-name>
         <url-pattern>/updateproduct</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ProductDelete</servlet-name>
-        <url-pattern>/ProductDelete</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RecoverProduct</servlet-name>
-        <url-pattern>/RecoverProduct</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
