@@ -153,10 +153,10 @@
                 <label for="rate-2" class="fas fa-star"></label>
                 <input type="radio" name="rate" id="rate-1">
                 <label for="rate-1" class="fas fa-star"></label>
-                <form action="#">
+                <form action="MainController?action=submitRating">
                     <header></header>
                     <div class="textarea">
-                        <textarea cols="30" placeholder="Describe your experience.."></textarea>
+                        <textarea cols="30" placeholder="Hãy đễ lại đánh giá của bạn về sản phẩm ....."></textarea>
                     </div>
                     <div class="btn">
                         <button type="submit">Post</button>

@@ -79,6 +79,7 @@ public class productDAO {
         }
         return false;
     }
+    
     public void RecoverProduct(String product_id){
         String sq = "update product set quantity=?,status=? where product_id = ?";
         try {

@@ -10,6 +10,7 @@
   justify-content: center;
   flex-direction: column;
   margin: auto;
+  margin-bottom: 20px;
 }
 
 .container_rating .post_rating {

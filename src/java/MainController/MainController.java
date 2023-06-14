@@ -99,6 +99,9 @@ public class MainController extends HttpServlet {
             if (action.equals("productmanager")) {
                 url = "Productmanager";
             }
+            if (action.equals("feedbackmanagement")) {
+                url = "Feedbackmanagement";
+            }
             if (action.equals("update")) {
                 url = "Update";
             }

@@ -39,7 +39,7 @@
     <servlet>
         <servlet-name>Checkout</servlet-name>
         <servlet-class>Controller.Home.Checkout</servlet-class>
-    </servlet>        
+    </servlet>
     <servlet>
         <servlet-name>PaymentBill</servlet-name>
         <servlet-class>MainController.PaymentBill</servlet-class>
@@ -80,7 +80,10 @@
         <servlet-name>ProductManager</servlet-name>
         <servlet-class>Controller.Admin.ProductManager</servlet-class>
     </servlet>
-    
+    <servlet>
+        <servlet-name>Feedbackmanagement</servlet-name>
+        <servlet-class>MainController.Feedbackmanagement</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
@@ -116,7 +119,7 @@
     <servlet-mapping>
         <servlet-name>Checkout</servlet-name>
         <url-pattern>/checkout</url-pattern>
-    </servlet-mapping>        
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PaymentBill</servlet-name>
         <url-pattern>/PaymentBill</url-pattern>
@@ -169,6 +172,10 @@
         <servlet-name>RecoverProduct</servlet-name>
         <servlet-class>MainController.RecoverProduct</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>Feedbackmanagement</servlet-name>
+        <url-pattern>/Feedbackmanagement</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
