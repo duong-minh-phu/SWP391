@@ -17,7 +17,8 @@
 
         <!-- CSS 
         ========================= -->
-
+        <link rel="stylesheet" href="styleproduct.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 
         <!-- Plugins CSS -->
         <link rel="stylesheet" href="assets/css/plugins.css">
@@ -82,16 +83,16 @@
                                     <p> số lượng hàng còn lại:${ProductData.quantity}</p>
                                 </div>
                                 <div class="product_desc">
-                                <p style="color: red; align-content: center;">
+                                    <p style="color: red; align-content: center;">
                                         ${requestScope.detail}
                                     </p>
-                                    </div>
-                                <c:if test="${(ProductData.quantity) != 0}">                                                                        
-                                <div class="product_variant quantity">
-                                    <label>quantity</label>
-                                    <input min="1" max="${ProductData.quantity}" name="quantity" type="number" value="1">
-                                    <button class="button" type="submit">Thêm vào giở hàng</button>  
                                 </div>
+                                <c:if test="${(ProductData.quantity) != 0}">                                                                        
+                                    <div class="product_variant quantity">
+                                        <label>quantity</label>
+                                        <input min="1" max="${ProductData.quantity}" name="quantity" type="number" value="1">
+                                        <button class="button" type="submit">Thêm vào giở hàng</button>  
+                                    </div>
                                 </c:if>
                             </form>
                         </div>
@@ -100,10 +101,6 @@
             </div>    
         </div>
         <!--product details end-->
-        <!--product info end-->
-        <div>
-            
-        </div>
         <!--product section area start-->
         <section class="product_section related_product">
             <div class="container">
@@ -136,11 +133,57 @@
             </div>
         </section>
         <!--product section area end-->
+        <div>
+            
+        </div>
+        <!--product info end-->
+        <div class="container_rating">
+            <div class="post_rating">
+                <div class="text_rating">Thanks for rating us!</div>
+                <div class="edit_rating">EDIT</div>
+            </div>
+            <div class="star-widget">
+                <input type="radio" name="rate" id="rate-5">
+                <label for="rate-5" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-4">
+                <label for="rate-4" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-3">
+                <label for="rate-3" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-2">
+                <label for="rate-2" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-1">
+                <label for="rate-1" class="fas fa-star"></label>
+                <form action="#">
+                    <header></header>
+                    <div class="textarea">
+                        <textarea cols="30" placeholder="Describe your experience.."></textarea>
+                    </div>
+                    <div class="btn">
+                        <button type="submit">Post</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script>
+            const btn = document.querySelector("button");
+            const post = document.querySelector(".post");
+            const widget = document.querySelector(".star-widget");
+            const editBtn = document.querySelector(".edit");
+            btn.onclick = () => {
+                widget.style.display = "none";
+                post.style.display = "block";
+                editBtn.onclick = () => {
+                    widget.style.display = "block";
+                    post.style.display = "none";
+                }
+                return false;
+            }
+        </script>
 
         <!--footer area start-->
         <jsp:include page="layout/footer.jsp"/>
         <!--footer area end-->
-        
+
         <!-- Plugins JS -->
         <script src="assets/js/plugins.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -148,13 +191,13 @@
         <!-- Main JS -->
         <script src="assets/js/main.js"></script>
         <script>
-//            $("#submit").click(function()){
-//            swal({
-//            title: "Thanks for Contacting us..!",
-//                    text: "We Will Contact You Soon...",
-//                    icon: "success",
-//            })
-//            }
+            //            $("#submit").click(function()){
+            //            swal({
+            //            title: "Thanks for Contacting us..!",
+            //                    text: "We Will Contact You Soon...",
+            //                    icon: "success",
+            //            })
+            //            }
         </script>
     </body>
 
