@@ -80,6 +80,14 @@
         <servlet-name>ProductManager</servlet-name>
         <servlet-class>Controller.Admin.ProductManager</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Blogmanagement</servlet-name>
+        <servlet-class>MainController.Blogmanagement</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteBlog</servlet-name>
+        <servlet-class>MainController.DeleteBlog</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
@@ -168,6 +176,14 @@
         <servlet-name>RecoverProduct</servlet-name>
         <servlet-class>MainController.RecoverProduct</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>Blogmanagement</servlet-name>
+        <url-pattern>/Blogmanagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteBlog</servlet-name>
+        <url-pattern>/DeleteBlog</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

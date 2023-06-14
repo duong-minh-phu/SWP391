@@ -135,7 +135,15 @@ public class MainController extends HttpServlet {
             if (action.equals("recoveruser")){
                 url = "Recoveruser";
             }
-            
+            if (action.equals("blogmanagement")){
+                url = "Blogmanagement";
+            }
+            if (action.equals("insertblog")) {
+                url = "InsertBlog";
+            }
+            if (action.equals("deleteblog")) {
+                url = "DeleteBlog";
+            }
             if (action.equals("updateproduct")){
                 productDAO c = new productDAO();
                 List<Product> product = c.getProduct();
