@@ -80,10 +80,6 @@
         <servlet-name>ProductManager</servlet-name>
         <servlet-class>Controller.Admin.ProductManager</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>Feedbackmanagement</servlet-name>
-        <servlet-class>MainController.Feedbackmanagement</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
@@ -172,10 +168,6 @@
         <servlet-name>RecoverProduct</servlet-name>
         <servlet-class>MainController.RecoverProduct</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>Feedbackmanagement</servlet-name>
-        <url-pattern>/Feedbackmanagement</url-pattern>
-    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
