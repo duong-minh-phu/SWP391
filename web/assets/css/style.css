@@ -91,8 +91,8 @@ html, body {
   border-radius: 10px;
   margin-bottom: 10px; }
 .img-fluid {
-  max-width: 186px;
-  height: 186px; }
+  max-width: 200px;
+  height: 200px; }
 
 
 body {
@@ -136,7 +136,7 @@ h5 {
     font-size: 14px;
     line-height: 18px;
 }
-.img-fluid{max-width:100%;height:auto}
+.img-fluid{max-width:200px;height:200px;}
 
 h6 {
     font-size: 12px;

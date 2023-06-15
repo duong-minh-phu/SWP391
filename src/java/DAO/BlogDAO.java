@@ -28,7 +28,7 @@ public class BlogDAO {
     public List<Blog> getBlog() {
         List<Blog> list = new ArrayList<>();
         String sql = "select p.blog_id,c.user_name,p.blog_name,p.blog_describe,p.img,p.date\n" +
-"                        from blog p inner join users c on p.user_id=c.user_id order by p.date desc";
+            " from blog p inner join users c on p.user_id=c.user_id order by p.date desc";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
