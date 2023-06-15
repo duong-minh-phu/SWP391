@@ -88,6 +88,14 @@
         <servlet-name>DeleteBlog</servlet-name>
         <servlet-class>MainController.DeleteBlog</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateBlog</servlet-name>
+        <servlet-class>MainController.UpdateBlog</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertBlog</servlet-name>
+        <servlet-class>MainController.InsertBlog</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
@@ -183,6 +191,14 @@
     <servlet-mapping>
         <servlet-name>DeleteBlog</servlet-name>
         <url-pattern>/DeleteBlog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateBlog</servlet-name>
+        <url-pattern>/UpdateBlog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertBlog</servlet-name>
+        <url-pattern>/InsertBlog</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

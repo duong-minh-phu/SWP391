@@ -84,7 +84,7 @@
                                         Tạo Blog</a>
                                 </div>
                             </div>
-                            
+                            <form href="MainController?action=updateblog" method="POST">
                                 <table class="table table-hover table-bordered" id="sampleTable">
                                     <thead>
                                         <tr>
@@ -106,94 +106,128 @@
                                                 <td>${b.blog_name}</td>
                                                 <td>${b.blog_describe}</td>
                                                 <td>${b.date}</td>
-                                                
+
                                                 <td>
                                                     <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" value="${b.blog_id}"><i
                                                             class="fas fa-trash-alt"></i>
                                                     </button>
-                                                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                                                            data-toggle="modal" data-target="#ModalUP${b.blog_id}"><i class="fas fa-edit"></i>
+                                                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" 
+                                                            data-toggle="modal" data-target="#ModalUP${b.blog_id}">
+                                                        <i class="fas fa-edit"></i>
                                                     </button>
                                                 </td>
                                             </tr>
-                                            </c:forEach>
-                                            <!--
-                                            MODAL
-                                            -->
-                                
+                                        </c:forEach>
+                                        <!--
+                                        MODAL
+                                        -->
+                                        <!-- Hộp thoại Modal -->
+                                    <div class="modal fade" id="ModalUP${b.blog_id}" tabindex="-1" role="dialog" aria-labelledby="ModalTitle"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="ModalTitle">Sửa thông tin</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="form-group">
+                                                            <label for="blog-name-input">Tên Blog</label>
+                                                            <input type="text" class="form-control" id="blog-name-input" value="${b.blog_name}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="blog-description-input">Chi tiết bài viết</label>
+                                                            <textarea class="form-control" id="blog-description-input">${b.blog_describe}</textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="blog-image-input">Ảnh</label>
+                                                            <input type="file" class="form-control-file" id="blog-image-input">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                                    <button type="button" class="btn btn-primary">Lưu thay đổi</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
 
 
-                                            
-                                        </tbody>
-                                    </table>
-                               
-                            </div>
+
+                                    </tbody>
+                                </table>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </main>
+            </div>
+        </main>
 
 
 
-            <!-- Essential javascripts for application to work-->
-            <script src="admin/js/jquery-3.2.1.min.js"></script>
-            <script src="admin/js/popper.min.js"></script>
-            <script src="admin/js/bootstrap.min.js"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-            <script src="admin/js/main.js"></script>
-            <!-- The javascript plugin to display page loading on top-->
-            <script src="admin/js/plugins/pace.min.js"></script>
-            <!-- Page specific javascripts-->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-            <!-- Data table plugin-->
-            <script type="text/javascript" src="admin/js/plugins/jquery.dataTables.min.js"></script>
-            <script type="text/javascript" src="admin/js/plugins/dataTables.bootstrap.min.js"></script>
-            <script type="text/javascript">
-            $('#sampleTable').DataTable();
-            //Thời Gian
-            function time() {
-                var today = new Date();
-                var weekday = new Array(7);
-                weekday[0] = "Chủ Nhật";
-                weekday[1] = "Thứ Hai";
-                weekday[2] = "Thứ Ba";
-                weekday[3] = "Thứ Tư";
-                weekday[4] = "Thứ Năm";
-                weekday[5] = "Thứ Sáu";
-                weekday[6] = "Thứ Bảy";
-                var day = weekday[today.getDay()];
-                var dd = today.getDate();
-                var mm = today.getMonth() + 1;
-                var yyyy = today.getFullYear();
-                var h = today.getHours();
-                var m = today.getMinutes();
-                var s = today.getSeconds();
-                m = checkTime(m);
-                s = checkTime(s);
-                nowTime = h + " giờ " + m + " phút " + s + " giây";
-                if (dd < 10) {
-                    dd = '0' + dd
-                }
-                if (mm < 10) {
-                    mm = '0' + mm
-                }
-                today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-                tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-                        '</span>';
-                document.getElementById("clock").innerHTML = tmp;
-                clocktime = setTimeout("time()", "1000", "Javascript");
-
-                function checkTime(i) {
-                    if (i < 10) {
-                        i = "0" + i;
-                    }
-                    return i;
-                }
+        <!-- Essential javascripts for application to work-->
+        <script src="admin/js/jquery-3.2.1.min.js"></script>
+        <script src="admin/js/popper.min.js"></script>
+        <script src="admin/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="admin/js/main.js"></script>
+        <!-- The javascript plugin to display page loading on top-->
+        <script src="admin/js/plugins/pace.min.js"></script>
+        <!-- Page specific javascripts-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+        <!-- Data table plugin-->
+        <script type="text/javascript" src="admin/js/plugins/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="admin/js/plugins/dataTables.bootstrap.min.js"></script>
+        <script type="text/javascript">
+        $('#sampleTable').DataTable();
+        //Thời Gian
+        function time() {
+            var today = new Date();
+            var weekday = new Array(7);
+            weekday[0] = "Chủ Nhật";
+            weekday[1] = "Thứ Hai";
+            weekday[2] = "Thứ Ba";
+            weekday[3] = "Thứ Tư";
+            weekday[4] = "Thứ Năm";
+            weekday[5] = "Thứ Sáu";
+            weekday[6] = "Thứ Bảy";
+            var day = weekday[today.getDay()];
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            nowTime = h + " giờ " + m + " phút " + s + " giây";
+            if (dd < 10) {
+                dd = '0' + dd
             }
-            </script>
-            <script>
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+            today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+            tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                    '</span>';
+            document.getElementById("clock").innerHTML = tmp;
+            clocktime = setTimeout("time()", "1000", "Javascript");
+
+            function checkTime(i) {
+                if (i < 10) {
+                    i = "0" + i;
+                }
+                return i;
+            }
+        }
+        </script>
+        <script>
 
             $(document).ready(jQuery(function () {
                 jQuery(".trash").click(function () {
@@ -212,17 +246,58 @@
                 });
             }));
         </script>
-            <script>
-                var myApp = new function () {
-                    this.printTable = function () {
-                        var tab = document.getElementById('sampleTable');
-                        var win = window.open('', '', 'height=700,width=700');
-                        win.document.write(tab.outerHTML);
-                        win.document.close();
-                        win.print();
-                    }
-                }
-            </script>
-        </body>
+        <script>
+            $(document).ready(function () {
+                // Xử lý sự kiện click của nút Sửa
+                $('#show-emp').click(function () {
+                    // Hiển thị modal tương ứng với đối tượng được chọn
+                    $('#ModalUP${b.blog_id}').modal('show');
+                });
+            });
+        </script>
+        <script>
+    $('.modal-footer button.btn-primary').click(function () {
+        // Lấy giá trị từ các trường input
+        var blogId = $(this).closest('.modal').attr('id').substring(7);
+        var blogName = $('#ModalUP' + blogId + ' #blog-name-input').val();
+        var blogDescribe = $('#ModalUP' + blogId + ' #blog-description-input').val();
+        var blogImage = $('#ModalUP' + blogId + ' #blog-image-input')[0].files[0];
 
-    </html>
+        // Gửi yêu cầu cập nhật bài viết tới máy chủ
+        var formData = new FormData();
+        formData.append('blogId', blogId);
+        formData.append('blogName', blogName);
+        formData.append('blogDescribe', blogDescribe);
+        formData.append('blogImage', blogImage);
+        $.ajax({
+            url: 'MainController?action=updateblog',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                // Xử lý kết quả trả về từ máy chủ nếu cần
+            },
+            error: function (xhr, status, error) {
+                // Xử lý lỗi nếu có
+            }
+        });
+
+        // Đóng modal
+        $(this).closest('.modal').modal('hide');
+    });
+</script>
+        <script>
+            var myApp = new function () {
+                this.printTable = function () {
+                    var tab = document.getElementById('sampleTable');
+                    var win = window.open('', '', 'height=700,width=700');
+                    win.document.write(tab.outerHTML);
+                    win.document.close();
+                    win.print();
+                }
+            }
+        </script>
+    </body>
+
+</html>
