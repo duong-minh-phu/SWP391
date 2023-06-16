@@ -37,12 +37,12 @@ public class UpdateItemsInCart extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         // Set content type to application/json
         response.setContentType("application/json");
-        int total = 0;
+        int total = 0, rowTotalPrice = 0;
         try {
 
             String updated_quantity = request.getParameter("quantity");
             String id = request.getParameter("id");
-            
+            System.out.println(id);
             HttpSession session = request.getSession();
             Cart cart = (Cart) session.getAttribute("cart");
             if (cart == null){
@@ -53,9 +53,12 @@ public class UpdateItemsInCart extends HttpServlet {
             Product product =  new productDAO().getProductByID(id);
             cart.alterItem(product, Integer.parseInt(updated_quantity));   
             session.setAttribute("cart", cart);
-             total = cart.getTotalMoney();
+            
+            rowTotalPrice = (int) (cart.getItems().get(product) * product.getProduct_price());
+            
+            total = cart.getTotalMoney();
         } finally {
-            response.getWriter().write(String.valueOf(total));
+            response.getWriter().write(String.valueOf(rowTotalPrice) + "|" +  String.valueOf(total));
         // Write JSON data to response
     }
     }
