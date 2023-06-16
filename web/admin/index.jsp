@@ -59,11 +59,11 @@
                             class="app-menu__label">Quản lý khách hàng đã xóa</span></a></li>
                 <li><a class="app-menu__item" href="Productmanager"><i
                             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
+                <li><a class="app-menu__item" href="MainController?action=blogmanagement"><i
+                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý Blog</span></a>
                 </li>
                 <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-task'></i><span
                             class="app-menu__label">Quản lý đơn hàng</span></a></li>
-                <li><a class="app-menu__item" href="#" target="_blank"><i class='app-menu__icon bx bx-task'></i><span
-                            class="app-menu__label">Kiểm tra phản hồi</span></a></li>
             </ul>
         </aside>
         <main class="app-content">
@@ -121,7 +121,7 @@
                             </div>
                         </div>
                         <!-- col-12 -->
-                        
+
                         <!-- / col-12 -->
                     </div>
                 </div>

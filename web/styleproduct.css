@@ -1,73 +1,144 @@
-body{
-    background: #ccc;
-}
-form {
-    background: white;
-    display: flex;
-    justify-content: space-between;
-    border-radius: 10px;
-    overflow: hidden;
-    box-sizing: border-box; 
-    width: 100%; 
-    padding: 1rem; 
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
-    transition: all 0.3s ease-in-out; 
-}
-
-form:hover {
-  transform: scale(0.85); 
-}
-.product-field {
-    width: 45%;
-    margin-bottom: 1rem;
+.container_rating {
+  position: relative;
+  width: 400px;
+  background: #999;
+  padding: 20px 30px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: auto;
+  margin-bottom: 20px;
 }
 
-.product-field label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+.container_rating .post_rating {
+  display: none;
 }
 
-.product-field input[type="text"],
-.product-field select,
-.product-field textarea,
-.product-field input[type="number"] {
-    border: 2px solid #ccc;
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border-radius: 0.25rem;
+.container_rating .text_rating {
+  font-size: 25px;
+  color: #666;
+  font-weight: 500;
 }
 
-.product-field input[type="file"] {
-    margin-top: 0.5rem;
+.container_rating .edit_rating {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-size: 16px;
+  color: #666;
+  font-weight: 500;
+  cursor: pointer;
 }
 
-.product-field button[type="submit"]:hover {
-    background-color: #0069d9;
+.container_rating .edit_rating:hover {
+  text-decoration: underline;
 }
 
-
-.product-image-preview {
-    max-width: 100%;
-    max-height: 100%;
-}
-.product-image-container {
-    width: 45%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.container_rating .star-widget input {
+  display: none;
 }
 
-.product-field button[type="submit"] {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    margin-top: 1rem;
-    align-self: flex-start; /* căn nút bấm theo chiều dọc */
+.container_rating label {
+  font-size: 40px;
+  color: #444;
+  padding: 10px;
+  float: right;
+  transition: all 0.2s ease;
+}
+
+input:not(:checked) ~ label:hover,
+input:not(:checked) ~ label:hover ~ label {
+  color: #fd4;
+}
+
+input:checked ~ label {
+  color: #fd4;
+}
+
+input#rate-5:checked ~ label {
+  color: #fe7;
+  text-shadow: 0 0 20px #952;
+}
+
+.container_rating form {
+  display: none;
+}
+
+input:checked ~ form {
+  display: block;
+}
+
+#rate-1:checked ~ form header:before{
+  content: "I just hate it 😠";
+}
+#rate-2:checked ~ form header:before{
+  content: "I don't like it 🙁";
+}
+#rate-3:checked ~ form header:before{
+  content: "It is awesome 😄";
+}
+#rate-4:checked ~ form header:before{
+  content: "I just like it 😘";
+}
+#rate-5:checked ~ form header:before{
+  content: "I just love it 😍";
+}
+
+form header {
+  width: 100%;
+  font-size: 25px;
+  color: #fe7;
+  font-weight: 500;
+  margin: 5px 0 20px 0;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+form .textarea {
+  height: 100px;
+  width: 100%;
+  overflow: hidden;
+}
+
+form .textarea textarea {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  color: #000;
+  border: 1px solid #333;
+  background: #ECECEC;
+  padding: 10px;
+  font-size: 17px;
+  resize: none;
+}
+
+.textarea textarea:focus {
+  border-color: #ECECEC;
+}
+
+form .btn {
+  height: 45px;
+  width: 100%;
+  margin: 15px 0;
+}
+
+form .btn button {
+  height: 100%;
+  width: 100%;
+  border: 1px solid #444;
+  outline: none;
+  background: #fff;
+  color: #999;
+  font-size: 17px;
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+form .btn button:hover {
+  background: #f2f2f2;
 }

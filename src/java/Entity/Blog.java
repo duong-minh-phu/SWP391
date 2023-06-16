@@ -38,6 +38,14 @@ public class Blog {
         this.blog_describe = blog_describe;
     }
 
+    public Blog(String img, String blog_name, String blog_describe) {
+        this.img = img;
+        this.blog_name = blog_name;
+        this.blog_describe = blog_describe;
+    }
+
+
+
     public int getBlog_id() {
         return blog_id;
     }
@@ -84,6 +92,10 @@ public class Blog {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public void setDate(String date) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

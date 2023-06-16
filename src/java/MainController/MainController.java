@@ -5,7 +5,9 @@
  */
 package MainController;
 
+import DAO.BlogDAO;
 import DAO.productDAO;
+import Entity.Blog;
 import Entity.Category;
 import Entity.Product;
 import java.io.IOException;
@@ -135,7 +137,28 @@ public class MainController extends HttpServlet {
             if (action.equals("recoveruser")){
                 url = "Recoveruser";
             }
+            if (action.equals("blogmanagement")){
+                url = "Blogmanagement";
+            }
+            if (action.equals("insertblog")) {
+                BlogDAO b = new BlogDAO();
+                List<Blog> blog = b.getBlog();
+                request.setAttribute("BlogDatamana", blog);
+                url = "admin/blogInsert.jsp";
+            }
+            if (action.equals("insertblogmana")){
+                url = "InsertBlog";
+            }
             
+            if (action.equals("deleteblog")) {
+                url = "DeleteBlog";
+            }
+            if (action.equals("updateblog")){
+                BlogDAO b = new BlogDAO();
+                List<Blog> blog = b.getBlog();
+                request.setAttribute("BlogDatamana", blog);
+                url = "UpdateBlog";
+            }
             if (action.equals("updateproduct")){
                 productDAO c = new productDAO();
                 List<Product> product = c.getProduct();
