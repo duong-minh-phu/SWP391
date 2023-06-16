@@ -169,6 +169,9 @@ public class MainController extends HttpServlet {
                 request.setAttribute("CategoryData", category);
                 url = "UpdateProduct";
             }
+            if (action.equals("addReview")) {
+                url = "InsertReview";
+            }
 
         } catch (Exception ex) {
             log("Error at: MainController" + ex.toString());

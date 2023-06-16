@@ -96,6 +96,10 @@
         <servlet-name>InsertBlog</servlet-name>
         <servlet-class>MainController.InsertBlog</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InsertReview</servlet-name>
+        <servlet-class>MainController.InsertReview</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
@@ -199,6 +203,10 @@
     <servlet-mapping>
         <servlet-name>InsertBlog</servlet-name>
         <url-pattern>/InsertBlog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertReview</servlet-name>
+        <url-pattern>/InsertReview</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

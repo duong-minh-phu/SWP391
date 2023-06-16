@@ -12,8 +12,8 @@ import java.sql.Date;
  * @author Administrator
  */
 public class Rating {
-    String user_name;
-    String product_name;
+    int user_id;
+    String product_id;
     int rate;
     String comment;
     Date date;
@@ -21,28 +21,29 @@ public class Rating {
     public Rating() {
     }
 
-    public Rating(String user_name, String product_name, int rate, String comment, Date date) {
-        this.user_name = user_name;
-        this.product_name = product_name;
+    public Rating(int user_id, String product_id, int rate, String comment, Date date) {
+        this.user_id = user_id;
+        this.product_id = product_id;
         this.rate = rate;
         this.comment = comment;
         this.date = date;
     }
+    
 
-    public String getUser_name() {
-        return user_name;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public String getProduct_id() {
+        return product_id;
     }
 
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+    public void setProduct_id(String product_id) {
+        this.product_id = product_id;
     }
 
     public int getRate() {
@@ -69,6 +70,4 @@ public class Rating {
         this.date = date;
     }
     
-    
-
 }
