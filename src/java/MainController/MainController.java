@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ROG STRIX
  */
+@MultipartConfig()
 public class MainController extends HttpServlet {
 
     /**
@@ -120,10 +122,10 @@ public class MainController extends HttpServlet {
                 url = "UpdateItemsInCart";
             }
             if (action.equals("insert")) {
-                productDAO c = new productDAO();
-                List<Category> category = c.getCategory();
-                request.setAttribute("CategoryData", category);
                 url = "admin/productInsert.jsp";
+            }
+            if (action.equals("bloginsert")) {
+                url = "Bloginsert";
             }
             if (action.equals("insertproduct")) {
                 url = "InsertProduct";

@@ -190,15 +190,15 @@
                             <div class="row element-button">
                             </div>
 
-                            <form class="row" action="MainController?action=insertblogmana" method="Post" enctype="multipart/form-data">
+                            <form class="row" action="MainController?action=bloginsert" method="POST" enctype="multipart/form-data">
                                 <div class="form-group col-md-3">
                                     <label class="control-label">Tên Bài Viết</label>
-                                    <input class="form-control" name="blog_name" type="text">
+                                    <input class="form-control" name="name" type="text" required="">
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label class="control-label">Ảnh</label>
                                     <div id="myfileupload">
-                                        <input type="file" id="uploadfile" name="blog_img" onchange="readURL(this);" />
+                                        <input type="file" id="uploadfile" name="img" onchange="readURL(this);" />
                                     </div>
                                     <div id="thumbbox">
                                         <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
@@ -211,8 +211,9 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label class="control-label">Chi tiết bài viết</label>
-                                    <textarea class="form-control" name="blog_describe" id="describe"></textarea>
+                                    <textarea class="form-control" name="describe" id="describe"></textarea>
                                 </div>
+                                
                                 <button class="btn btn-save" type="submit">Lưu lại</button>
                                 &nbsp;
                                 <a class="btn btn-cancel" href="blogmanager.jsp">Hủy bỏ</a>

@@ -48,17 +48,12 @@ public class InsertBlog extends HttpServlet {
         // Thực hiện thêm bài viết vào database
         BlogDAO blogDAO = new BlogDAO();
         Blog blog = new Blog(blog_name, fileimg, blog_describe);
-        boolean success = blogDAO.insertBlog(blog);
+        
 
         // Trả về phản hồi cho người dùng
         response.sendRedirect("404.jsp");
         PrintWriter out = response.getWriter();
-        if (success) {
-            out.println("<h1>Bài viết đã được thêm thành công!</h1>");
-        } else {
-            out.println("<h1>Có lỗi xảy ra khi thêm bài viết.</h1>");
-        }
-        out.close();
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
