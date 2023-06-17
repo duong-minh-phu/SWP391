@@ -26,15 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 @MultipartConfig()
 public class MainController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+   
     private static final String ERROR = "404.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -118,6 +110,9 @@ public class MainController extends HttpServlet {
             if (action.equals("deleteFromCart")) {
                 url = "DeleteFromCart";
             }
+            if (action.equals("billmana")) {
+                url = "Billmana";
+            }
             if (action.equals("updateItemsInCart")) {
                 url = "UpdateItemsInCart";
             }
@@ -141,7 +136,7 @@ public class MainController extends HttpServlet {
             }
             if (action.equals("blogmanagement")){
                 url = "Blogmanagement";
-            }
+            }            
             if (action.equals("insertblog")) {
                 BlogDAO b = new BlogDAO();
                 List<Blog> blog = b.getBlog();

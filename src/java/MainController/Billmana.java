@@ -5,7 +5,6 @@
  */
 package MainController;
 
-import DAO.BlogCommentDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,44 +12,37 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ROG STRIX
  */
-@WebServlet(name = "Blogcomment", urlPatterns = {"/Blogcomment"})
-public class Blogcomment extends HttpServlet {
+@WebServlet(name = "Billmana", urlPatterns = {"/Billmana"})
+public class Billmana extends HttpServlet {
 
-    
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            String comment=request.getParameter("blograting");
-            
-            HttpSession session = request.getSession();
-            Entity.User user = (Entity.User) session.getAttribute("user");
-            
-            if(user==null){
-                request.setAttribute("error", "Bạn cần phải đăng nhập trước khi comment");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-            }
-            if(user.getUser_name().isEmpty()){
-                request.setAttribute("infor", "bạn cần cập nhật thông tin trước khi comment");
-                request.getRequestDispatcher("my-account.jsp").forward(request, response);
-            }
-            System.out.println(user.getUser_name());
-            if(user!=null && !user.getUser_name().isEmpty()){
-            int user_id = user.getUser_id();
-            String blog_id=request.getParameter("blog_id");
-            int id_blog=Integer.parseInt(blog_id);
-            BlogCommentDAO dao=new BlogCommentDAO();
-            dao.BlogComment(user_id, id_blog, comment);
-            request.getRequestDispatcher("MainController?action=blogdetails").forward(request, response);
-            }
-        }catch(Exception ex){
-            response.sendRedirect("404.jsp");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Billmana</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Billmana at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

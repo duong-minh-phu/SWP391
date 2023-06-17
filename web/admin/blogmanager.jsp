@@ -84,7 +84,7 @@
                                         Tạo Blog</a>
                                 </div>
                             </div>
-                            <form href="MainController?action=updateblog" method="POST">
+                            <form href="MainController?action=updateblog" method="POST"enctype="multipart/form-data">
                                 <table class="table table-hover table-bordered" id="sampleTable">
                                     <thead>
                                         <tr>
@@ -117,11 +117,13 @@
                                                     </button>
                                                 </td>
                                             </tr>
-                                        </c:forEach>
+                                        
                                         <!--
                                         MODAL
                                         -->
                                         <!-- Hộp thoại Modal -->
+                                        
+                                        
                                     <div class="modal fade" id="ModalUP${b.blog_id}" tabindex="-1" role="dialog" aria-labelledby="ModalTitle"
                                          aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -133,30 +135,32 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form>
+                                                    
                                                         <div class="form-group">
                                                             <label for="blog-name-input">Tên Blog</label>
-                                                            <input type="text" class="form-control" id="blog-name-input" value="${b.blog_name}">
+                                                            <input type="text" name="name" class="form-control" id="blog-name-input" value="${b.blog_name}">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="blog-description-input">Chi tiết bài viết</label>
-                                                            <textarea class="form-control" id="blog-description-input">${b.blog_describe}</textarea>
+                                                            <textarea  class="form-control" id="blog-description-input">${b.blog_describe}</textarea>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="blog-image-input">Ảnh</label>
                                                             <input type="file" class="form-control-file" id="blog-image-input">
                                                         </div>
-                                                    </form>
+                                                    
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                                    <button type="button" class="btn btn-primary">Lưu thay đổi</button>
+                                                    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    
 
 
+                                    </c:forEach>            
 
 
 
