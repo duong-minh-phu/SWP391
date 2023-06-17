@@ -100,6 +100,10 @@
         <servlet-name>InsertReview</servlet-name>
         <servlet-class>MainController.InsertReview</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InsertCategory</servlet-name>
+        <servlet-class>MainController.InsertCategory</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
@@ -170,7 +174,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UpdateProduct</servlet-name>
-        <url-pattern>/updateproduct</url-pattern>
+        <url-pattern>/UpdateProduct</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProductDelete</servlet-name>
@@ -207,6 +211,10 @@
     <servlet-mapping>
         <servlet-name>InsertReview</servlet-name>
         <url-pattern>/InsertReview</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertCategory</servlet-name>
+        <url-pattern>/InsertCategory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

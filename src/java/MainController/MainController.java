@@ -122,6 +122,11 @@ public class MainController extends HttpServlet {
                 url = "UpdateItemsInCart";
             }
             if (action.equals("insert")) {
+                productDAO c = new productDAO();
+                List<Product> product = c.getProduct();
+                request.setAttribute("ProductData", product);
+                List<Category> category = c.getCategory();
+                request.setAttribute("CategoryData", category);
                 url = "admin/productInsert.jsp";
             }
             if (action.equals("bloginsert")) {
@@ -171,6 +176,9 @@ public class MainController extends HttpServlet {
             }
             if (action.equals("addReview")) {
                 url = "InsertReview";
+            }
+            if (action.equals("insertcategory")) {
+                url = "InsertCategory";
             }
 
         } catch (Exception ex) {

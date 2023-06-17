@@ -149,7 +149,7 @@
                     <div class="col-lg-6">
                         <div class="review_form_wrapper">
                             <h3>Viết đánh giá của bạn</h3>
-                            <form action="MainController?action=addReview" method="POST">
+                            <form action="MainController?action=addReview" method="POST" onSubmit="return validateForm()">
 
                                 <input type="hidden" name="product_review_id" value="${ProductData.product_id}">
                                 <input type="hidden" name="user_id" value="${sessionScope.user.user_id}">
@@ -222,6 +222,11 @@
 
         <!-- Main JS -->
         <script src="assets/js/main.js"></script>
+        <% if (request.getParameter("success") != null) { %>
+        <script>
+                                    alert("Đã đăng tải thành công!");
+        </script>
+        <% }%>
         <script>
             //            $("#submit").click(function()){
             //            swal({
@@ -230,6 +235,24 @@
             //                    icon: "success",
             //            })
             //            }
+        </script>
+        <script>
+            function validateForm() {
+                var userId = document.getElementsByName("user_id")[0].value;
+                if (userId === "") {
+                    // Hiển thị thông báo
+                    var message = document.createElement("div");
+                    message.innerHTML = "Bạn cần phải đăng nhập để thực hiện đánh giá";
+                    message.style.color = "red";
+                    document.body.appendChild(message);
+                    // Chuyển hướng trang sau 5 giây
+                    setTimeout(function () {
+                        window.location.href = "login.jsp";
+                    }, 5000);
+                    return false;
+                }
+                return true;
+            }
         </script>
     </body>
 
