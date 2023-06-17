@@ -1,5 +1,6 @@
 
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
@@ -133,52 +134,83 @@
             </div>
         </section>
         <!--product section area end-->
-        <div>
-            
+        <div class="customer_reviews">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section_title">
+                            <h2>Đánh giá khách hàng</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="review_form_wrapper">
+                            <h3>Viết đánh giá của bạn</h3>
+                            <form action="MainController?action=addReview" method="POST" onSubmit="return validateForm()">
+
+                                <input type="hidden" name="product_review_id" value="${ProductData.product_id}">
+                                <input type="hidden" name="user_id" value="${sessionScope.user.user_id}">
+                                <%
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                    String formattedDate = dateFormat.format(new java.util.Date());
+                                %>
+                                <input type="hidden" name="review_date" value="<%= formattedDate%>">
+                                <div class="form-group">
+                                    <label for="rating">Đánh giá của bạn:</label>
+                                    <select class="form-control" id="rating" name="rating">
+                                        <option value="5">5 sao</option>
+                                        <option value="4">4 sao</option>
+                                        <option value="3">3 sao</option>
+                                        <option value="2">2 sao</option>
+                                        <option value="1">1 sao</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="review">Nhận xét của bạn:</label>
+                                    <textarea class="form-control" rows="5" id="review" name="review"></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Gửi đánh giá</button>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="customer_review_list">
+                            <h3>Đánh giá của khách hàng</h3>
+                            <ul class="list-unstyled">
+                                <c:forEach items="${reviewList}" var="r">
+                                    <li>
+                                        <div class="review_item">
+                                            <div class="rating_wrap">
+
+                                                <div class="star_rating">
+                                                    <span style="width:${r.rating * 20}%"></span>
+                                                </div>
+
+                                            </div>
+                                            <p>${r.review}</p>
+                                            <div class="review_user">
+                                                <span>Product: ${r.product_name}</span>
+                                                <span>By: ${r.customer_name}</span>
+                                                <span>Rating: ${r.rating}</span>
+                                                <span>Date: ${r.review_date}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
         <!--product info end-->
-        <div class="container_rating">
-            <div class="post_rating">
-                <div class="text_rating">Thanks for rating us!</div>
-                <div class="edit_rating">EDIT</div>
-            </div>
-            <div class="star-widget">
-                <input type="radio" name="rate" id="rate-5">
-                <label for="rate-5" class="fas fa-star"></label>
-                <input type="radio" name="rate" id="rate-4">
-                <label for="rate-4" class="fas fa-star"></label>
-                <input type="radio" name="rate" id="rate-3">
-                <label for="rate-3" class="fas fa-star"></label>
-                <input type="radio" name="rate" id="rate-2">
-                <label for="rate-2" class="fas fa-star"></label>
-                <input type="radio" name="rate" id="rate-1">
-                <label for="rate-1" class="fas fa-star"></label>
-                <form action="MainController?action=submitRating">
-                    <header></header>
-                    <div class="textarea">
-                        <textarea cols="30" placeholder="Hãy đễ lại đánh giá của bạn về sản phẩm ....."></textarea>
-                    </div>
-                    <div class="btn">
-                        <button type="submit">Post</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <script>
-            const btn = document.querySelector("button");
-            const post = document.querySelector(".post");
-            const widget = document.querySelector(".star-widget");
-            const editBtn = document.querySelector(".edit");
-            btn.onclick = () => {
-                widget.style.display = "none";
-                post.style.display = "block";
-                editBtn.onclick = () => {
-                    widget.style.display = "block";
-                    post.style.display = "none";
-                }
-                return false;
-            }
-        </script>
 
         <!--footer area start-->
         <jsp:include page="layout/footer.jsp"/>
@@ -190,6 +222,11 @@
 
         <!-- Main JS -->
         <script src="assets/js/main.js"></script>
+        <% if (request.getParameter("success") != null) { %>
+        <script>
+                                    alert("Đã đăng tải thành công!");
+        </script>
+        <% }%>
         <script>
             //            $("#submit").click(function()){
             //            swal({
@@ -198,6 +235,24 @@
             //                    icon: "success",
             //            })
             //            }
+        </script>
+        <script>
+            function validateForm() {
+                var userId = document.getElementsByName("user_id")[0].value;
+                if (userId === "") {
+                    // Hiển thị thông báo
+                    var message = document.createElement("div");
+                    message.innerHTML = "Bạn cần phải đăng nhập để thực hiện đánh giá";
+                    message.style.color = "red";
+                    document.body.appendChild(message);
+                    // Chuyển hướng trang sau 5 giây
+                    setTimeout(function () {
+                        window.location.href = "login.jsp";
+                    }, 5000);
+                    return false;
+                }
+                return true;
+            }
         </script>
     </body>
 

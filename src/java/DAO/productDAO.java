@@ -11,8 +11,10 @@ import Entity.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +44,7 @@ public class productDAO {
         }
         return list;
     }
-    
+
     public List<Product> getProductDelete() {
         List<Product> list = new ArrayList<>();
         String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from  \n"
@@ -62,8 +64,8 @@ public class productDAO {
         return list;
     }
 
-    public boolean insertProduct(Product product) {
-        String sql = "insert into dbo.product(product_id,category_id,product_name,product_price,product_describe,quantity,img) values(?,?,?,?,?,?,?)";
+    public void insertProduct(Product product) {
+        String sql = "insert dbo.product(product_id,category_id,product_name,product_price,product_describe,quantity,img,status) values(?,?,?,?,?,?,?,?)";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -74,24 +76,42 @@ public class productDAO {
             ps.setString(5, product.getProduct_describe());
             ps.setInt(6, product.getQuantity());
             ps.setString(7, product.getImg());
+            ps.setString(8, "TRUE");
             ps.executeUpdate();
         } catch (Exception e) {
         }
-        return false;
     }
-    
-    public void RecoverProduct(String product_id){
+
+    public void InsertProduct(String product_id, int category_id, String product_name, float product_price, String product_describe, int quantity, String img) {
+        try {
+            String query = "insert dbo.product(product_id,category_id,product_name,product_price,product_describe,quantity,img,status) values(?,?,?,?,?,?,?,TRUE)";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+
+            ps.setString(1, product_id);
+            ps.setInt(2, category_id);
+            ps.setString(3, product_name);
+            ps.setFloat(4, product_price);
+            ps.setString(5, product_describe);
+            ps.setInt(6, quantity);
+            ps.setString(7, img);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        };
+    }
+
+    public void RecoverProduct(String product_id) {
         String sq = "update product set quantity=?,status=? where product_id = ?";
         try {
-        conn = new DBContext().getConnection();
-        ps = conn.prepareStatement(sq);
-        ps.setInt(1, 1);
-        ps.setString(2, "True");
-        ps.setString(3, product_id);
-        ps.executeUpdate();
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sq);
+            ps.setInt(1, 1);
+            ps.setString(2, "True");
+            ps.setString(3, product_id);
+            ps.executeUpdate();
         } catch (Exception e) {
         }
-        
+
     }
 
     public void deleteProduct(String product_id) {
@@ -205,15 +225,16 @@ public class productDAO {
         }
         return list;
     }
-    
+
     public void insertCategory(String name) {
-        String sql = " insert into Category (category_name) values(?)";
+        String sql = "INSERT INTO Category (category_id, category_name) VALUES ((SELECT COUNT(*) FROM Category) + 1, ?)";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, name);
             ps.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -243,8 +264,6 @@ public class productDAO {
         }
         return list;
     }
-    
-    
 
     public Product getProductByID(String product_id) {
         List<Product> list = new ArrayList<>();

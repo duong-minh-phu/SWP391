@@ -84,7 +84,7 @@
                                     <a class="btn btn-add btn-sm" href="MainController?action=productdelete" >Sản phẩm đã hết hàng</a>
                                 </div>
                             </div>
-                            <form href="MainController?action=updateproduct" method="POST">
+                            <form action="MainController?action=updateproduct" method="POST" enctype="multipart/form-data">
                                 <table class="table table-hover table-bordered" id="sampleTable">
                                     <thead>
                                         <tr>
