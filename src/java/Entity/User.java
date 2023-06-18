@@ -9,6 +9,7 @@ public class User {
     String user_pass;
     String isAdmin;
     String user_phone;
+    Cart cart;
 
     public User() {
     }
@@ -73,6 +74,14 @@ public class User {
 
     public void setUser_phone(String user_phone) {
         this.user_phone = user_phone;
+    }
+    
+        public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
   

@@ -8,6 +8,7 @@ package MainController;
 import DAO.productDAO;
 import Entity.Cart;
 import Entity.Product;
+import Entity.User;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,19 @@ public class AddToCart extends HttpServlet {
             Product product = new productDAO().getProductByID(id);
             HttpSession session = request.getSession();
             Cart cart = (Cart) session.getAttribute("cart");
+            User user = (User) session.getAttribute("user");
+            
+            if (user != null) {
+                cart = user.getCart();
+                if (cart == null) {
+                    cart = new Cart();
+                }
+                cart.addItem(product, quantity);
+                
+                user.setCart(cart);
+                session.setAttribute("user", user);
+            }
+            
             if (cart == null){
                 
                 cart = new Cart();

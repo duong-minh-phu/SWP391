@@ -26,7 +26,7 @@ import java.time.LocalDate;
  *
  * @author ngodi
  */
-
+@WebServlet(name = "PaymentBill", urlPatterns = {"/PaymentBill"})
 public class PaymentBill extends HttpServlet {
 
     /**
@@ -46,7 +46,7 @@ public class PaymentBill extends HttpServlet {
            
             String payment_method = request.getParameter("payment_method");
             Cart cart = (Cart) session.getAttribute("cart");
-            double total_payment = cart.getTotalMoney();
+            float total_payment = cart.getTotalMoney();
             String address = request.getParameter("address");
             String phone = request.getParameter("phone");
             String payment = null;
@@ -57,25 +57,26 @@ public class PaymentBill extends HttpServlet {
                 request.setAttribute("error", "Số điện thoại không hợp lệ. Vui lòng nhập lại.");
                 request.setAttribute("phoneValue", phone);
                 request.getRequestDispatcher("payment.jsp").forward(request, response);
-            return;
             }
             if (address.length() < 5) {
                 request.setAttribute("error1", "Địa chỉ phải có ít nhất 5 ký tự.");
+                request.setAttribute("total_payment", total_payment);
                 request.setAttribute("addressValue", address); // Chuyển tiếp giá trị address
                 request.setAttribute("phoneValue", phone);
                 request.getRequestDispatcher("payment.jsp").forward(request, response);
-            return;
             }
-            int phonenumber = Integer.parseInt(phone);
             User u = (User) session.getAttribute("user");
             LocalDate curDate = java.time.LocalDate.now(); 
             String date = curDate.toString();
-            
             billDAO dao = new billDAO();
-            dao.addOrder(u, total_payment, payment, address,date, phonenumber);
+            dao.addOrder(u, total_payment, payment, address,date, phone);
             session.removeAttribute("cart");
             if (payment_method.equals("cod")) {
-                response.sendRedirect("home");
+                request.setAttribute("total_payment", total_payment);
+                request.setAttribute("address", address);
+                request.setAttribute("phone", phone);
+                request.getRequestDispatcher("success.jsp").forward(request, response);
+                session.removeAttribute("cart");
             }
         } catch(Exception e){
             response.sendRedirect("404.jsp");
@@ -94,7 +95,7 @@ public class PaymentBill extends HttpServlet {
     } catch (NumberFormatException e) {
         return false;
     }
-    return true;
+    return true;   
 }
 
 

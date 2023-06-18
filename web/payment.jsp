@@ -138,9 +138,6 @@
         <!--Checkout page section end-->
         <!--footer area start-->
         <jsp:include page="layout/footer.jsp"/>
-
-
-
         <!-- Plugins JS -->
         <script src="assets/js/plugins.js"></script>
 

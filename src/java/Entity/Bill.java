@@ -1,16 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Entity;
 
 import java.sql.Date;
 
-/**
- *
- * @author ROG STRIX
- */
 public class Bill {
     int bill_id;
     User user;
@@ -18,9 +10,12 @@ public class Bill {
     String payment;
     String address;
     Date date;
-    int phone;
+    String phone;
 
-    public Bill(int bill_id, User user, Float total, String payment, String address, Date date, int phone) {
+    public Bill() {
+    }
+
+    public Bill(int bill_id, User user, Float total, String payment, String address, Date date, String phone) {
         this.bill_id = bill_id;
         this.user = user;
         this.total = total;
@@ -29,8 +24,20 @@ public class Bill {
         this.date = date;
         this.phone = phone;
     }
-
-    public Bill() {
+    
+    public Bill(int bill_id,Float total,Date date) {
+        this.bill_id = bill_id;
+        this.total = total;
+        this.date = date;
+    }
+    
+    public Bill(int bill_id, Float total, String payment, String address, Date date, String phone) {
+        this.bill_id = bill_id;
+        this.total = total;
+        this.payment = payment;
+        this.address = address;
+        this.date = date;
+        this.phone = phone;
     }
 
     public int getBill_id() {
@@ -81,13 +88,20 @@ public class Bill {
         this.date = date;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    
+
+    
+
+    
+    
     
     
 }
