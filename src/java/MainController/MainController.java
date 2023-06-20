@@ -175,6 +175,15 @@ public class MainController extends HttpServlet {
             if (action.equals("insertcategory")) {
                 url = "InsertCategory";
             }
+            if (action.equals("comment")) {
+                url = "CommentManager";
+            }
+            if (action.equals("deletecomment")) {
+                url = "DeleteComment";
+            }
+            if (action.equals("feedbackmanager")) {
+                url = "FeedbackManagement";
+            }
 
         } catch (Exception ex) {
             log("Error at: MainController" + ex.toString());

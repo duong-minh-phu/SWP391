@@ -104,6 +104,18 @@
         <servlet-name>InsertCategory</servlet-name>
         <servlet-class>MainController.InsertCategory</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CommentManager</servlet-name>
+        <servlet-class>MainController.CommentManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteComment</servlet-name>
+        <servlet-class>MainController.DeleteComment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FeedbackManagement</servlet-name>
+        <servlet-class>MainController.FeedbackManagement</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
@@ -215,6 +227,18 @@
     <servlet-mapping>
         <servlet-name>InsertCategory</servlet-name>
         <url-pattern>/InsertCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommentManager</servlet-name>
+        <url-pattern>/CommentManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteComment</servlet-name>
+        <url-pattern>/DeleteComment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeedbackManagement</servlet-name>
+        <url-pattern>/FeedbackManagement</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
