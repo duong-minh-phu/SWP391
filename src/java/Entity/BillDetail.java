@@ -120,5 +120,4 @@ public class BillDetail {
     public int getTrangthai() {
         return trangthai;
     }
-    
 }

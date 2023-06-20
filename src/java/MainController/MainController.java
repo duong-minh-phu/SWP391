@@ -125,6 +125,12 @@ public class MainController extends HttpServlet {
             if (action.equals("updateItemsInCart")) {
                 url = "UpdateItemsInCart";
             }
+            if (action.equals("myaccount")) {
+                url = "MyAccounts";               
+            }    
+            if (action.equals("showdetailcus")) {
+                url = "ShowdetailCus";
+            }
             if (action.equals("insert")) {
                 productDAO c = new productDAO();
                 List<Product> product = c.getProduct();

@@ -92,8 +92,7 @@
                                             <td>${d.product_id}</td>
                                             <td>${d.product_name}</td>                                            
                                             <td>${d.quantity}</td>
-                                            <td>${d.price}</td>
-                                            
+                                            <td>${d.price}</td>                                          
                                         </tr>
                                     </c:forEach>
                                 </tbody>

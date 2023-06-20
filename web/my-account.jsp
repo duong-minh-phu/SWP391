@@ -1,6 +1,8 @@
+<%@page import="java.util.List"%>
+<%@page import="Entity.Bill"%>
+<%@page import="DAO.billDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -69,7 +71,35 @@
                         </div>
                         <div class="col-sm-12 col-md-9 col-lg-9">
                             <!-- Tab panes -->
-                            <div class="tab-content dashboard_content">                                
+                            <div class="tab-content dashboard_content"> 
+                                <div class="tab-pane fadee" id="orders">
+                                <h3>Đơn hàng</h3>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Ngày mua</th>
+                                                <th>Hình thức thanh toán</th>
+                                                <th>Địa chỉ</th>
+                                                <th>Tổng đơn</th>
+                                                <th>Xem chi tiết</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <c:forEach items="${requestScope.bill}" var="b">
+                                                <tr>
+                                                    <td>${b.getDate()}</td>
+                                                    <td><span class="success">${b.getPayment()}</span></td>
+                                                    <td>${b.getAddress()}</td>
+                                                    <td>${b.getTotal()}</td>
+                                                 <td><a href="MainController?action=showdetailcus&bill_id=${b.getBill_id()}" class="view">view</a></td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                                 <div class="tab-pane fade show active" id="account-details">
                                     <h3>Tài khoản của tôi </h3>
                                     <div class="login">
