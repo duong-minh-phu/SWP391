@@ -17,6 +17,7 @@ public class BlogComment {
     int blog_id;
     String date;
     String comment;
+    String blog_name;
 
     public BlogComment(int user_id, int blog_id, String date, String comment) {
         this.user_id = user_id;
@@ -75,7 +76,13 @@ public class BlogComment {
     public void setComment(String comment) {
         this.comment = comment;
     }
-    
-    
+
+    public String getBlog_name() {
+        return blog_name;
+    }
+
+    public void setBlog_name(String blog_name) {
+        this.blog_name = blog_name;
+    }
     
 }
