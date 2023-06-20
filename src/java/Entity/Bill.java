@@ -59,6 +59,14 @@ public class Bill {
         this.date = date;
         this.phone = phone;
     }
+    
+        public Bill(int bill_id, Date date, String payment, String address, float totalMoney) {
+        this.total = totalMoney;
+        this.payment = payment;
+        this.address = address;
+        this.date = date;
+        this.bill_id = bill_id;
+    }
 
     public int getBill_id() {
         return bill_id;

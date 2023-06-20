@@ -33,7 +33,7 @@
                             </c:if>
 
                         <c:if test="${sessionScope.user.user_name == null}">
-                            <li><a href="myaccount.jsp">Tài khoản của tôi</a></li>
+                            <li><a href="my-account.jsp">Tài khoản của tôi</a></li>
                             </c:if>
 
                         <c:if test="${sessionScope.user == null}">
@@ -118,7 +118,11 @@
                                     </c:if>
                                 <ul class="dropdown_links">
                                     <c:if test="${sessionScope.user != null}">
-                                        <li><a href="my-account.jsp">Tài khoản của tôi</a></li>
+                                        <li><a href="MainController?action=myaccount">Tài khoản của tôi</a></li>
+<!--                                        <form action="MainController">
+                                            <input type="submit" name="action" value="myaccount"></input>
+                                        </form>-->
+                                        
                                         </c:if>
 
                                     <c:if test="${fn: toUpperCase(sessionScope.user.isAdmin) == 'ADMIN'}">
