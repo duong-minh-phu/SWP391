@@ -1,5 +1,6 @@
 
 package Controller.Home;
+import DAO.productDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
@@ -17,6 +18,12 @@ public class Home extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
+         productDAO c = new productDAO();
+         List<Entity.Product> product = c.getTop10Product();
+         List<Entity.Product> product1 = c.getTrendProduct();
+         request.setAttribute("top10", product);
+         request.setAttribute("topTrend", product1);
+        
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 

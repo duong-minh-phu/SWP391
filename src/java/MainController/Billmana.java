@@ -38,7 +38,7 @@ public class Billmana extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             billDAO dao=new billDAO();
             List<Bill> bill=dao.getBill();
-            System.out.println(bill);
+            
             request.setAttribute("bill", bill);            
             request.getRequestDispatcher("admin/order.jsp").forward(request, response);
         }catch(Exception ex){

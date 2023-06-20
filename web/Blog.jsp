@@ -108,7 +108,7 @@
                                 <div class="pagination">
                                     <ul>
                                         <c:forEach begin="${1}" end="${num1}" var="i">
-                                            <li class="${i==page1?"current":""}"><a href="MainController?action=blog&page=${i}">${i}</a></li>
+                                            <li class="${i==page1?"current":""}"><a href="MainController?action=blog&page1=${i}">${i}</a></li>
                                             </c:forEach>
 
                                     </ul>

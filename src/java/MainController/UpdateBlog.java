@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Entity.Blog;
 import DAO.BlogDAO;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 
 /**
@@ -21,7 +22,7 @@ import javax.servlet.annotation.WebServlet;
  * @author luong
  */
 @WebServlet(name = "UpdateBlog", urlPatterns = "/UpdateBlog")
-
+@MultipartConfig()
 public class UpdateBlog extends HttpServlet {
 
     /**
@@ -36,9 +37,11 @@ public class UpdateBlog extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Get the blog data from the request
-    String blog_name = request.getParameter("blog_name");
-    String blog_describe = request.getParameter("blog_describe");
-    String img = request.getParameter("img");
+            String blog_name = request.getParameter("name");
+            System.out.println(blog_name);
+            String blog_describe = request.getParameter("describe");
+            System.out.println(blog_describe);
+            String img = request.getParameter("img");
 
 
     }

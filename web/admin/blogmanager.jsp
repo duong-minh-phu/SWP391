@@ -88,7 +88,7 @@
                                     <a class="btn btn-add btn-sm" href="MainController?action=comment" >Quản lý Comment</a>
                                 </div>
                             </div>
-                            <form href="MainController?action=updateblog" method="POST"enctype="multipart/form-data">
+                            <form action="MainController?action=updateblog" method="POST"enctype="multipart/form-data">
                                 <table class="table table-hover table-bordered" id="sampleTable">
                                     <thead>
                                         <tr>
@@ -139,15 +139,22 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    
-                                                        <div class="form-group">
+                                                        <div class="form-group col-md-6">
+                                                                <label class="control-label">Tên Blog</label>
+                                                                <input class="form-control" type="text" name="name" required value="${b.blog_name}">
+                                                            </div>
+<!--                                                        <div class="form-group">
                                                             <label for="blog-name-input">Tên Blog</label>
                                                             <input type="text" name="name" class="form-control" id="blog-name-input" value="${b.blog_name}">
-                                                        </div>
-                                                        <div class="form-group">
+                                                        </div>-->
+<!--                                                        <div class="form-group">
                                                             <label for="blog-description-input">Chi tiết bài viết</label>
                                                             <textarea  class="form-control" id="blog-description-input">${b.blog_describe}</textarea>
-                                                        </div>
+                                                        </div>-->
+                                                        <div class="form-group col-md-6">
+                                                        <label class="control-label">Chi tiết bài viết</label>
+                                                          <input class="form-control" type="text" name="describe" value="${b.blog_describe}">
+                                                          </div>
                                                         <div class="form-group">
                                                             <label for="blog-image-input">Ảnh</label>
                                                             <input type="file" class="form-control-file" id="blog-image-input">

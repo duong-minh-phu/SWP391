@@ -99,7 +99,7 @@
                                         <tr>
                                             <td>${b.bill_id}</td>
                                             <td>${b.user1}</td>
-                                            <td>(+84)${b.phone}</td>
+                                            <td>${b.phone}</td>
                                             <td>${b.address}</td>
                                             <td>${b.date}</td>
                                             <td>${b.total}</td>
@@ -108,7 +108,8 @@
                                             
                                             </td>
                                             <td><a style=" color: rgb(245 157 57);background-color: rgb(251 226 197); padding: 5px;border-radius: 5px;" href="MainController?action=delivery&bill_id=${b.bill_id}"><i class="fa"></i>quá trình giao hàng</a>
-                                            
+                                            <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                                                        data-target="#ModalUP${b.bill_id}"><i class="fas fa-edit"></i></button>
                                             </td>
 <!--                                            <td><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
                                                         data-target="#ModalUP${b.bill_id}"><i class="fas fa-edit"></i></button></td>-->

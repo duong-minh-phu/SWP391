@@ -56,6 +56,9 @@ public class MainController extends HttpServlet {
             if (action.equals("blog")) {
                 url = "Blog";
             }
+            if (action.equals("updatebill")) {
+                url = "Updatebill";
+            }
             if (action.equals("listByCategory")) {
                 url = "ListByCategory";
             }
@@ -162,9 +165,7 @@ public class MainController extends HttpServlet {
                 url = "DeleteBlog";
             }
             if (action.equals("updateblog")){
-                BlogDAO b = new BlogDAO();
-                List<Blog> blog = b.getBlog();
-                request.setAttribute("BlogDatamana", blog);
+                
                 url = "UpdateBlog";
             }
             if (action.equals("updateproduct")){

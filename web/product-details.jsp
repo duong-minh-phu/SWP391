@@ -119,10 +119,10 @@
                                 <div class="col-lg-3">
                                     <div class="single_product">
                                         <div class="product_thumb">
-                                            <a class="primary_img" href="product?action=productdetail&product_id=${pc.product_id}"><img src="${pc.img}" alt=""></a>
+                                            <a class="primary_img" href="MainController?action=productdetail&product_id=${pc.product_id}"><img src="${pc.img}" alt=""></a>
                                         </div>
                                         <div class="product_content">
-                                            <h3><a href="product?action=productdetail&product_id=${pc.product_id}">${pc.product_name}</a></h3>
+                                            <h3><a href="MainController?action=productdetail&product_id=${pc.product_id}">${pc.product_name}</a></h3>
                                             <span class="current_price">${pc.product_price}</span>
                                         </div>
                                     </div>

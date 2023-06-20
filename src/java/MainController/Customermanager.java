@@ -30,6 +30,7 @@ public class Customermanager extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             userDAO dao = new userDAO();
             List<User> user1 = dao.getUser();
+            System.out.println(user1.size());
             request.setAttribute("user", user1);
             request.getRequestDispatcher("admin/customer.jsp").forward(request, response);
         }catch (Exception e) {

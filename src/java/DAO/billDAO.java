@@ -143,4 +143,34 @@ public class billDAO {
         }
         return list;
     }
+        public List<Bill> getBillByDay(){
+        List<Bill> list = new ArrayList<>();
+        String sql = "select b.bill_id, u.user_name,b.total_money,b.payment,b.address,b.date,b.phone from bill b inner join users u on b.user_id = u.user_id where date = cast(getdate() as Date)";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Bill(rs.getInt(1), rs.getString(2),rs.getFloat(3), rs.getString(4), rs.getString(5), rs.getDate(6), rs.getString(7)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+        
+        public void updatebill(int id,String status){
+        LocalDate curDate = java.time.LocalDate.now();
+        String date = curDate.toString();
+        try{
+            String query = "insert into billstatus values(?,?,?)";
+                conn = new DBContext().getConnection();
+                ps = conn.prepareStatement(query);
+                ps.setInt(1, id);
+                ps.setString(2,status ); 
+                ps.setString(3, date);
+                ps.executeUpdate();
+        }catch(Exception ex){
+            
+        };
+    }
 }

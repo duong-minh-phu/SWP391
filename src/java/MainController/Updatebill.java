@@ -6,57 +6,45 @@
 package MainController;
 
 import DAO.billDAO;
-import DAO.productDAO;
-import DAO.userDAO;
-import Entity.Bill;
-import Entity.Product;
-import Entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ROG STRIX
  */
-@WebServlet(name = "Manager", urlPatterns = {"/Manager"})
-public class Manager extends HttpServlet {
+@WebServlet(name = "Updatebill", urlPatterns = {"/Updatebill"})
+public class Updatebill extends HttpServlet {
 
-    
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            HttpSession session = request.getSession();
-            Entity.User user = (User) session.getAttribute("user");
-            if (user.getIsAdmin().equalsIgnoreCase("ADMIN")||user.getIsAdmin().equalsIgnoreCase("STAFF")) {
-                 userDAO dao = new userDAO();
-            List<User> user1 = dao.getUser();
-            productDAO p = new productDAO();
-            List<Product> products = p.getProduct();
-            billDAO dao1=new billDAO();           
-            List<Bill> bill=dao1.getBill();
-            List<Bill> billbyday=dao1.getBillByDay();
-            List<Product> pro50=p.getProduct50();
-            System.out.println(bill.size());
-            request.setAttribute("size50", pro50.size());    
-            request.setAttribute("sizebill", bill.size());
-            request.setAttribute("sizepro", products.size());
-            request.setAttribute("sizeuser", user1.size());
-            request.setAttribute("billbyday", billbyday);
-                request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
-            } else {
-                response.sendRedirect("login");
-            }
-        } catch (Exception e) {
+        try (PrintWriter out = response.getWriter()) {
+            String Bill_id = request.getParameter("bill_id");
+            String status = request.getParameter("permission");
+            int id = Integer.parseInt(Bill_id);
+                   billDAO dao=new billDAO();
+                   dao.updatebill(id, status);
+                   response.sendRedirect("MainController?action=billmana");
+                    
+        }catch(Exception ex){
             response.sendRedirect("404.jsp");
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

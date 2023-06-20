@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ROG%20STRIX/Documents/GitHub/SWP391/src/java/MainController/Productdetail.java</file>
-            <file>file:/C:/Users/ROG%20STRIX/Documents/GitHub/SWP391/src/java/MainController/Blogdetails.java</file>
-            <file>file:/C:/Users/ROG%20STRIX/Documents/GitHub/SWP391/src/java/DAO/billDAO.java</file>
-            <file>file:/C:/Users/ROG%20STRIX/Documents/GitHub/SWP391/src/java/Entity/BillDetail.java</file>
+            <file>file:/C:/Users/ROG%20STRIX/Documents/GitHub/SWP391/src/java/MainController/Manager.java</file>
+            <file>file:/C:/Users/ROG%20STRIX/Documents/GitHub/SWP391/src/java/MainController/MainController.java</file>
+            <file>file:/C:/Users/ROG%20STRIX/Documents/GitHub/SWP391/src/java/MainController/Customermanager.java</file>
             <file>file:/C:/Users/ROG%20STRIX/Documents/GitHub/SWP391/src/java/MainController/Billmana.java</file>
-            <file>file:/C:/Users/ROG%20STRIX/Documents/GitHub/SWP391/web/admin/orderdetail.jsp</file>
-            <file>file:/C:/Users/ROG%20STRIX/Documents/GitHub/SWP391/src/java/Entity/Product.java</file>
-            <file>file:/C:/Users/ROG%20STRIX/Documents/GitHub/SWP391/src/java/MainController/Showdetail.java</file>
+            <file>file:/C:/Users/ROG%20STRIX/Documents/GitHub/SWP391/src/java/MainController/Productmanager.java</file>
+            <file>file:/C:/Users/ROG%20STRIX/Documents/GitHub/SWP391/web/admin/index.jsp</file>
         </group>
     </open-files>
 </project-private>
