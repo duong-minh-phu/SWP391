@@ -13,6 +13,7 @@ import java.sql.Date;
  */
 public class Rating {
     int user_id;
+    String user_name;
     String product_id;
     int rate;
     String comment;
@@ -28,6 +29,34 @@ public class Rating {
         this.comment = comment;
         this.date = date;
     }
+
+    public Rating(String user_name, String product_id, int rate, String comment, Date date) {
+        this.user_name = user_name;
+        this.product_id = product_id;
+        this.rate = rate;
+        this.comment = comment;
+        this.date = date;
+    }
+    
+    
+
+    public Rating(int user_id, String user_name, String product_id, int rate, String comment, Date date) {
+        this.user_id = user_id;
+        this.user_name = user_name;
+        this.product_id = product_id;
+        this.rate = rate;
+        this.comment = comment;
+        this.date = date;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+    
     
 
     public int getUser_id() {
