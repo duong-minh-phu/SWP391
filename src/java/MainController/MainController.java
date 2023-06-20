@@ -62,6 +62,9 @@ public class MainController extends HttpServlet {
             if (action.equals("sortlow")) {
                 url = "Sortlow";
             }
+                    if (action.equals("showdetail")) {
+                url = "Showdetail";
+            }
             if (action.equals("sorthigh")) {
                 url = "Sorthigh";
             }

@@ -13,6 +13,9 @@ public class BillDetail {
         int detail_id;
         int bill_id;
         Product product;
+        String product_id;
+        String product_name;
+        String img;
         int quantity;
         Float price;
         int trangthai;
@@ -35,6 +38,40 @@ public class BillDetail {
         this.quantity = quantity;
         this.price = price;
     }
+
+    public BillDetail(int detail_id, String product_id, String product_name, String img, int quantity, Float price) {
+        this.detail_id = detail_id;
+        this.product_id = product_id;
+        this.product_name = product_name;
+        this.img = img;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
+    public String getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(String product_id) {
+        this.product_id = product_id;
+    }
+
+    public String getProduct_name() {
+        return product_name;
+    }
+
+    public void setProduct_name(String product_name) {
+        this.product_name = product_name;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+    
 
     public void setDetail_id(int detail_id) {
         this.detail_id = detail_id;

@@ -94,16 +94,15 @@ public class billDAO {
         
         public List<BillDetail> getDetail(int bill_id){
         List<BillDetail> list = new ArrayList<>();
-        String sql = "select d.detail_id, p.product_id, p.product_name, p.img, d.quantity, d.price from bill_detail d "
-                + "inner join product p on d.product_id = p.product_id where d.bill_id = ?";
+        String sql = "select d.bill_detail_id, p.product_id, p.product_name, p.img, d.quantity,d.product_total from bill_detail d\n" +
+"               inner join product p on d.product_id = p.product_id where d.bill_id =?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, bill_id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Product p = new Product(rs.getString(2), rs.getString(3), rs.getString(4));
-                list.add(new BillDetail(rs.getInt(1), p,rs.getInt(5),rs.getFloat(6)));
+                list.add(new BillDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getInt(5),rs.getFloat(6)));
             }
         } catch (Exception e) {
         }
@@ -125,5 +124,23 @@ public class billDAO {
         }
         return list;
     }
-          
+      
+        
+        public List<Bill> getBill() {
+        List<Bill> list = new ArrayList<>();
+        String sql = "select p.bill_id,c.user_name,p.total_money,p.payment,p.address,p.date,p.phone\n" +
+                        "from bill p inner join users c on p.user_id=c.user_id ";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                  list.add(new Bill(rs.getInt(1), rs.getString(2),rs.getFloat(3), rs.getString(4), rs.getString(5), rs.getDate(6), rs.getString(7)));
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
 }

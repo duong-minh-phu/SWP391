@@ -6,6 +6,7 @@ import java.sql.Date;
 public class Bill {
     int bill_id;
     User user;
+    String user1;
     Float total;
     String payment;
     String address;
@@ -24,6 +25,25 @@ public class Bill {
         this.date = date;
         this.phone = phone;
     }
+
+    public Bill(int bill_id, String user1, Float total, String payment, String address, Date date, String phone) {
+        this.bill_id = bill_id;
+        this.user1 = user1;
+        this.total = total;
+        this.payment = payment;
+        this.address = address;
+        this.date = date;
+        this.phone = phone;
+    }
+
+    public String getUser1() {
+        return user1;
+    }
+
+    public void setUser1(String user1) {
+        this.user1 = user1;
+    }
+    
     
     public Bill(int bill_id,Float total,Date date) {
         this.bill_id = bill_id;

@@ -6,7 +6,7 @@
 package MainController;
 
 import DAO.billDAO;
-import Entity.Bill;
+import Entity.BillDetail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -20,27 +20,23 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ROG STRIX
  */
-@WebServlet(name = "Billmana", urlPatterns = {"/Billmana"})
-public class Billmana extends HttpServlet {
+@WebServlet(name = "Showdetail", urlPatterns = {"/Showdetail"})
+public class Showdetail extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            billDAO dao=new billDAO();
-            List<Bill> bill=dao.getBill();
-            System.out.println(bill);
-            request.setAttribute("bill", bill);            
-            request.getRequestDispatcher("admin/order.jsp").forward(request, response);
+            /* TODO output your page here. You may use following sample code. */
+           String billid=request.getParameter("bill_id");
+            System.out.println(billid);
+           int id=Integer.parseInt(billid);
+           billDAO dao=new billDAO();
+           List<BillDetail> detail = dao.getDetail(id);
+           request.setAttribute("Detail", detail);
+           System.out.println(detail);
+           request.getRequestDispatcher("admin/orderdetail.jsp").forward(request, response);
         }catch(Exception ex){
             response.sendRedirect("404.jsp");
         }

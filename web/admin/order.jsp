@@ -1,8 +1,4 @@
-<%-- 
-    Document   : order
-    Created on : Oct 19, 2021, 11:23:09 PM
-    Author     : Khuong Hung
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -67,7 +63,7 @@
                             class="app-menu__label">Quản lý đơn hàng</span></a></li>
             </ul>
         </aside>
-        <main class="app-content">
+         <main class="app-content">
             <div class="app-title">
                 <ul class="app-breadcrumb breadcrumb side">
                     <li class="breadcrumb-item active"><a href="#"><b>Danh sách đơn hàng</b></a></li>
@@ -95,19 +91,27 @@
                                         <th>Tổng tiền</th>
                                         <th>Thanh Toán</th>
                                         <th>Tính năng</th>
+                                        <th>cập nhật trạng thái đơn</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <c:forEach items="${bill}" var="b">
                                         <tr>
                                             <td>${b.bill_id}</td>
-                                            <td>${b.user.user_name}</td>
+                                            <td>${b.user1}</td>
                                             <td>(+84)${b.phone}</td>
                                             <td>${b.address}</td>
                                             <td>${b.date}</td>
                                             <td>${b.total}</td>
                                             <td><span class="badge bg-success">${b.payment}</span></td>                                  
-                                            <td><a style=" color: rgb(245 157 57);background-color: rgb(251 226 197); padding: 5px;border-radius: 5px;" href="ordermanager?action=showdetail&bill_id=${b.bill_id}"><i class="fa"></i>Chi tiết đơn hàng</a></td>
+                                            <td><a style=" color: rgb(245 157 57);background-color: rgb(251 226 197); padding: 5px;border-radius: 5px;" href="MainController?action=showdetail&bill_id=${b.bill_id}"><i class="fa"></i>Chi tiết đơn hàng</a>
+                                            
+                                            </td>
+                                            <td><a style=" color: rgb(245 157 57);background-color: rgb(251 226 197); padding: 5px;border-radius: 5px;" href="MainController?action=showdetail&bill_id=${b.bill_id}"><i class="fa"></i>quá trình giao hàng</a>
+                                            
+                                            </td>
+<!--                                            <td><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                                                        data-target="#ModalUP${b.bill_id}"><i class="fas fa-edit"></i></button></td>-->
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -117,6 +121,45 @@
                 </div>
             </div>
         </main>
+                    <c:forEach items="${bill}" var="b">           
+            <div class="modal fade" id="ModalUP${b.bill_id}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+                 data-keyboard="false">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <form method="POST" action="MainController?action=updatebill">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="form-group  col-md-12">
+                                        <span class="thong-tin-thanh-toan">
+                                            <h5>cập nhật trạng thái đơn</h5>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleSelect1" class="control-label">trạng thái đơn</label>
+                                        <input hidden name="bill_id" value="${b.bill_id}">
+                                        <select name="permission" class="form-control" id="exampleSelect1">
+                                            <option value="xac nhan don">xác nhận đơn </option>
+                                            <option value="cho lay hang">chờ lấy hàng</option>
+                                            <option value="dang giao">đang giao</option>
+                                            <option value="hoan thanh">hoàn thành</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <BR>
+                                <button class="btn btn-save" type="submit">Lưu lại</button>
+                                <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+                                <BR>
+                            </div>
+                        </form>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
         <!-- Essential javascripts for application to work-->
         <script src="admin/js/jquery-3.2.1.min.js"></script>
         <script src="admin/js/popper.min.js"></script>
