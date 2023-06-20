@@ -104,6 +104,14 @@
         <servlet-name>InsertCategory</servlet-name>
         <servlet-class>MainController.InsertCategory</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MyAccounts</servlet-name>
+        <servlet-class>MainController.MyAccounts</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowDetails</servlet-name>
+        <servlet-class>MainController.ShowDetails</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
@@ -215,6 +223,14 @@
     <servlet-mapping>
         <servlet-name>InsertCategory</servlet-name>
         <url-pattern>/InsertCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyAccounts</servlet-name>
+        <url-pattern>/MyAccounts</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowDetails</servlet-name>
+        <url-pattern>/ShowDetails</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -75,22 +75,7 @@ public class billDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-            public List<Bill> getBillInfo(){
-              List<Bill> list = new ArrayList<>();
-              String sql = "select b.bill_id, u.user_name,b.phone,b.address,b.date,b.total_money,b.payment from bill b inner join users u on b.user_id = u.user_id";
-              try {
-                  conn = new DBContext().getConnection();
-                  ps = conn.prepareStatement(sql);
-                  rs = ps.executeQuery();
-                  while (rs.next()) {
-                      User u = new User(rs.getString(2));
-                      list.add(new Bill(rs.getInt(1),u , rs.getFloat(6), rs.getString(7), rs.getString(4), rs.getDate(5), rs.getString(3)));
-                  }
-              } catch (Exception e) {
-              }
-              return list;
-          }             
+    }             
         
         public List<BillDetail> getDetail(int bill_id){
         List<BillDetail> list = new ArrayList<>();
@@ -110,20 +95,26 @@ public class billDAO {
         return list;
     }
         
-        public List<Bill> getBillByID(int user_id){
-        List<Bill> list = new ArrayList<>();
-        String sql = "select b.bill_id, b.date,b.total,b.payment, b.address, b.phone from bill b where user_id = ?";
+       public List<Bill> getBillsByUserId(int user_id) throws Exception {
+        List<Bill> bills = new ArrayList<>();
         try {
+            String sql = "SELECT bill_id, date, payment, address, total_money FROM bill WHERE user_id = ?";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, user_id);
             rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new Bill(rs.getInt(1), rs.getFloat(3), rs.getString(4), rs.getString(5), rs.getDate(2), rs.getString(6)));
+            while (rs.next()) {          
+                int bill_id = rs.getInt("bill_id");
+                java.sql.Date date = rs.getDate("date");
+                String payment = rs.getString("payment");
+                String address = rs.getString("address");
+                float totalMoney = rs.getFloat("total_money");  
+                Bill bill = new Bill(bill_id, date, payment, address, totalMoney);
+                bills.add(bill);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return list;
-    }
-          
+        return bills;
+    }            
 }

@@ -11,7 +11,15 @@ public class Bill {
     String address;
     Date date;
     String phone;
+    int user_id;
 
+    public Bill(Float total, String payment, String address, Date date, int user_id) {
+        this.total = total;
+        this.payment = payment;
+        this.address = address;
+        this.date = date;
+        this.user_id = user_id;
+    }
     public Bill() {
     }
 
@@ -38,6 +46,28 @@ public class Bill {
         this.address = address;
         this.date = date;
         this.phone = phone;
+    }
+
+    public Bill(Date date, String payment, String address, float totalMoney) {      
+        this.total = totalMoney;
+        this.payment = payment;
+        this.address = address;
+        this.date = date;
+    }
+
+    public Bill(Date date, String payment, String address, float totalMoney, int user_id) {
+        this.date = date;
+        this.payment = payment;
+        this.address = address;
+        this.user_id= user_id;
+    }
+
+    public Bill(int bill_id, Date date, String payment, String address, float totalMoney) {
+        this.total = totalMoney;
+        this.payment = payment;
+        this.address = address;
+        this.date = date;
+        this.bill_id = bill_id;
     }
 
     public int getBill_id() {
@@ -95,13 +125,5 @@ public class Bill {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
-    
-
-    
-
-    
-    
-    
-    
+ 
 }

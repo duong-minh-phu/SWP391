@@ -6,10 +6,13 @@
 package MainController;
 
 import DAO.BlogDAO;
+import DAO.billDAO;
 import DAO.productDAO;
+import Entity.Bill;
 import Entity.Blog;
 import Entity.Category;
 import Entity.Product;
+import Entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -18,6 +21,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -115,6 +119,12 @@ public class MainController extends HttpServlet {
             }
             if (action.equals("updateItemsInCart")) {
                 url = "UpdateItemsInCart";
+            }            
+            if (action.equals("myaccount")) {
+                url = "MyAccounts";
+            }    
+            if (action.equals("showdetail")) {
+                url = "ShowDetails";
             }
             if (action.equals("insert")) {
                 productDAO c = new productDAO();
