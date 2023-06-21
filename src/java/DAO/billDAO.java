@@ -139,7 +139,7 @@ public class billDAO {
         public List<Bill> getBill() {
         List<Bill> list = new ArrayList<>();
         String sql = "select p.bill_id,c.user_name,p.total_money,p.payment,p.address,p.date,p.phone\n" +
-                        "from bill p inner join users c on p.user_id=c.user_id ";
+                        "from bill p inner join users c on p.user_id=c.user_id and p.delivery_status='False'";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -180,6 +180,37 @@ public class billDAO {
                 ps.setString(2,status ); 
                 ps.setString(3, date);
                 ps.executeUpdate();
+        }catch(Exception ex){
+            
+        };
+        }
+        public void updatebillcancel(int id,String status){
+        LocalDate curDate = java.time.LocalDate.now();
+        String date = curDate.toString();
+        try{
+            String query = "insert into cancelbill values(?,?,?)";
+                conn = new DBContext().getConnection();
+                ps = conn.prepareStatement(query);
+                ps.setInt(1, id);
+                ps.setString(2,status ); 
+                ps.setString(3, date);
+                ps.executeUpdate();
+        }catch(Exception ex){
+            
+        };
+        }
+        public void cancelbill(int id,String status){
+        LocalDate curDate = java.time.LocalDate.now();
+        String date = curDate.toString();
+        try{
+            String query = " update bill  set delivery_status='True' where bill_id=?";
+                conn = new DBContext().getConnection();
+                ps = conn.prepareStatement(query);
+                ps.setInt(1, id);                
+                ps.executeUpdate();
+                
+            
+                
         }catch(Exception ex){
             
         };

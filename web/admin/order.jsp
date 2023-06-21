@@ -90,8 +90,9 @@
                                         <th>Ngày mua</th>
                                         <th>Tổng tiền</th>
                                         <th>Thanh Toán</th>
-                                        <th>Tính năng</th>
+                                        <th>Chi tiet</th>
                                         <th>cập nhật trạng thái đơn</th>
+                                        <th>tinh nang</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -108,11 +109,15 @@
                                             
                                             </td>
                                             <td><a style=" color: rgb(245 157 57);background-color: rgb(251 226 197); padding: 5px;border-radius: 5px;" href="MainController?action=delivery&bill_id=${b.bill_id}"><i class="fa"></i>quá trình giao hàng</a>
-                                            <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                                                        data-target="#ModalUP${b.bill_id}"><i class="fas fa-edit"></i></button>
+                                            
                                             </td>
 <!--                                            <td><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
                                                         data-target="#ModalUP${b.bill_id}"><i class="fas fa-edit"></i></button></td>-->
+
+                                            <td><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                                                        data-target="#ModalUP${b.bill_id}"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-primary btn-sm trash" type="button" title="xoa" id="show-emp" data-toggle="modal"
+                                                        data-target="#ModalUP1${b.bill_id}"><i class="fas fa-trash-alt"></i></button></td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -146,6 +151,48 @@
                                             <option value="cho lay hang">chờ lấy hàng</option>
                                             <option value="dang giao">đang giao</option>
                                             <option value="hoan thanh">hoàn thành</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <BR>
+                                <button class="btn btn-save" type="submit">Lưu lại</button>
+                                <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+                                <BR>
+                            </div>
+                        </form>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
+                    
+                    
+                    
+                    
+                    <c:forEach items="${bill}" var="b">           
+            <div class="modal fade" id="ModalUP1${b.bill_id}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+                 data-keyboard="false">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <form method="POST" action="MainController?action=cancelbill">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="form-group  col-md-12">
+                                        <span class="thong-tin-thanh-toan">
+                                            <h5>hủy bỏ đơn hàng</h5>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleSelect1" class="control-label">lý do hủy bỏ đơn hàng</label>
+                                        <input hidden name="bill_id" value="${b.bill_id}">
+                                        <select name="permission1" class="form-control" id="exampleSelect1">
+                                            <option value="khong du hang">không đủ hàng </option>
+                                            <option value="mat hang dang bi loi">mặt hàng đang bị lỗi</option>
+                                            
                                         </select>
                                     </div>
                                 </div>
