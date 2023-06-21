@@ -145,66 +145,28 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="review_form_wrapper">
-                            <h3>Viết đánh giá của bạn</h3>
-                            <form action="MainController?action=addReview" method="POST" onSubmit="return validateForm()">
-
-                                <input type="hidden" name="product_review_id" value="${ProductData.product_id}">
-                                <input type="hidden" name="user_id" value="${sessionScope.user.user_id}">
-                                <%
-                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                                    String formattedDate = dateFormat.format(new java.util.Date());
-                                %>
-                                <input type="hidden" name="review_date" value="<%= formattedDate%>">
-                                <div class="form-group">
-                                    <label for="rating">Đánh giá của bạn:</label>
-                                    <select class="form-control" id="rating" name="rating">
-                                        <option value="5">5 sao</option>
-                                        <option value="4">4 sao</option>
-                                        <option value="3">3 sao</option>
-                                        <option value="2">2 sao</option>
-                                        <option value="1">1 sao</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="review">Nhận xét của bạn:</label>
-                                    <textarea class="form-control" rows="5" id="review" name="review"></textarea>
-                                </div>
-
-                                <button type="submit" class="btn btn-primary">Gửi đánh giá</button>
-
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="customer_review_list">
-                            <h3>Đánh giá của khách hàng</h3>
-                            <ul class="list-unstyled">
-                                <c:forEach items="${reviewList}" var="r">
-                                    <li>
-                                        <div class="review_item">
-                                            <div class="rating_wrap">
-
-                                                <div class="star_rating">
-                                                    <span style="width:${r.rating * 20}%"></span>
-                                                </div>
-
+                <div class="customer_review_list">
+                    <div class="row">
+                        <c:forEach items="${ReviewData}" var="ron">
+                            <div class="col-lg-6">
+                                <div class="customer_review_item">
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <h5 class="mt-0">${ron.user_name}</h5>
+                                            <p>${ron.comment}</p>
+                                            <div class="rating">
+                                                <c:forEach begin="1" end="${ron.rate}">
+                                                    <i class="fa fa-star"></i>
+                                                </c:forEach>
                                             </div>
-                                            <p>${r.review}</p>
-                                            <div class="review_user">
-                                                <span>Product: ${r.product_name}</span>
-                                                <span>By: ${r.customer_name}</span>
-                                                <span>Rating: ${r.rating}</span>
-                                                <span>Date: ${r.review_date}</span>
+                                            <div class ="datetime">
+                                                <p>${ron.date}</p>
                                             </div>
                                         </div>
-                                    </li>
-                                </c:forEach>
-                            </ul>
-                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
                     </div>
                 </div>
 
@@ -224,7 +186,7 @@
         <script src="assets/js/main.js"></script>
         <% if (request.getParameter("success") != null) { %>
         <script>
-                                    alert("Đã đăng tải thành công!");
+            alert("Đã đăng tải thành công!");
         </script>
         <% }%>
         <script>
@@ -254,6 +216,68 @@
                 return true;
             }
         </script>
+        <style>
+            .list-unstyled {
+                padding-left: 0;
+                list-style: none;
+            }
+
+            .customer_review_item {
+                border: 1px solid #ccc;
+                padding: 20px;
+                margin-bottom: 30px;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .customer_review_item:before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(255, 255, 255, 0.7);
+                z-index: 1;
+                opacity: 0;
+                transition: all 0.3s ease;
+            }
+
+            .customer_review_item:hover:before {
+                opacity: 1;
+            }
+
+            .customer_review_item h5 {
+                font-size: 18px;
+                color: #333;
+                margin-bottom: 10px;
+            }
+
+            .customer_review_item p {
+                font-size: 16px;
+                color: #666;
+                margin-bottom: 20px;
+            }
+
+            .rating {
+                display: inline-block;
+                vertical-align: middle;
+                margin-right: 10px;
+            }
+
+            .datetime {
+                position: absolute;
+                bottom: 0px;
+                right: 20px;
+            }
+
+
+            .fa-star {
+                color: gold;
+                font-size: 20px;
+            }
+
+        </style>
     </body>
 
 </html>
