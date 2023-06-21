@@ -5,33 +5,37 @@
  */
 package MainController;
 
+import DAO.DeliveryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ROG STRIX
  */
-@WebServlet(name = "logout", urlPatterns = {"/logout"})
-public class logout extends HttpServlet {
+@WebServlet(name = "Detailcancel", urlPatterns = {"/Detailcancel"})
+public class Detailcancel extends HttpServlet {
 
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            HttpSession session = request.getSession();
-            session.removeAttribute("user");
-//            session.removeAttribute("size");
-            response.sendRedirect("home");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            String billid=request.getParameter("bill_id");
+            int id=Integer.parseInt(billid);
+            DeliveryDAO dao=new DeliveryDAO();
+            List<Entity.Delivery> detail1 = dao.getDeliverycancel(id);
+            request.setAttribute("de", detail1);
+            request.getRequestDispatcher("admin/delivery.jsp").forward(request, response);
         }catch(Exception ex){
-            log("Error at: MainController" + ex.toString());
+            response.sendRedirect("404.jsp");
         }
     }
 

@@ -153,6 +153,24 @@ public class billDAO {
         }
         return list;
     }
+        
+        public List<Bill> getBill1() {
+        List<Bill> list = new ArrayList<>();
+        String sql = "select p.bill_id,c.user_name,p.total_money,p.payment,p.address,p.date,p.phone\n" +
+                        "from bill p inner join users c on p.user_id=c.user_id and p.delivery_status='True'";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                  list.add(new Bill(rs.getInt(1), rs.getString(2),rs.getFloat(3), rs.getString(4), rs.getString(5), rs.getDate(6), rs.getString(7)));
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
 
         public List<Bill> getBillByDay(){
         List<Bill> list = new ArrayList<>();

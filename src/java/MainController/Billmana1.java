@@ -5,33 +5,45 @@
  */
 package MainController;
 
+import DAO.billDAO;
+import Entity.Bill;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ROG STRIX
  */
-@WebServlet(name = "logout", urlPatterns = {"/logout"})
-public class logout extends HttpServlet {
+@WebServlet(name = "Billmana1", urlPatterns = {"/Billmana1"})
+public class Billmana1 extends HttpServlet {
 
-    
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            HttpSession session = request.getSession();
-            session.removeAttribute("user");
-//            session.removeAttribute("size");
-            response.sendRedirect("home");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+           billDAO dao=new billDAO();
+            List<Bill> bill=dao.getBill1();
+            
+            request.setAttribute("bill", bill);            
+            request.getRequestDispatcher("admin/ordercancel.jsp").forward(request, response);
         }catch(Exception ex){
-            log("Error at: MainController" + ex.toString());
+            response.sendRedirect("404.jsp");
         }
     }
 

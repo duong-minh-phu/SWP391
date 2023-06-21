@@ -43,4 +43,23 @@ public class DeliveryDAO {
         }
         return list;
     }
+    
+    public List<Delivery> getDeliverycancel(int bill_id) {
+        List<Delivery> list = new ArrayList<>();
+
+        String sql = "select*from cancelbill d where  d.bill_id=?";
+             try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, bill_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Delivery(rs.getInt(1), rs.getString(2), rs.getDate(3)));
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
 }

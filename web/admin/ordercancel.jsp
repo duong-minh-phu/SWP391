@@ -52,7 +52,7 @@
             </div>
             <hr>
             <ul class="app-menu">
-                <li><a class="app-menu__item" href="Productmanager"><i
+               <li><a class="app-menu__item" href="Productmanager"><i
                             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
                 <li><a class="app-menu__item" href="MainController?action=blogmanagement"><i
                             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý Blog</span></a>
@@ -68,7 +68,7 @@
          <main class="app-content">
             <div class="app-title">
                 <ul class="app-breadcrumb breadcrumb side">
-                    <li class="breadcrumb-item active"><a href="#"><b>Danh sách đơn hàng</b></a></li>
+                    <li class="breadcrumb-item active"><a href="#"><b>Danh sách đơn hàng bị hủy </b></a></li>
                 </ul>
                 <div id="clock"></div>
             </div>
@@ -93,8 +93,8 @@
                                         <th>Tổng tiền</th>
                                         <th>Thanh Toán</th>
                                         <th>Chi tiet</th>
-                                        <th>cập nhật trạng thái đơn</th>
-                                        <th>tinh nang</th>
+                                        <th>lý do hủy</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -110,16 +110,13 @@
                                             <td><a style=" color: rgb(245 157 57);background-color: rgb(251 226 197); padding: 5px;border-radius: 5px;" href="MainController?action=showdetail&bill_id=${b.bill_id}"><i class="fa"></i>Chi tiết đơn hàng</a>
                                             
                                             </td>
-                                            <td><a style=" color: rgb(245 157 57);background-color: rgb(251 226 197); padding: 5px;border-radius: 5px;" href="MainController?action=delivery&bill_id=${b.bill_id}"><i class="fa"></i>quá trình giao hàng</a>
+                                            <td><a style=" color: rgb(245 157 57);background-color: rgb(251 226 197); padding: 5px;border-radius: 5px;" href="MainController?action=detailcancel&bill_id=${b.bill_id}"><i class="fa"></i>chi tiết</a>
                                             
                                             </td>
 <!--                                            <td><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
                                                         data-target="#ModalUP${b.bill_id}"><i class="fas fa-edit"></i></button></td>-->
 
-                                            <td><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                                                        data-target="#ModalUP${b.bill_id}"><i class="fas fa-edit"></i></button>
-                                            <button class="btn btn-primary btn-sm trash" type="button" title="xoa" id="show-emp" data-toggle="modal"
-                                                        data-target="#ModalUP1${b.bill_id}"><i class="fas fa-trash-alt"></i></button></td>
+                                            
                                         </tr>
                                     </c:forEach>
                                 </tbody>
