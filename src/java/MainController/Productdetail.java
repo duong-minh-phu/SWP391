@@ -6,6 +6,8 @@
 package MainController;
 
 import DAO.productDAO;
+import DAO.ratingDAO;
+import Entity.Rating;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -36,13 +38,16 @@ public class Productdetail extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try  {
             String product_id = request.getParameter("product_id");
+            ratingDAO rate = new ratingDAO();
             productDAO c = new productDAO();
+            List<Rating> rating = rate.getRatingsByProductID(product_id);
             Entity.Product product = c.getProductByID(product_id);
             int category_id = product.getCate().getCategory_id();
             if(product.getQuantity()==0){
                  request.setAttribute("detail", "Mặt hàng này đã hết xin chọn loại khác!!!");
             }
             List<Entity.Product> productByCategory = c.getProductByCategory(category_id);
+            request.setAttribute("ReviewData", rating);
             request.setAttribute("ProductData", product);
             request.setAttribute("ProductByCategory", productByCategory);
             request.getRequestDispatcher("product-details.jsp").forward(request, response);

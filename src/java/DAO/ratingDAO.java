@@ -28,10 +28,10 @@ public class ratingDAO {
 
     public List<Rating> getRating() {
         List<Rating> list = new ArrayList<>();
-            String sql = "SELECT u.user_name, p.product_name ,r.rate, r.comment, r.date\n"
-                    + "FROM Rating r\n"
-                    + "INNER JOIN product p ON r.product_id = p.product_id\n"
-                    + "INNER JOIN users u ON r.user_id = u.user_id";
+        String sql = "SELECT u.user_name, p.product_name ,r.rate, r.comment, r.date\n"
+                + "FROM Rating r\n"
+                + "INNER JOIN product p ON r.product_id = p.product_id\n"
+                + "INNER JOIN users u ON r.user_id = u.user_id";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -56,24 +56,26 @@ public class ratingDAO {
 
     public List<Rating> getRatingsByProductID(String product_id) {
         List<Rating> list = new ArrayList<>();
-        String sql = "SELECT r.user_id, p.product_name ,r.rate, r.comment, r.date\n"
+        String sql = "SELECT u.user_name, p.product_name ,r.rate, r.comment, r.date\n"
                 + "FROM Rating r\n"
                 + "INNER JOIN product p ON r.product_id = p.product_id\n"
-                + "WHERE r.product_id = ?";
+                + "INNER JOIN users u ON r.user_id = u.user_id\n"
+                +"WHERE r.product_id = ?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, product_id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int userId = rs.getInt("user_id");
+                String userName = rs.getString("user_name");
                 String productName = rs.getString("product_name");
                 int rate = rs.getInt("rate");
                 String comment = rs.getString("comment");
                 Date date = rs.getDate("date");
 
-                Rating rating = new Rating(userId, productName, rate, comment, date);
+                Rating rating = new Rating(userName, productName, rate, comment, date);
                 list.add(rating);
+                System.out.println(list);
 
             }
 
