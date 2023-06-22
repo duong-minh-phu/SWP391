@@ -6,6 +6,9 @@
 package MainController;
 
 import DAO.billDAO;
+import DAO.userDAO;
+import Entity.Email;
+import Entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import jdk.nashorn.internal.codegen.Emitter;
 
 /**
  *
@@ -41,6 +45,12 @@ public class Cancelbill extends HttpServlet {
             billDAO dao=new billDAO();
             dao.cancelbill(id, status);
             dao.updatebillcancel(id, status);
+            int a=dao.getuseridbybill(id);
+            System.out.println(a);
+            userDAO u=new userDAO();
+            User user=u.checkmailbyid(a);
+            Email e=new Email();            
+            if(e.sendEmail(user.getUser_email(),"Thông báo hủy đơn từ BMOS", "Xin lỗi đã hủy đơn hàng của bạn chúng tôi thành thật xin lỗi nếu có vấn dề thì hãy liên hệ lại chúng tôi!!"))
             response.sendRedirect("MainController?action=billmana");
             
         }catch(Exception ex){

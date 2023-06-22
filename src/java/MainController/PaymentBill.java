@@ -70,7 +70,8 @@ public class PaymentBill extends HttpServlet {
             String date = curDate.toString();
             billDAO dao = new billDAO();
             dao.addOrder(u, total_payment, payment, address,date, phone);
-            session.removeAttribute("cart");
+            session.removeAttribute("size");
+            session.removeAttribute("cart");            
             if (payment_method.equals("cod")) {
                 request.setAttribute("total_payment", total_payment);
                 request.setAttribute("address", address);

@@ -257,4 +257,21 @@ public class billDAO {
         return bills;
 
     }
+        public int getuseridbybill(int billid){
+            try{
+                 String sql = "select b.user_id from bill b where b.bill_id=?";
+                  conn = new DBContext().getConnection();
+                  ps = conn.prepareStatement(sql);
+                  ps.setInt(1, billid);
+                  rs=ps.executeQuery();
+                  while (rs.next()) {
+                    int a=rs.getInt(1);
+                    return a;
+                }
+            }catch(Exception ex){
+                ex.printStackTrace(); 
+            }
+            
+            return 0;
+        }
 }

@@ -89,6 +89,22 @@ public class userDAO {
             }
         return null;
     }
+    public User checkmailbyid(int id){
+        try{
+            String sql="select*from users where user_id=?";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery(); 
+            while (rs.next()) {                
+                User a=new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6));
+                return a;
+            }
+        }catch(Exception ex){
+            
+        }
+        return null;
+    }
     
     public User checkPass(String pass,int user_id){
             try {
