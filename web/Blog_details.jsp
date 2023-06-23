@@ -24,6 +24,9 @@
 
         <!-- Main Style CSS -->
         <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style> .link-muted { color: #aaa; } .link-muted:hover { color: #1266f1; }
+            </style>
 
     </head>
 
@@ -51,7 +54,54 @@
             </div>         
         </div>
         <!--breadcrumbs area end-->
+<!--            <section style="background-color: #ad655f;">
+  <div class="container my-5 py-5">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-12 col-lg-10">
+        <div class="card text-dark">
+          <div class="card-body p-4">
+            <h4 class="mb-0">Recent comments</h4>
+            <p class="fw-light mb-4 pb-2">Latest Comments section by users</p>
+             <c:forEach items="${BlogCommentByid}" var="c">
+            <div class="d-flex flex-start">
+              <img class="rounded-circle shadow-1-strong me-3"
+                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp" alt="avatar" width="60"
+                height="60" />
+              <div>
+                <h6 class="fw-bold mb-1">${c.user_name}</h6>
+                <div class="d-flex align-items-center mb-3">
+                  <p class="mb-0">
+                    ${c.date}
+                    <span class="badge bg-primary">Pending</span>
+                  </p>
+                  <a href="#!" class="link-muted"><i class="fas fa-pencil-alt ms-2"></i></a>
+                  <a href="#!" class="link-muted"><i class="fas fa-redo-alt ms-2"></i></a>
+                  <a href="#!" class="link-muted"><i class="fas fa-heart ms-2"></i></a>
+                </div>
+                <p class="mb-0">
+                  ${c.comment}
+                </p>
+              </div>
+            </div>
+            </c:forEach> 
+          </div>
 
+          <hr class="my-0" />
+
+          
+
+          <hr class="my-0" style="height: 1px;" />
+
+          
+
+          <hr class="my-0" />
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>-->
         <!--product details start-->
         <div class="product_details">
             <div class="container">
@@ -92,16 +142,56 @@
         
         
             
-             <c:forEach items="${BlogCommentByid}" var="c">    
-                                                <div>
-            <div class="comment-body">
-                  <h4>${c.user_name}</h4>
-                  <div class="meta">${c.date}</div>
-                  <p>${c.comment}</p>
-                  
-                </div>                  
-                  </div>
-            </c:forEach>  
+             <section style="background-color: #ad655f;">
+  <div class="container my-5 py-5">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-12 col-lg-10">
+        <div class="card text-dark">
+          <div class="card-body p-4">
+            <h4 class="mb-0">Recent comments</h4>
+            <p class="fw-light mb-4 pb-2">Latest Comments section by users</p>
+             <c:forEach items="${BlogCommentByid}" var="c">
+            <div class="card-body p-4">
+            <div class="d-flex flex-start">
+              <img class="rounded-circle shadow-1-strong me-3"
+                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(26).webp" alt="avatar" width="60"
+                height="60" />
+              <div>
+                <h6 class="fw-bold mb-1">${c.user_name}</h6>
+                <div class="d-flex align-items-center mb-3">
+                  <p class="mb-0">
+                    ${c.date}
+                    <span class="badge bg-success">Approved</span>
+                  </p>
+                  <a href="#!" class="link-muted"><i class="fas fa-pencil-alt ms-2"></i></a>
+                  <a href="#!" class="text-success"><i class="fas fa-redo-alt ms-2"></i></a>
+                  <a href="#!" class="link-danger"><i class="fas fa-heart ms-2"></i></a>
+                </div>
+                <p class="mb-0">
+                  ${c.comment}
+                </p>
+              </div>
+            </div>
+          </div>
+            </c:forEach> 
+          </div>
+
+          <hr class="my-0" />
+
+          
+
+          <hr class="my-0" style="height: 1px;" />
+
+          
+
+          <hr class="my-0" />
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
         </div>
         
         
@@ -137,6 +227,9 @@
 //            })
 //            }
         </script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 
 </html>

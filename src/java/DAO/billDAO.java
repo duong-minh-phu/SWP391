@@ -70,6 +70,9 @@ public class billDAO {
                     ps.setBoolean(5, false);
                     ps.executeUpdate();
                 }
+                
+                
+                
             }
             String sql3 = "UPDATE product SET quantity = quantity - ? WHERE product_id = ?";
                 ps = conn.prepareStatement(sql3);
@@ -86,6 +89,23 @@ public class billDAO {
             e.printStackTrace();
         }
     }
+         public void updatebilldely(int id){
+        LocalDate curDate = java.time.LocalDate.now();
+        String date = curDate.toString();
+        try{
+            String query = "insert into billstatus values(?,?,?)";
+                conn = new DBContext().getConnection();
+                ps = conn.prepareStatement(query);
+                ps.setInt(1, id);
+                ps.setString(2,"xac nhan don" ); 
+                ps.setString(3, date);
+                ps.executeUpdate();
+        }catch(Exception ex){
+            
+        };
+        }
+      
+      
             public List<Bill> getBillInfo(){
               List<Bill> list = new ArrayList<>();
               String sql = "select b.bill_id, u.user_name,b.phone,b.address,b.date,b.total_money,b.payment from bill b inner join users u on b.user_id = u.user_id";
@@ -174,7 +194,7 @@ public class billDAO {
 
         public List<Bill> getBillByDay(){
         List<Bill> list = new ArrayList<>();
-        String sql = "select b.bill_id, u.user_name,b.total_money,b.payment,b.address,b.date,b.phone from bill b inner join users u on b.user_id = u.user_id where date = cast(getdate() as Date)";
+        String sql = "select b.bill_id, u.user_name,b.total_money,b.payment,b.address,b.date,b.phone from bill b inner join users u on b.user_id = u.user_id where date = cast(getdate() as Date) b.delivery_status='False'";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -272,6 +292,39 @@ public class billDAO {
                 ex.printStackTrace(); 
             }
             
+            return 0;
+        }
+        public int getbillid(){
+            try{
+                 String sql = "SELECT TOP 1 bill_id FROM bill ORDER BY bill_id DESC";
+                  conn = new DBContext().getConnection();
+                  ps = conn.prepareStatement(sql);                  
+                  rs=ps.executeQuery();
+                  while (rs.next()) {
+                    int a=rs.getInt(1);
+                    return a;
+                }
+            }catch(Exception ex){
+                ex.printStackTrace(); 
+            }
+            
+            return 0;
+        }
+        
+        public int moneymonth(int month){
+            try {
+                String sql = "select sum(total_money) from bill where month(date)=? and delivery_status='False'";
+                  conn = new DBContext().getConnection();
+                  ps = conn.prepareStatement(sql);
+                  ps.setInt(1, month);
+                  rs=ps.executeQuery();
+                  while (rs.next()) {
+                    int a=rs.getInt(1);
+                    return a;
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace(); 
+            }
             return 0;
         }
 }
