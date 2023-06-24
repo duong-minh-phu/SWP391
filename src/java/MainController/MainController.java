@@ -168,7 +168,10 @@ public class MainController extends HttpServlet {
             }
             if (action.equals("blogmanagement")){
                 url = "Blogmanagement";
-            }            
+            }     
+            if (action.equals("bill")){
+                url = "Bill";
+            }
             if (action.equals("insertblog")) {
                 BlogDAO b = new BlogDAO();
                 List<Blog> blog = b.getBlog();

@@ -6,12 +6,11 @@
 package MainController;
 
 import DAO.billDAO;
-import Entity.Bill;
 import Entity.User;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,18 +20,22 @@ import javax.servlet.http.HttpSession;
  *
  * @author ngodi
  */
-@WebServlet(name = "MyAccounts", urlPatterns = {"/MyAccounts"})
-public class MyAccounts extends HttpServlet { 
+public class Bill extends HttpServlet {
     private static final String ERROR = "404.jsp";
-    private static final String SUCCESS = "my-account.jsp";
-        protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private static final String SUCCESS = "bill.jsp";
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url=ERROR;
         try {           
                 HttpSession session = request.getSession();
                 User user = (User) session.getAttribute("user");          
-                if (user != null) {                 
-                url=SUCCESS;
+                if (user != null) {
+                    int user_id = user.getUser_id();
+                    billDAO dao = new billDAO();
+                    List<Entity.Bill> bill = dao.getBillsByUserId(user_id);
+                    request.setAttribute("bill", bill);                   
+            url=SUCCESS;
                 } else {
                     response.sendRedirect("login.jsp");
                 }
@@ -42,6 +45,7 @@ public class MyAccounts extends HttpServlet {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

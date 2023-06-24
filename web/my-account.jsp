@@ -64,7 +64,7 @@
                                 <ul role="tablist" class="nav flex-column dashboard-list">
                                     <li><a href="#account-details" data-toggle="tab" class="nav-link">Tài khoản của tôi</a></li>
                                     <li><a href="#password" data-toggle="tab" class="nav-link">Thay đổi mật khẩu</a></li>
-                                    <li> <a href="#orders" data-toggle="tab" class="nav-link">Đơn hàng</a></li>
+                                    <li><a href="MainController?action=bill"  class="nav-link">Đơn hàng</a></li>
                                     <li><a href="MainController?action=logout" class="nav-link">Đăng xuất</a></li>
                                 </ul>
                             </div>    
@@ -72,34 +72,6 @@
                         <div class="col-sm-12 col-md-9 col-lg-9">
                             <!-- Tab panes -->
                             <div class="tab-content dashboard_content"> 
-                                <div class="tab-pane fadee" id="orders">
-                                <h3>Đơn hàng</h3>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Ngày mua</th>
-                                                <th>Hình thức thanh toán</th>
-                                                <th>Địa chỉ</th>
-                                                <th>Tổng đơn</th>
-                                                <th>Xem chi tiết</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <c:forEach items="${requestScope.bill}" var="b">
-                                                <tr>
-                                                    <td>${b.getDate()}</td>
-                                                    <td><span class="success">${b.getPayment()}</span></td>
-                                                    <td>${b.getAddress()}</td>
-                                                    <td>${b.getTotal()}</td>
-                                                 <td><a href="MainController?action=showdetailcus&bill_id=${b.getBill_id()}" class="view">view</a></td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
                                 <div class="tab-pane fade show active" id="account-details">
                                     <h3>Tài khoản của tôi </h3>
                                     <div class="login">
