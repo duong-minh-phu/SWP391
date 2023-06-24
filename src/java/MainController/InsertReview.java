@@ -31,6 +31,7 @@ public class InsertReview extends HttpServlet {
         int rate = Integer.parseInt(request.getParameter("rating"));
         String reviewText = request.getParameter("review");
         String dateString = request.getParameter("review_date");
+        int billId = Integer.parseInt(request.getParameter("bill_id"));
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date reviewDate = null;
@@ -43,7 +44,7 @@ public class InsertReview extends HttpServlet {
         java.sql.Date sqlReviewDate = new java.sql.Date(reviewDate.getTime());
 
         ratingDAO r = new ratingDAO();
-        Rating rating = new Rating(userId, productId, rate, reviewText, sqlReviewDate);
+        Rating rating = new Rating(userId, dateString, productId, rate, reviewText, sqlReviewDate, billId);
         r.insertRating(rating);
 
        response.sendRedirect("MainController?action=productdetail&product_id=" + productId + "&success=true");

@@ -209,6 +209,9 @@ public class MainController extends HttpServlet {
             if (action.equals("feedbackmanager")) {
                 url = "FeedbackManagement";
             }
+            if (action.equals("checkRating")) {
+                url = "checkRating";
+            }
 
         } catch (Exception ex) {
             log("Error at: MainController" + ex.toString());

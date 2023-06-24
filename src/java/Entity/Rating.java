@@ -18,6 +18,7 @@ public class Rating {
     int rate;
     String comment;
     Date date;
+    int bill_id;
 
     public Rating() {
     }
@@ -48,6 +49,26 @@ public class Rating {
         this.comment = comment;
         this.date = date;
     }
+
+    public Rating(int user_id, String user_name, String product_id, int rate, String comment, Date date, int bill_id) {
+        this.user_id = user_id;
+        this.user_name = user_name;
+        this.product_id = product_id;
+        this.rate = rate;
+        this.comment = comment;
+        this.date = date;
+        this.bill_id = bill_id;
+    }
+    
+
+    public int getBill_id() {
+        return bill_id;
+    }
+
+    public void setBill_id(int bill_id) {
+        this.bill_id = bill_id;
+    }
+    
 
     public String getUser_name() {
         return user_name;
