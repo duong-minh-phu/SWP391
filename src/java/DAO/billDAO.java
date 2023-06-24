@@ -104,7 +104,7 @@ public class billDAO {
         
         public List<BillDetail> getDetail(int bill_id){
         List<BillDetail> list = new ArrayList<>();
-        String sql = "SELECT d.bill_detail_id, p.product_id, p.product_name, p.img, d.quantity, d.product_total \n" +
+        String sql = "SELECT d.bill_detail_id, p.product_id, p.product_name, p.img, d.quantity, d.product_total,d.bill_id \n" +
                       "FROM bill_detail d\n" + "INNER JOIN product p ON d.product_id = p.product_id\n" + "WHERE d.bill_id = ?";
         try {
             conn = new DBContext().getConnection();
@@ -112,7 +112,7 @@ public class billDAO {
             ps.setInt(1, bill_id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new BillDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getInt(5),rs.getFloat(6)));
+                list.add(new BillDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getInt(5),rs.getFloat(6),rs.getInt(7)));
             }
         } catch (Exception e) {
         }

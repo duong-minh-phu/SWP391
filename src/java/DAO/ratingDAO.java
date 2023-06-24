@@ -13,7 +13,9 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -60,7 +62,7 @@ public class ratingDAO {
                 + "FROM Rating r\n"
                 + "INNER JOIN product p ON r.product_id = p.product_id\n"
                 + "INNER JOIN users u ON r.user_id = u.user_id\n"
-                +"WHERE r.product_id = ?";
+                + "WHERE r.product_id = ?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -71,7 +73,11 @@ public class ratingDAO {
                 String productName = rs.getString("product_name");
                 int rate = rs.getInt("rate");
                 String comment = rs.getString("comment");
-                Date date = rs.getDate("date");
+                Timestamp timestamp = rs.getTimestamp("date");
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(timestamp.getTime());
+                calendar.add(Calendar.DATE, 2);
+                Date date = new Date(calendar.getTimeInMillis());
 
                 Rating rating = new Rating(userName, productName, rate, comment, date);
                 list.add(rating);
@@ -86,7 +92,7 @@ public class ratingDAO {
     }
 
     public boolean insertRating(Rating rating) {
-        String sql = "insert into dbo.rating(user_id,product_id,rate,comment,date) values(?,?,?,?,?)";
+        String sql = "insert into dbo.rating(user_id,product_id,rate,comment,date,bill_id) values(?,?,?,?,?,?)";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -95,6 +101,7 @@ public class ratingDAO {
             ps.setInt(3, rating.getRate());
             ps.setString(4, rating.getComment());
             ps.setDate(5, new java.sql.Date(rating.getDate().getTime()));
+            ps.setInt(6, rating.getBill_id());
 
             int rowsAffected = ps.executeUpdate(); // thực hiện câu lệnh SQL
 
@@ -113,4 +120,38 @@ public class ratingDAO {
         }
     }
 
+    public boolean checkForRating(int user_id, String product_id, int bill_id) {
+        String sql = "select count(*) as count from dbo.Rating where user_id=? and product_id=? and bill_id=?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, user_id);
+            ps.setString(2, product_id);
+            ps.setInt(3, bill_id);
+
+            rs = ps.executeQuery(); // thực hiện câu lệnh SQL
+
+            if (rs.next()) {
+                int count = rs.getInt("count");
+                return (count > 0);
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception e) {
+            }
+            try {
+                ps.close();
+            } catch (Exception e) {
+            }
+            try {
+                conn.close();
+            } catch (Exception e) {
+            }
+        }
+    }
 }

@@ -116,6 +116,10 @@
         <servlet-name>FeedbackManagement</servlet-name>
         <servlet-class>MainController.FeedbackManagement</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>checkRating</servlet-name>
+        <servlet-class>MainController.checkRating</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
@@ -239,6 +243,10 @@
     <servlet-mapping>
         <servlet-name>FeedbackManagement</servlet-name>
         <url-pattern>/FeedbackManagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>checkRating</servlet-name>
+        <url-pattern>/checkRating</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
