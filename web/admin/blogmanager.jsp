@@ -112,7 +112,7 @@
                                                             class="fas fa-trash-alt"></i>
                                                     </button>
                                                     <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" 
-                                                            data-toggle="modal" data-target="#ModalUP${b.blog_id}">
+                                                            data-toggle="modal" data-blog-id="${b.blog_id}">
                                                         <i class="fas fa-edit"></i>
                                                     </button>
                                                 </td>
@@ -308,6 +308,17 @@
                     win.print();
                 }
             }
+        </script>
+        <script>
+            $(document).ready(function () {
+                $(".edit").click(function () {
+                    // Get the product ID from the data-product-id attribute
+                    var blog_id = $(this).data("blog-id");
+
+                    // Redirect the user to the edit product page
+                    window.location = "MainController?action=updateBlog&blog_id=" + blog_id;
+                });
+            });
         </script>
     </body>
 

@@ -16,6 +16,7 @@ import Entity.Blog;
 import DAO.BlogDAO;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -37,13 +38,47 @@ public class UpdateBlog extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Get the blog data from the request
-            String blog_name = request.getParameter("name");
-            System.out.println(blog_name);
-            String blog_describe = request.getParameter("describe");
-            System.out.println(blog_describe);
-            String img = request.getParameter("img");
+            try{
+                int blog_id = Integer.parseInt(request.getParameter("blog_id"));
+                String blog_name = request.getParameter("update_name");
+                String blog_describe = request.getParameter("update_describe");
+                BlogDAO dao = new BlogDAO();
+            
+            Part filePart = request.getPart("updatess_img");
+            System.out.println(filePart);
+            String realPath = request.getServletContext().getRealPath("/images/");
+            System.out.println(realPath);
+            String fileName = filePart.getSubmittedFileName(); // Lấy tên tệp ảnh gốc
+            System.out.println(fileName);
 
+            if (fileName == "") {
+                Blog blog = new Blog(blog_id, blog_name, blog_describe);
+                dao.updateBlog2(blog);
+                // Chuyển hướng người dùng đến trang danh sách sản phẩm
+                request.getRequestDispatcher("MainController?action=blogmanagement").forward(request, response);
+            } else {
+                String destinationPath = realPath + fileName;
+                System.out.println(destinationPath);
 
+                filePart.write(destinationPath);
+
+                String imagePath = "images/" + fileName;
+                System.out.println(imagePath);
+
+                Blog blog = new Blog(blog_id, imagePath, blog_name, blog_describe);
+
+                dao.updateBlog(blog);
+
+                // Chuyển hướng người dùng đến trang danh sách sản phẩm
+                request.getRequestDispatcher("MainController?action=blogmanagement").forward(request, response);
+            }
+            if (fileName == null) {
+                response.sendRedirect("404.jsp");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect(request.getContextPath() + "/404.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
