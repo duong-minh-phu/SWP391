@@ -44,11 +44,11 @@ public class productDAO {
         }
         return list;
     }
-    
+
     public List<Product> getProduct50() {
         List<Product> list = new ArrayList<>();
-        String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from \n" +
-"                product p inner join category c on p.category_id = c.category_id and p.status='TRUE' and p.quantity<50";
+        String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from \n"
+                + "                product p inner join category c on p.category_id = c.category_id and p.status='TRUE' and p.quantity<50";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -63,8 +63,7 @@ public class productDAO {
         }
         return list;
     }
-    
-    
+
     public List<Product> getProductDelete() {
         List<Product> list = new ArrayList<>();
         String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from  \n"
@@ -149,7 +148,7 @@ public class productDAO {
     }
 
     public void updateProduct(Product product) {
-        String sq3 = "update product set category_id=? ,product_name=? ,product_price=? ,product_describe=? ,quantity=? ,img=? where product_id=?";
+        String sq3 = "update product set category_id=? ,product_name=? ,product_price=? ,product_describe=? ,quantity=? ,img=? where product_id=? and status='TRUE'";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sq3);
@@ -160,6 +159,21 @@ public class productDAO {
             ps.setInt(5, product.getQuantity());
             ps.setString(6, product.getImg());
             ps.setString(7, product.getProduct_id());
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    public void updateProduct2(Product product) {
+        String sq = "update product set category_id=? ,product_name=? ,product_price=? ,product_describe=? ,quantity=?  where product_id=? and status='TRUE'";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sq);
+            ps.setInt(1, product.getCate().getCategory_id());
+            ps.setString(2, product.getProduct_name());
+            ps.setFloat(3, product.getProduct_price());
+            ps.setString(4, product.getProduct_describe());
+            ps.setInt(5, product.getQuantity());
+            ps.setString(6, product.getProduct_id());
             ps.executeUpdate();
         } catch (Exception e) {
         }
@@ -303,6 +317,23 @@ public class productDAO {
         return null;
     }
 
+    public Product getProductByID2(String product_id) {
+        String sql = "select c.category_id, c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from product p inner join category c on p.category_id = c.category_id WHERE p.product_id=? and p.status='TRUE'";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, product_id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                Category c = new Category(rs.getInt(1), rs.getString(2));
+                return new Product(c, rs.getString(3), rs.getString(4), rs.getFloat(5), rs.getString(6), rs.getInt(7), rs.getString(8));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
     public int CountProduct() {
         int count = 0;
         String sql = "SELECT COUNT(*) as 'count'\n"
@@ -389,6 +420,7 @@ public class productDAO {
         }
         return list;
     }
+
     public List<Product> getTop10Product() {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT TOP 10 p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img FROM product p where p.status='TRUE' ORDER BY NEWID()";
@@ -404,6 +436,7 @@ public class productDAO {
         }
         return list;
     }
+
     public List<Product> getTrendProduct() {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT TOP 5 p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img FROM product p inner join bill_detail bd on p.product_id = bd.product_id\n"

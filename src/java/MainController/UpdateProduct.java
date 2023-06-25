@@ -28,26 +28,31 @@ public class UpdateProduct extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String category_id = request.getParameter("category_id");
+            String category_id = request.getParameter("update_category_id");
             String productId = request.getParameter("product_id");
-            String product_name = request.getParameter("product_name");
-            String product_price = request.getParameter("price");
-            String product_quantity = request.getParameter("quantity");
-            String product_describe = request.getParameter("describe");
+            String product_name = request.getParameter("update_name");
+            String product_price = request.getParameter("update_price");
+            String product_quantity = request.getParameter("update_quantity");
+            String product_describe = request.getParameter("update_describe");
             int quantity = Integer.parseInt(product_quantity);
             Float price = Float.parseFloat(product_price);
             int cid = Integer.parseInt(category_id);
             productDAO dao = new productDAO();
             Category cate = new Category(cid);
 
-            Part filePart = request.getPart("product_img");
+            Part filePart = request.getPart("updatess_img");
             System.out.println(filePart);
             String realPath = request.getServletContext().getRealPath("/images/");
             System.out.println(realPath);
             String fileName = filePart.getSubmittedFileName(); // Lấy tên tệp ảnh gốc
             System.out.println(fileName);
 
-            if (fileName != null) {
+            if (fileName == "") {
+                Product product = new Product(cate, productId, product_name, price, product_describe, quantity);
+                dao.updateProduct2(product);
+                // Chuyển hướng người dùng đến trang danh sách sản phẩm
+                request.getRequestDispatcher("MainController?action=productmanager").forward(request, response);
+            } else {
                 String destinationPath = realPath + fileName;
                 System.out.println(destinationPath);
 
@@ -56,7 +61,7 @@ public class UpdateProduct extends HttpServlet {
                 String imagePath = "images/" + fileName;
                 System.out.println(imagePath);
 
-                Product product = new Product(product_name, price, product_describe, quantity, imagePath);
+                Product product = new Product(cate, productId, product_name, price, product_describe, quantity, imagePath);
 
                 dao.updateProduct(product);
 
