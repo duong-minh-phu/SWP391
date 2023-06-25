@@ -189,13 +189,14 @@ public class MainController extends HttpServlet {
                 
                 url = "UpdateBlog";
             }
-            if (action.equals("updateproduct")){
+            if (action.equals("updateProduct")){
+                String productId = request.getParameter("product_id");
                 productDAO c = new productDAO();
-                List<Product> product = c.getProduct();
-                request.setAttribute("ProductData", product);
+                Product product = c.getProductByID2(productId);
+                request.setAttribute("ProductIDDATA", product);
                 List<Category> category = c.getCategory();
                 request.setAttribute("CategoryData", category);
-                url = "UpdateProduct";
+                url = "admin/updateProduct.jsp";
             }
             if (action.equals("addReview")) {
                 url = "InsertReview";
@@ -214,6 +215,9 @@ public class MainController extends HttpServlet {
             }
             if (action.equals("checkRating")) {
                 url = "checkRating";
+            }
+            if (action.equals("updateproduct")){
+                url = "UpdateProduct";
             }
 
         } catch (Exception ex) {

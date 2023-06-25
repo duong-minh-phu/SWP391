@@ -111,8 +111,9 @@
                                                     <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" value="${p.product_id}"><i
                                                             class="fas fa-trash-alt"></i>
                                                     </button>
-                                                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                                                            data-toggle="modal" data-target="#ModalUP${p.product_id}"><i class="fas fa-edit"></i>
+                                                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" data-toggle="modal"
+                                                            data-product-id="${p.product_id}">
+                                                        <i class="fas fa-edit"></i>
                                                     </button>
                                                 </td>
                                             </tr>
@@ -195,11 +196,11 @@
                                             <td>${p.product_price}</td>
                                             <td>${p.product_describe}</td>
                                             <td>${p.quantity}</td>
-                                            <td><img src="${p.img}" alt="" width="100px;"></td>
+                                            <td><img src="${p.img}" alt="" width="200px;"></td>
 
                                             <td>
                                                 <button class="btn btn-primary btn-sm trash" type="button" title="Phục hồi" value="${p.product_id}"><i class="fa-solid fa-recycle"></i>
-                                                    </button>  
+                                                </button>  
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -317,6 +318,17 @@
                     win.print();
                 }
             }
+        </script>
+        <script>
+            $(document).ready(function () {
+                $(".edit").click(function () {
+                    // Get the product ID from the data-product-id attribute
+                    var product_id = $(this).data("product-id");
+
+                    // Redirect the user to the edit product page
+                    window.location = "MainController?action=updateProduct&product_id=" + product_id;
+                });
+            });
         </script>
     </body>
 
