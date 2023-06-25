@@ -44,6 +44,12 @@ public class Blog {
         this.blog_describe = blog_describe;
     }
 
+    public Blog(int blog_id, String blog_name, String blog_describe) {
+        this.blog_id = blog_id;
+        this.blog_name = blog_name;
+        this.blog_describe = blog_describe;
+    }
+
 
 
     public int getBlog_id() {

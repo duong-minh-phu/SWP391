@@ -189,6 +189,14 @@ public class MainController extends HttpServlet {
                 
                 url = "UpdateBlog";
             }
+            if (action.equals("updateBlog")){
+                String blog_id = request.getParameter("blog_id");
+                BlogDAO b = new BlogDAO();
+                Blog blog = b.getBlogByID2(blog_id);
+                request.setAttribute("BlogIDDATA", blog);
+                url = "admin/updateBlog.jsp";
+            }
+            
             if (action.equals("updateProduct")){
                 String productId = request.getParameter("product_id");
                 productDAO c = new productDAO();
