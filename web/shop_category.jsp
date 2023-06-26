@@ -92,8 +92,8 @@
                                 <c:forEach items="${ProductData}" var="p">
                                     <div class="col-lg-4 col-md-4 col-12 ">
                                         <div class="single_product">
-                                            <div class="product_thumb">
-                                                <a class="primary_img" href="MainController?action=productdetail&product_id=${p.product_id}"><img src="${p.img}" alt=""></a>
+                                            <div class="product_thumb" style=" height: 260px; width: 100%;">
+                                                <a class="primary_img" href="MainController?action=productdetail&product_id=${p.product_id}" style="width: 100%;height: 100%; display: block"><img src="${p.img}"  style="height: 100%;width: 100%; object-fit: fill"alt=""></a>
 
                                                 <div class="quick_button">
                                                     <a href="MainController?action=productdetail&product_id=${p.product_id}"title="quick_view">Xem sản phẩm</a>
