@@ -227,6 +227,19 @@ public class MainController extends HttpServlet {
             if (action.equals("updateproduct")){
                 url = "UpdateProduct";
             }
+            
+            if (action.equals("orderconfirm")) {
+                url = "OrderConfirm";
+            }
+            if (action.equals("orderprepared")) {
+                url = "OrderPrepared";
+            }
+            if (action.equals("ordershipping")) {
+                url = "OrderShipping";
+            }
+            if (action.equals("ordershipdone")) {
+                url = "OrderShipDone";
+            }
 
         } catch (Exception ex) {
             log("Error at: MainController" + ex.toString());
