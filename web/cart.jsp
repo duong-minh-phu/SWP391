@@ -74,7 +74,7 @@
                                                     <td class="product_name"><a href="MainController?action=productdetail&product_id=${i.key.product_id}">${i.key.product_name}</a></td>
                                                     <td class="product-price"><fmt:formatNumber pattern="##########" value="${i.key.product_price}"/></td>
 
-                                                    <td class="product_quantity"><input name="quantity" min="1" max="100" value="${i.value}" onchange="handleEvent(event, '${i.key.product_id}')" type="number"></td>
+                                                    <td class="product_quantity"><input name="quantity" min="1" max="100"  value="${Math.floor(i.value/2)}" onchange="handleEvent(event, '${i.key.product_id}')" type="number"></td>
 
                                                     <td id ="demo3${i.key.product_id}" class="product_total"> <fmt:formatNumber pattern="##########" value="${i.key.product_price * i.value }"/></td>
 
@@ -113,6 +113,7 @@
                                                         document.getElementById("demo2").innerHTML = parseInt(this.responseText.split("|")[1]) + 15000;
                                                         const demo3 = "demo3" + product_id;
                                                         document.getElementById(demo3).innerHTML = this.responseText.split("|")[0];
+                                                        
                                                     }
                                                     xhttp.open("GET", "UpdateItemsInCart?id=" + product_id + "&quantity=" + quantity);
                                                     xhttp.send()
