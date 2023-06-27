@@ -12,6 +12,8 @@ public class Bill {
     String address;
     Date date;
     String phone;
+    String status;
+    String bill_status;
 
     public Bill() {
     }
@@ -60,12 +62,34 @@ public class Bill {
         this.phone = phone;
     }
     
+    
         public Bill(int bill_id, Date date, String payment, String address, float totalMoney) {
         this.total = totalMoney;
         this.payment = payment;
         this.address = address;
         this.date = date;
         this.bill_id = bill_id;
+    }
+
+    public Bill(int bill_id, Float total, String payment, String address, Date date, String phone, String bill_status) {
+        this.bill_id = bill_id;
+        this.total = total;
+        this.payment = payment;
+        this.address = address;
+        this.date = date;
+        this.phone = phone;
+        this.bill_status = bill_status;
+    }
+        
+        
+        public Bill(int bill_id, Date date, String payment, String address, float totalMoney, String bill_status){
+       this.bill_id = bill_id;
+        this.date = date;
+        this.payment = payment;
+        this.address = address;
+        this.total = totalMoney;
+        this.bill_status = bill_status;
+
     }
 
     public int getBill_id() {
@@ -122,6 +146,22 @@ public class Bill {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getBill_status() {
+        return bill_status;
+    }
+
+    public void setBill_status(String bill_status) {
+        this.bill_status = bill_status;
     }
 
     

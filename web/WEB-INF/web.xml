@@ -124,6 +124,22 @@
         <servlet-name>Bill</servlet-name>
         <servlet-class>MainController.Bill</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OrderConfirm</servlet-name>
+        <servlet-class>MainController.OrderConfirm</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderPrepared</servlet-name>
+        <servlet-class>MainController.OrderPrepared</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderShipping</servlet-name>
+        <servlet-class>MainController.OrderShipping</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderShipDone</servlet-name>
+        <servlet-class>MainController.OrderShipDone</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
@@ -255,6 +271,22 @@
     <servlet-mapping>
         <servlet-name>Bill</servlet-name>
         <url-pattern>/Bill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderConfirm</servlet-name>
+        <url-pattern>/OrderConfirm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderPrepared</servlet-name>
+        <url-pattern>/OrderPrepared</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderShipping</servlet-name>
+        <url-pattern>/OrderShipping</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderShipDone</servlet-name>
+        <url-pattern>/OrderShipDone</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

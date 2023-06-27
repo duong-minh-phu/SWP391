@@ -58,35 +58,98 @@
             <div class="container">   
                 <div class="account_dashboard">
                     <div class="row">
-                            <!-- Tab panes -->
-                            <div class="tab-content dashboard_content"> 
-                               <h3>Đơn hàng</h3>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Ngày mua</th>
-                                                <th>Hình thức thanh toán</th>
-                                                <th>Địa chỉ</th>
-                                                <th>Tổng đơn</th>
-                                                <th>Xem chi tiết</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                        <!-- Tab panes -->
+                        <div class="tab-content dashboard_content"> 
+                            <h3>Đơn hàng</h3>
+                            <div class="button-container" style="display: flex;">
+                                <div class="col-sm-2" style="flex-grow: 1;">
+                                    <a class="btn btn-add btn-sm" href="MainController?action=orderconfirm" >Đơn hàng chờ xác nhận</a>
+                                </div>
 
-                                            <c:forEach items="${requestScope.bill}" var="b">
-                                                <tr>
-                                                    <td>${b.getDate()}</td>
-                                                    <td><span class="success">${b.getPayment()}</span></td>
-                                                    <td>${b.getAddress()}</td>
-                                                    <td>${b.getTotal()}</td>
-                                                 <td><a href="MainController?action=showdetailcus&bill_id=${b.getBill_id()}" class="view">view</a></td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
+                                <div class="col-sm-2" style="flex-grow: 1;">
+                                    <a class="btn btn-add btn-sm" href="MainController?action=orderprepared" >Đơn hàng đang chuẩn bị</a>
+                                </div>
+
+                                <div class="col-sm-2" style="flex-grow: 1;">
+                                    <a class="btn btn-add btn-sm" href="MainController?action=ordershipping" >Đang vận chuyển</a>
+                                </div>
+
+                                <div class="col-sm-2" style="flex-grow: 1;">
+                                    <a class="btn btn-add btn-sm" href="MainController?action=ordershipdone" >Đã giao hàng thành công</a>
                                 </div>
                             </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Ngày mua</th>
+                                            <th>Hình thức thanh toán</th>
+                                            <th>Địa chỉ</th>
+                                            <th>Tổng đơn</th>
+                                            <th>Trạng thái</th>
+                                            <th>Xem chi tiết</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${requestScope.billstatus1}" var="b">
+                                            <tr>
+                                                <td>${b.getDate()}</td>
+                                                <td><span class="success">${b.getPayment()}</span></td>
+                                                <td>${b.getAddress()}</td>
+                                                <td>${b.getTotal()}</td>
+                                                <td>${b.getBill_status()}</td>
+                                                <td><a href="MainController?action=showdetailcus&bill_id=${b.getBill_id()}" class="view">view</a></td>
+                                            </tr>
+                                        </c:forEach>
+
+                                        <c:forEach items="${requestScope.billstatus2}" var="b">
+                                            <tr>
+                                                <td>${b.getDate()}</td>
+                                                <td><span class="success">${b.getPayment()}</span></td>
+                                                <td>${b.getAddress()}</td>
+                                                <td>${b.getTotal()}</td>
+                                                <td>${b.getBill_status()}</td>
+                                                <td><a href="MainController?action=showdetailcus&bill_id=${b.getBill_id()}" class="view">view</a></td>
+                                            </tr>
+                                        </c:forEach>
+
+                                        <c:forEach items="${requestScope.billstatus3}" var="b">
+                                            <tr>
+                                                <td>${b.getDate()}</td>
+                                                <td><span class="success">${b.getPayment()}</span></td>
+                                                <td>${b.getAddress()}</td>
+                                                <td>${b.getTotal()}</td>
+                                                <td>${b.getBill_status()}</td>
+                                                <td><a href="MainController?action=showdetailcus&bill_id=${b.getBill_id()}" class="view">view</a></td>
+                                            </tr>
+                                        </c:forEach>
+
+                                        <c:forEach items="${requestScope.billstatus4}" var="b">
+                                            <tr>
+                                                <td>${b.getDate()}</td>
+                                                <td><span class="success">${b.getPayment()}</span></td>
+                                                <td>${b.getAddress()}</td>
+                                                <td>${b.getTotal()}</td>
+                                                <td>${b.getBill_status()}</td>
+                                                <td><a href="MainController?action=showdetailcus&bill_id=${b.getBill_id()}" class="view">view</a></td>
+                                            </tr>
+                                        </c:forEach>
+
+                                        <c:forEach items="${requestScope.bill}" var="b">
+                                            <tr>
+                                                <td>${b.getDate()}</td>
+                                                <td><span class="success">${b.getPayment()}</span></td>
+                                                <td>${b.getAddress()}</td>
+                                                <td>${b.getTotal()}</td>
+                                                <td>${b.getBill_status()}</td>
+                                                
+                                                <td><a href="MainController?action=showdetailcus&bill_id=${b.getBill_id()}" class="view">view</a></td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>  
             </div>        	
