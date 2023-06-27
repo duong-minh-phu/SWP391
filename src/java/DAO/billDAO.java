@@ -34,7 +34,7 @@ public class billDAO {
 
     public void addOrder(User u, float cartTotal, String payment, String address, String date, String phone) throws Exception {
         try {
-            String sql = "INSERT INTO bill (user_id, total_money, payment, address, date, phone, delivery_status) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO bill (user_id, total_money, payment, address, date, phone, delivery_status,bill_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, u.getUser_id());
@@ -44,6 +44,7 @@ public class billDAO {
             ps.setString(5, date);
             ps.setString(6, phone);
             ps.setBoolean(7, false);
+            ps.setString(8, "xac nhan don");
             ps.executeUpdate();
 
             String sql1 = "SELECT TOP 1 bill_id FROM bill ORDER BY bill_id DESC";
