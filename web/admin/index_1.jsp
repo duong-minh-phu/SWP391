@@ -51,8 +51,8 @@
             </div>
             <hr>
             <ul class="app-menu">
-                <li><a class="app-menu__item" href="MainController?action=dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
-                            class="app-menu__label">Bảng điều khiển</span></a></li>
+<!--                <li><a class="app-menu__item" href="MainController?action=dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
+                            class="app-menu__label">Bảng điều khiển</span></a></li>-->
                             <li><a class="app-menu__item" href="MainController?action=dashboard1"><i class='app-menu__icon bx bx-tachometer'></i><span
                             class="app-menu__label">Bảng điều khiển</span></a></li>
                 <li><a class="app-menu__item" href="MainController?action=customermanager"><i class='app-menu__icon bx bx-user-voice'></i><span
@@ -129,53 +129,38 @@
               </div>
             </div>
           </div>
+           <div class="col-md-6">
+            <div class="widget-small danger coloured-icon"><i class='icon bx bxs-error-alt fa-3x'></i>
+              <div class="info">
+                <h4>đơn bị hủy</h4>
+                <p><b>${requestScope.bill11} đơn</b></p>
+                <p class="info-tong">số đơn bị hủy</p>
+              </div>
+            </div>
+          </div>
            <!-- col-12 -->
+           
            <div class="col-md-12">
             <div class="tile">
-                <h3 class="tile-title">Tình trạng đơn hàng</h3>
+                <h3 class="tile-title">sản phẩm mới</h3>
               <div>
                 <table class="table table-bordered">
                   <thead>
                     <tr>
-                      <th>ID đơn hàng</th>
-                      <th>Tên khách hàng</th>
-                      <th>Tổng tiền</th>
-                      <th>Trạng thái</th>
+                      <th>ID sản phẩm </th>
+                      <th>Tên sản phẩm </th>
+                      <th>Giá</th>
+                      
                     </tr>
                   </thead>
                   <tbody>
+                      <c:forEach items="${top5}" var="top">
                     <tr>
-                      <td>AL3947</td>
-                      <td>Phạm Thị Ngọc</td>
-                      <td>
-                        19.770.000 đ
-                      </td>
-                      <td><span class="badge bg-info">Chờ xử lý</span></td>
+                      <td>${top.product_id}</td>
+                        <td>${top.product_name}</td>
+                        <td>${top.product_price}đ</td>
                     </tr>
-                    <tr>
-                      <td>ER3835</td>
-                      <td>Nguyễn Thị Mỹ Yến</td>
-                      <td>
-                        16.770.000 đ	
-                      </td>
-                      <td><span class="badge bg-warning">Đang vận chuyển</span></td>
-                    </tr>
-                    <tr>
-                      <td>MD0837</td>
-                      <td>Triệu Thanh Phú</td>
-                      <td>
-                        9.400.000 đ	
-                      </td>
-                      <td><span class="badge bg-success">Đã hoàn thành</span></td>
-                    </tr>
-                    <tr>
-                      <td>MT9835</td>
-                      <td>Đặng Hoàng Phúc	</td>
-                      <td>
-                        40.650.000 đ	
-                      </td>
-                      <td><span class="badge bg-danger">Đã hủy	</span></td>
-                    </tr>
+                    </c:forEach>
                   </tbody>
                 </table>
               </div>
@@ -186,42 +171,26 @@
              <!-- col-12 -->
             <div class="col-md-12">
                 <div class="tile">
-                  <h3 class="tile-title">Khách hàng mới</h3>
+                  <h3 class="tile-title">Sản phẩm mua nhiều</h3>
                 <div>
                   <table class="table table-hover">
                     <thead>
                       <tr>
-                        <th>ID</th>
-                        <th>Tên khách hàng</th>
-                        <th>Ngày sinh</th>
-                        <th>Số điện thoại</th>
+                        <th>ID sản phẩm </th>
+                      <th>Tên sản phẩm </th>
+                      <th>Giá</th>
+                        
                       </tr>
                     </thead>
                     <tbody>
+                        <c:forEach items="${topTrend1}" var="top10">
                       <tr>
-                        <td>#183</td>
-                        <td>Hột vịt muối</td>
-                        <td>21/7/1992</td>
-                        <td><span class="tag tag-success">0921387221</span></td>
+                        <td>${top10.product_id}</td>
+                        <td>${top10.product_name}</td>
+                        <td>${top10.product_price}đ</td>
+                        
                       </tr>
-                      <tr>
-                        <td>#219</td>
-                        <td>Bánh tráng trộn</td>
-                        <td>30/4/1975</td>
-                        <td><span class="tag tag-warning">0912376352</span></td>
-                      </tr>
-                      <tr>
-                        <td>#627</td>
-                        <td>Cút rang bơ</td>
-                        <td>12/3/1999</td>
-                        <td><span class="tag tag-primary">01287326654</span></td>
-                      </tr>
-                      <tr>
-                        <td>#175</td>
-                        <td>Hủ tiếu nam vang</td>
-                        <td>4/12/20000</td>
-                        <td><span class="tag tag-danger">0912376763</span></td>
-                      </tr>
+                      </c:forEach>
                     </tbody>
                   </table>
                 </div>
@@ -245,7 +214,7 @@
           </div>
           <div class="col-md-12">
             <div class="tile">
-              <h3 class="tile-title">Thống kê 6 tháng doanh thu</h3>
+              <h3 class="tile-title">Thống kê 6 hàng xuất</h3>
               <div class="embed-responsive embed-responsive-16by9">
                 <canvas class="embed-responsive-item" id="barChartDemo"></canvas>
               </div>
@@ -276,6 +245,7 @@
         <script src="admin/js/main.js"></script>
         <!--===============================================================================================-->
         <script src="admin/js/plugins/pace.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <!--===============================================================================================-->
         <script type="text/javascript" src="admin/js/plugins/chart.js"></script>
         <!--===============================================================================================-->
@@ -290,7 +260,7 @@
                                         pointStrokeColor: "rgb(255, 212, 59)",
                                         pointHighlightFill: "rgb(255, 212, 59)",
                                         pointHighlightStroke: "rgb(255, 212, 59)",
-                                        data: [20, 59, 90, 51, 56, 100]
+                                        data: [20, 30, 21, 23, 15, 30]
                                     },
                                     {
                                         label: "Dữ liệu kế tiếp",
@@ -300,7 +270,7 @@
                                         pointStrokeColor: "rgb(9, 109, 239)",
                                         pointHighlightFill: "rgb(9, 109, 239)",
                                         pointHighlightStroke: "rgb(9, 109, 239)",
-                                        data: [48, 48, 49, 39, 86, 10]
+                                        data: [${requestScope.qua1}, ${requestScope.qua2}, ${requestScope.qua3}, ${requestScope.qua4}, ${requestScope.qua5}, ${requestScope.qua6}]
                                     }
                                 ]
                             };
@@ -350,6 +320,28 @@
                 }
             }
         </script>
+        <script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'April', 'May', 'June','July','August','Sep','Oc','Nov','Dec'],
+      datasets: [{
+        label: '# of Votes',
+        data: [${requestScope.monney1}, ${requestScope.monney2}, ${requestScope.monney3}, ${requestScope.monney4}, ${requestScope.monney5}, ${requestScope.monney6},${requestScope.monney7},${requestScope.monney8},${requestScope.monney9},${requestScope.monney10},${requestScope.monney11},${requestScope.monney12}],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
     </body>
 
 </html>

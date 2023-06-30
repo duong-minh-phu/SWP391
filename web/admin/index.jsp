@@ -53,6 +53,19 @@
             <ul class="app-menu">
                 <li><a class="app-menu__item" href="MainController?action=dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
                             class="app-menu__label">Bảng điều khiển</span></a></li>
+                <li><a class="app-menu__item" href="Productmanager"><i
+                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
+                <li><a class="app-menu__item" href="MainController?action=blogmanagement"><i
+                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý Blog</span></a>
+                </li>
+                <li><a class="app-menu__item" href="MainController?action=feedbackmanager"><i class='app-menu__icon bx bx-like'></i><span
+                            class="app-menu__label">Quản lý Feedback</span></a></li>
+                <li><a class="app-menu__item" href="MainController?action=billmana"><i class='app-menu__icon bx bx-task'></i><span
+                            class="app-menu__label">Quản lý đơn hàng</span></a></li>
+                <li><a class="app-menu__item" href="MainController?action=billmana1"><i class='app-menu__icon bx bx-task'></i><span
+                            class="app-menu__label">Quản lý đơn hàng bị hủy</span></a></li>
+<!--                <li><a class="app-menu__item" href="MainController?action=dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
+                            class="app-menu__label">Bảng điều khiển</span></a></li>
                 <li><a class="app-menu__item" href="MainController?action=dashboard1"><i class='app-menu__icon bx bx-tachometer'></i><span
                             class="app-menu__label">Bảng điều khiển</span></a></li>            
                 <li><a class="app-menu__item" href="MainController?action=customermanager"><i class='app-menu__icon bx bx-user-voice'></i><span
@@ -60,7 +73,7 @@
                 <li><a class="app-menu__item" href="MainController?action=customermanager1"><i class='app-menu__icon bx bx-user-voice'></i><span
                             class="app-menu__label">Quản lý khách hàng đã xóa</span></a></li>
                             <li><a class="app-menu__item" href="MainController?action=money"><i class='app-menu__icon bx bx-user-voice'></i><span
-                            class="app-menu__label">tiền</span></a></li>
+                            class="app-menu__label">tiền</span></a></li>-->
 <!--                <li><a class="app-menu__item" href="Productmanager"><i
                             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
                 <li><a class="app-menu__item" href="MainController?action=blogmanagement"><i
@@ -89,15 +102,7 @@
                 <div class="col-md-12 col-lg-12">
                     <div class="row">
                         <!-- col-6 -->
-                        <div class="col-md-6">
-                            <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
-                                <div class="info">
-                                    <h4><a href="MainController?action=customermanager">Tổng khách hàng</a></h4>
-                                    <p><b>${requestScope.sizeuser} khách hàng</b></p>
-                                    <p class="info-tong">Tổng số khách hàng được quản lý.</p>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <!-- col-6 -->
                         <div class="col-md-6">
                             <div class="widget-small info coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
@@ -128,15 +133,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="widget-small warning coloured-icon"><i class='icon bx bxs-shopping-bags fa-3x'></i>
-                                <div class="info">
-                                    <h4 ><a href="MainController?action=billmana">Tổng tiền tháng</a></h4>
-                                    <p><b>${requestScope.moneymonth} VNĐ</b></p>
-                                    <p class="info-tong">Tổng tiền trong tháng này.</p>
-                                </div>
-                            </div>
-                        </div>            
+                                    
                         <!-- col-12 -->
                                 <div class="col-md-12">
                             <div class="tile">

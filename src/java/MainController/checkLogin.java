@@ -57,9 +57,9 @@ public class checkLogin extends HttpServlet {
                 response.addCookie(pass);
                 response.addCookie(rem);
                 if("ADMIN".equals(user.getIsAdmin())){
-                    response.sendRedirect("MainController?action=dashboard");
+                    response.sendRedirect("MainController?action=dashboard1");
                 } if("STAFF".equals(user.getIsAdmin())){
-                    response.sendRedirect("Productmanager");
+                    response.sendRedirect("MainController?action=dashboard");
                 }
                 if ("CUS".equals(user.getIsAdmin())){
                 response.sendRedirect("home");

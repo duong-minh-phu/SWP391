@@ -57,7 +57,19 @@ public class Dashboard1 extends HttpServlet {
                     System.out.println(dao1.moneymonth(i));
                 }
             Calendar calendar = Calendar.getInstance();
-            int month = calendar.get(Calendar.MONTH) + 1;    
+            int month = calendar.get(Calendar.MONTH) + 1; 
+            List<Entity.Product> product = p.getTop5Product();
+         List<Entity.Product> product1 = p.getTrendProduct();
+         List<Entity.Bill> bill1=dao1.getBill1();
+         request.setAttribute("bill11", bill1.size());
+         request.setAttribute("top5", product);
+         request.setAttribute("topTrend1", product1);
+         request.setAttribute("qua1", dao1.quality(1));
+            request.setAttribute("qua2", dao1.quality(2));
+            request.setAttribute("qua3", dao1.quality(3));
+            request.setAttribute("qua4", dao1.quality(4));
+            request.setAttribute("qua5", dao1.quality(5));
+            request.setAttribute("qua6", dao1.quality(6));
             request.setAttribute("moneymonth", dao1.moneymonth(month));
             request.setAttribute("size50", pro50.size());    
             request.setAttribute("sizebill", bill.size());

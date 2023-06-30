@@ -164,6 +164,8 @@
             </div>
             <hr>
             <ul class="app-menu">
+                <li><a class="app-menu__item" href="MainController?action=dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
+                            class="app-menu__label">Bảng điều khiển</span></a></li>
                 <li><a class="app-menu__item" href="Productmanager"><i
                             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
                 <li><a class="app-menu__item" href="MainController?action=blogmanagement"><i

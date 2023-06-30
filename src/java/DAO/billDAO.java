@@ -353,6 +353,26 @@ public class billDAO {
         }
         return 0;
     }
+    
+    public int quality(int month) {
+        try {
+            String sql = "select sum(d.quantity)\n" +
+"  from bill b inner join bill_detail d\n" +
+"  on b.bill_id=d.bill_id\n" +
+"  where MONTH(b.date)=? and b.delivery_status='False'";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, month);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int a = rs.getInt(1);
+                return a;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
 
     public List<Bill> getBillsStatus1(int user_id) throws Exception {
         List<Bill> bills = new ArrayList<>();

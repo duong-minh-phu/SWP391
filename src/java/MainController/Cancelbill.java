@@ -50,7 +50,7 @@ public class Cancelbill extends HttpServlet {
             userDAO u=new userDAO();
             User user=u.checkmailbyid(a);
             Email e=new Email();            
-            if(e.sendEmail(user.getUser_email(),"Thông báo hủy đơn từ BMOS", "Xin lỗi đã hủy đơn hàng của bạn chúng tôi thành thật xin lỗi nếu có vấn dề thì hãy liên hệ lại chúng tôi!!"))
+            if(e.sendEmail(user.getUser_email(),"BMOS", "Xin lỗi đã hủy đơn hàng của bạn chúng tôi thành thật xin lỗi nếu có vấn dề thì hãy liên hệ lại chúng tôi!!"))
             response.sendRedirect("MainController?action=billmana");
             
         }catch(Exception ex){
