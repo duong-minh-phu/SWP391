@@ -11,10 +11,13 @@ import Entity.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -163,6 +166,7 @@ public class productDAO {
         } catch (Exception e) {
         }
     }
+
     public void updateProduct2(Product product) {
         String sq = "update product set category_id=? ,product_name=? ,product_price=? ,product_describe=? ,quantity=?  where product_id=? and status='TRUE'";
         try {
@@ -194,6 +198,43 @@ public class productDAO {
         return list;
     }
 
+    public List<Category> getCategory1() {
+        List<Category> list = new ArrayList<>();
+           String sql = "SELECT c.category_id, c.category_name, COUNT(p.product_id) AS product_count "
+               + "FROM category AS c "
+               + "LEFT JOIN product AS p ON c.category_id = p.category_id AND p.status = 'TRUE'"
+               + "WHERE c.category_status = 'True' "
+               + "GROUP BY c.category_id, c.category_name";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Category(rs.getInt(1), rs.getString(2),rs.getInt(3)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    public List<Category> getCategory2() {
+        List<Category> list = new ArrayList<>();
+         String sql = "SELECT c.category_id, c.category_name, COUNT(p.product_id) AS product_count "
+               + "FROM category AS c "
+               + "LEFT JOIN product AS p ON c.category_id = p.category_id AND p.status = 'FALSE'"
+               + "WHERE c.category_status = 'False' "
+               + "GROUP BY c.category_id, c.category_name";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Category(rs.getInt(1), rs.getString(2),rs.getInt(3)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
     public Category getCategoryByName(String name) {
         String sql = "select * from Categories where category_name = ?";
         try {
@@ -208,6 +249,28 @@ public class productDAO {
         }
         return null;
     }
+    public Entity.Category getCategoryByName1(String category_name) {
+    String sql = "SELECT * FROM category WHERE category_name = ?";
+    try {
+        conn = new DBContext().getConnection();
+        ps = conn.prepareStatement(sql);
+        ps.setString(1, category_name);
+        rs = ps.executeQuery();
+
+        if (rs.next()) {
+            int categoryId = rs.getInt("category_id");
+            String categoryName = rs.getString("category_name");
+
+            return new Entity.Category(categoryId, categoryName);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }   catch (Exception ex) {
+            Logger.getLogger(productDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    return null;
+}
 
     public List<Product> getProductLow() {
         List<Product> list = new ArrayList<>();
@@ -261,11 +324,12 @@ public class productDAO {
     }
 
     public void insertCategory(String name) {
-        String sql = "INSERT INTO Category (category_id, category_name) VALUES ((SELECT COUNT(*) FROM Category) + 1, ?)";
+        String sql = "INSERT INTO Category (category_id, category_name,category_status) VALUES ((SELECT COUNT(*) FROM Category) + 1, ?, ?)";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, name);
+            ps.setString(2, "True");
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -452,6 +516,85 @@ public class productDAO {
             System.out.println(e);
         }
         return list;
+    }
+
+    public void deleteCategory(String category_id) {
+        String updateCategorySql = "UPDATE category SET category_status = ? WHERE category_id = ?";
+        String updateProductSql = "UPDATE product SET status = ? WHERE category_id = ?";
+
+        try {
+            conn = new DBContext().getConnection();
+            conn.setAutoCommit(false); 
+            ps = conn.prepareStatement(updateCategorySql);
+            ps.setString(1, "False");
+            ps.setString(2, category_id);
+            ps.executeUpdate();
+
+            // Cập nhật trạng thái của sản phẩm liên quan
+            ps = conn.prepareStatement(updateProductSql);
+            ps.setString(1, "FALSE");
+            ps.setString(2, category_id);
+            ps.executeUpdate();
+
+            conn.commit(); // Thực hiện commit thay đổi
+        } catch (Exception e) {
+            try {
+                conn.rollback(); // Nếu có lỗi, rollback các thay đổi trước đó
+            } catch (SQLException ex) {
+                System.out.println("Error rolling back changes: " + ex.getMessage());
+            }
+            System.out.println("Error deleting category: " + e.getMessage());
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error closing database resources: " + ex.getMessage());
+            }
+        }
+    }
+     public void RecoverCategory(String category_id) {
+        String sq = "update category set category_status = ? where category_id = ?";
+        String sq1 = "UPDATE product SET status = ? WHERE category_id = ?";
+        try {
+            conn = new DBContext().getConnection();
+            conn.setAutoCommit(false);
+            ps = conn.prepareStatement(sq);
+            ps.setString(1, "True");
+            ps.setString(2, category_id);
+            ps.executeUpdate();
+            
+            
+            ps = conn.prepareStatement(sq1);
+            ps.setString(1, "TRUE");
+            ps.setString(2, category_id);
+            ps.executeUpdate();
+            
+            conn.commit();
+        } catch (Exception e) {
+            try {
+                conn.rollback(); 
+            } catch (SQLException ex) {
+                System.out.println("Error rolling back changes: " + ex.getMessage());
+            }
+            System.out.println("Error deleting category: " + e.getMessage());
+        }finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error closing database resources: " + ex.getMessage());
+            }
+        }
+
     }
 
 }

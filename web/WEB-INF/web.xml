@@ -140,6 +140,22 @@
         <servlet-name>OrderShipDone</servlet-name>
         <servlet-class>MainController.OrderShipDone</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CategoryManager</servlet-name>
+        <servlet-class>MainController.CategoryManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCategory</servlet-name>
+        <servlet-class>MainController.DeleteCategory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CategoryDelete</servlet-name>
+        <servlet-class>MainController.CategoryDelete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RecoveryCategory</servlet-name>
+        <servlet-class>MainController.RecoveryCategory</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
@@ -287,6 +303,22 @@
     <servlet-mapping>
         <servlet-name>OrderShipDone</servlet-name>
         <url-pattern>/OrderShipDone</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CategoryManager</servlet-name>
+        <url-pattern>/CategoryManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCategory</servlet-name>
+        <url-pattern>/DeleteCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CategoryDelete</servlet-name>
+        <url-pattern>/CategoryDelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RecoveryCategory</servlet-name>
+        <url-pattern>/RecoveryCategory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

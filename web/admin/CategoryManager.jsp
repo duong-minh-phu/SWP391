@@ -4,7 +4,7 @@
 <html lang="en">
 
     <head>
-        <title>Danh sách sản phẩm | Quản trị Admin</title>
+        <title>Danh sách danh mục | Quản trị Admin</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     </head>
 
     <body onload="time()" class="app sidebar-mini rtl">
@@ -67,7 +68,7 @@
         <main class="app-content">
             <div class="app-title">
                 <ul class="app-breadcrumb breadcrumb side">
-                    <li class="breadcrumb-item active"><a href="#"><b>Danh sách sản phẩm</b></a></li>
+                    <li class="breadcrumb-item active"><a href="#"><b>Danh sách danh mục</b></a></li>
                 </ul>
                 <div id="clock"></div>
             </div>
@@ -86,126 +87,50 @@
                                 <div class="col-sm-2">
                                     <a class="btn btn-add btn-sm" href="MainController?action=categorymana">Quản lý danh mục</a>
                                 </div>
+                                <div class="col-sm-2">
+                                    <a id="addCategoryButton" class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i
+                                            class="fas fa-folder-plus"></i> Thêm danh mục</a>
+                                </div>
+                                <div class="col-sm-2">
+                                    <a class="btn btn-add btn-sm" href="MainController?action=categorydelete" >Danh mục đã xóa</a>
+                                </div>
                             </div>
                             <form action="MainController?action=updateproduct" method="POST" enctype="multipart/form-data">
                                 <table class="table table-hover table-bordered" id="sampleTable">
                                     <thead>
                                         <tr>
-                                            <th>Danh mục</th>
-                                            <th>Tên sản phẩm</th>
-                                            <th>Giá</th>
-                                            <th>Thông tin</th>
-                                            <th>Số lượng</th>
-                                            <th>Ảnh</th>
-                                            <th>Chức năng</th>
+                                            <th>ID Danh mục</th>
+                                            <th>Tên Danh Mục</th>
+                                            <th class="quantity-column">Số lượng sản phẩm liên quan</th>
+                                            <th class="function-column">Chức Năng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${ProductData}" var="p">
+                                        <c:forEach items="${CategoryMana}" var="cats">
                                             <tr>
-                                                <td>${p.cate.category_name}</td>
-                                                <td>${p.product_name}</td>
-                                                <td>${p.product_price}</td>
-                                                <td>${p.product_describe}</td>
-                                                <td>${p.quantity}</td>
-                                                <td><img src="${p.img}" alt="" width="100px;"></td>
-
+                                                <td>${cats.category_id}</td>
+                                                <td>${cats.category_name}</td>
                                                 <td>
-                                                    <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" value="${p.product_id}"><i
+                                                    ${cats.product_count}
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" value="${cats.category_id}"><i
                                                             class="fas fa-trash-alt"></i>
-                                                    </button>
-                                                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" data-toggle="modal"
-                                                            data-product-id="${p.product_id}">
-                                                        <i class="fas fa-edit"></i>
                                                     </button>
                                                 </td>
                                             </tr>
-
-                                            <!--
-                                            MODAL
-                                            -->
-
-                                        <div class="modal fade" id="ModalUP${p.product_id}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-                                             data-keyboard="false">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        <div class="row">
-                                                            <div class="form-group  col-md-12">
-                                                                <span class="thong-tin-thanh-toan">
-                                                                    <h5>Chỉnh sửa thông tin sản phẩm</h5>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="form-group col-md-6">
-                                                                <label for="exampleSelect1" class="control-label">Danh mục</label>
-                                                                <select name="category_id" class="form-control" id="exampleSelect1" >
-                                                                    <option>-- Chọn danh mục --</option>
-                                                                    <c:forEach items="${CategoryData}" var="cat">
-                                                                        <option value="${cat.category_id}">${cat.category_name}</option>
-                                                                    </c:forEach>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group col-md-6">
-                                                                <label class="control-label">Tên sản phẩm</label>
-                                                                <input class="form-control" type="text" name="product_name" required value="${p.product_name}">
-                                                            </div>
-                                                            <div class="form-group col-md-6">
-                                                                <label class="control-label" >Giá</label>
-                                                                <input class="form-control" type="number" name="product_price" required value="${p.product_price}">
-                                                            </div>
-                                                            <div class="form-group col-md-6">
-                                                                <label class="control-label">Thông tin</label>
-                                                                <input class="form-control" type="text" name="product_describe" value="${p.product_describe}">
-                                                            </div>
-
-                                                            <div class="form-group col-md-6">
-                                                                <label class="control-label">Số lượng</label>
-                                                                <input class="form-control" type="text" name="product_quantity" value="${p.quantity}">
-                                                            </div>
-                                                            <!--anh san pham-->
-                                                            <div class="form-group col-md-12">
-                                                                <label class="control-label">Ảnh sản phẩm</label>
-                                                                <div id="myfileupload">
-                                                                    <input type="file" id="uploadfile" name="product_img" value="${p.img}" onchange="readURL(this);" />
-                                                                </div>
-                                                                <div id="thumbbox">
-                                                                    <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
-                                                                    <a class="removeimg" href="javascript:"></a>
-                                                                </div>
-                                                                <div id="boxchoice">
-                                                                    <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-                                                                    <p style="clear:both"></p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <BR>
-                                                        <button class="btn btn-save" type="submit" >Lưu lại</button>
-                                                        <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-                                                        <BR>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--
-                                      MODAL
-                                        -->
-                                    </c:forEach>
-                                    <c:forEach items="${ProductDelete}" var="p">
-                                        <tr>
-                                            <td>${p.cate.category_name}</td>
-                                            <td>${p.product_name}</td>
-                                            <td>${p.product_price}</td>
-                                            <td>${p.product_describe}</td>
-                                            <td>${p.quantity}</td>
-                                            <td><img src="${p.img}" alt="" width="200px;"></td>
-
-                                            <td>
-                                                <button class="btn btn-primary btn-sm trash" type="button" title="Phục hồi" value="${p.product_id}"><i class="fa-solid fa-recycle"></i>
-                                                </button>  
-                                        </tr>
-                                    </c:forEach>
+                                        </c:forEach>
+                                        <c:forEach items="${CategoryDelete}" var="catego">
+                                            <tr>
+                                                <td>${catego.category_id}</td>
+                                                <td>${catego.category_name}</td>
+                                                <td>${catego.product_count}</td> 
+                                                <td>
+                                                    <button class="btn btn-primary btn-sm trash" type="button" title="Phục hồi" value="${catego.category_id}"><i class="fa-solid fa-recycle"></i>
+                                                    </button>  
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </form>
@@ -214,6 +139,44 @@
                 </div>
             </div>
         </main>
+        <div class="modal fade" id="adddanhmuc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+             data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group  col-md-12">
+                                <span class="thong-tin-thanh-toan">
+                                    <h5>Thêm mới danh mục </h5>
+                                </span>
+                            </div>
+
+                            <div class="form-group col-md-12" >
+
+                                <h2 style="color: red; padding-left: 1px;font-size: 14px;">
+                                    ${error}</h2>
+                                <label class="control-label">Nhập tên danh mục mới</label>
+                                <form action="MainController?action=insertcategory" method="post"> 
+                                    <input class="form-control" type="text" name="name" required>
+                                    <br>
+                                    <button class="btn btn-save" type="submit">Lưu lại</button>
+                                    <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+                                </form>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Danh mục sản phẩm hiện đang có</label>
+                                <ul style="padding-left: 20px;">
+                                    <c:forEach items="${CategoryData}" var="cat">
+                                        <li>${cat.category_name}</li>
+                                        </c:forEach>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <% if (session.getAttribute("successMessage") != null) { %>
         <div id="popup" class="popup">
@@ -225,6 +188,16 @@
             </div>
         </div>
         <% session.removeAttribute("successMessage"); %>
+        <% } else if (session.getAttribute("failMessage") != null) { %>
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span class="close-button">&times;</span>
+                <div class="alert alert-danger">
+                    <% out.println(session.getAttribute("failMessage")); %>
+                </div>
+            </div>
+        </div>
+        <% session.removeAttribute("failMessage"); %>
         <% }%>
         <style>
             .popup {
@@ -280,6 +253,12 @@
                 color: #155724;
                 background-color: #d4edda;
                 border-color: #c3e6cb;
+
+            }
+            .alert-danger {
+                color: #721c24;
+                background-color: #f8d7da;
+                border-color: #f5c6cb;
             }
         </style>
         <script>
@@ -297,9 +276,15 @@
             });
         </script>
 
-
-
         <!-- Essential javascripts for application to work-->
+        <style>
+            .function-column {
+                width: 80px; /* Adjust the width as per your requirements */
+            }
+            .quantity-column{
+                width: 300px;
+            }
+        </style>
         <script src="admin/js/jquery-3.2.1.min.js"></script>
         <script src="admin/js/popper.min.js"></script>
         <script src="admin/js/bootstrap.min.js"></script>
@@ -361,12 +346,12 @@
                 jQuery(".trash").click(function () {
                     swal({
                         title: "Cảnh báo",
-                        text: "Bạn có chắc chắn là muốn xóa sản phẩm này?",
+                        text: "Bạn có chắc chắn là muốn xóa danh mục cùng với các sản phẩm liên quan ?",
                         buttons: ["Hủy bỏ", "Đồng ý"],
                     })
                             .then((willDelete) => {
                                 if (willDelete) {
-                                    window.location = "MainController?action=deleteproduct&product_id=" + $(this).attr("value");
+                                    window.location = "MainController?action=deletecategory&category_id=" + $(this).attr("value");
                                     swal("Đã xóa thành công !!!!", {
                                     });
                                 }
@@ -380,12 +365,12 @@
                 $('button[title="Phục hồi"]').click(function () {
                     swal({
                         title: "Cảnh báo",
-                        text: "Bạn có chắc chắn là muốn phục hồi sản phẩm này?",
+                        text: "Bạn có chắc chắn là muốn phục hồi danh mục cùng với các sản phẩm liên quan này?",
                         buttons: ["Hủy bỏ", "Đồng ý"],
                     })
                             .then((willDelete) => {
                                 if (willDelete) {
-                                    window.location = "MainController?action=recoverproduct&product_id=" + $(this).attr("value");
+                                    window.location = "MainController?action=recovercategory&category_id=" + $(this).attr("value");
                                     swal("Đã Phục hồi thành công !", {
                                     });
                                 }
@@ -404,17 +389,14 @@
                 }
             }
         </script>
-        <script>
-            $(document).ready(function () {
-                $(".edit").click(function () {
-                    // Get the product ID from the data-product-id attribute
-                    var product_id = $(this).data("product-id");
+        <!--        <script>
+                    // Trigger the click event of the button after the page loads
+                    document.addEventListener("DOMContentLoaded", function () {
+                        var addCategoryButton = document.getElementById("addCategoryButton");
+                        addCategoryButton.click();
+                    });
+                </script>-->
 
-                    // Redirect the user to the edit product page
-                    window.location = "MainController?action=updateProduct&product_id=" + product_id;
-                });
-            });
-        </script>
     </body>
 
 </html>

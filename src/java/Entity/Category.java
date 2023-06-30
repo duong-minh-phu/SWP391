@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Category {
     int category_id;
     String category_name;
+    int product_count;
     private ArrayList<Product> product = new ArrayList<>();
 
     public Category() {
@@ -23,7 +24,20 @@ public class Category {
         this.category_id = category_id;
         this.category_name = category_name;
     }
-    
+
+    public Category(int category_id, String category_name, int product_count) {
+        this.category_id = category_id;
+        this.category_name = category_name;
+        this.product_count = product_count;
+    }
+
+    public int getProduct_count() {
+        return product_count;
+    }
+
+    public void setProduct_count(int product_count) {
+        this.product_count = product_count;
+    }
     public Category(String category_name) {
         this.category_name = category_name;
     }

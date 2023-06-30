@@ -51,6 +51,7 @@ public class UpdateProduct extends HttpServlet {
                 Product product = new Product(cate, productId, product_name, price, product_describe, quantity);
                 dao.updateProduct2(product);
                 // Chuyển hướng người dùng đến trang danh sách sản phẩm
+                request.getSession().setAttribute("successMessage", "Đã chỉnh sửa sản phẩm thành công");
                 request.getRequestDispatcher("MainController?action=productmanager").forward(request, response);
             } else {
                 String destinationPath = realPath + fileName;
@@ -66,6 +67,7 @@ public class UpdateProduct extends HttpServlet {
                 dao.updateProduct(product);
 
                 // Chuyển hướng người dùng đến trang danh sách sản phẩm
+                request.getSession().setAttribute("successMessage", "Đã chỉnh sửa sản phẩm thành công");
                 request.getRequestDispatcher("MainController?action=productmanager").forward(request, response);
             }
             if (fileName == null) {

@@ -291,6 +291,87 @@
                 </div>
             </div>
         </div>
+        <% if (session.getAttribute("successMessage") != null) { %>
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span class="close-button">&times;</span>
+                <div class="alert alert-success">
+                    <% out.println(session.getAttribute("successMessage")); %>
+                </div>
+            </div>
+        </div>
+        <% session.removeAttribute("successMessage"); %>
+        <% }%>
+        <style>
+            .popup {
+                display: none;
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 9999;
+            }
+
+            .popup-content {
+                position: fixed;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                padding: 20px;
+                width: 70%;
+                max-width: 500px;
+                background-color: #fefefe;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            }
+
+            .close-button {
+                position: absolute;
+                top: -15px;
+                right: -15px;
+                font-size: 24px;
+                font-weight: bold;
+                color: white;
+                cursor: pointer;
+                background-color: red;
+                border-radius: 50%;
+                width: 35px;
+                height: 35px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1;
+            }
+
+            .alert {
+                padding: 15px;
+                margin-bottom: 1px;
+                border: 1px solid transparent;
+                border-radius: 4px;
+            }
+
+            .alert-success {
+                color: #155724;
+                background-color: #d4edda;
+                border-color: #c3e6cb;
+            }
+        </style>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var popup = document.getElementById("popup");
+                var closeButton = document.querySelector(".close-button");
+
+                // Hiển thị popup
+                popup.style.display = "block";
+
+                // Xử lý sự kiện khi nhấp vào nút đóng
+                closeButton.addEventListener("click", function () {
+                    popup.style.display = "none";
+                });
+            });
+        </script>
 
         <script src="admin/js/jquery-3.2.1.min.js"></script>
         <script src="admin/js/popper.min.js"></script>

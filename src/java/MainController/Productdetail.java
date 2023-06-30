@@ -41,12 +41,16 @@ public class Productdetail extends HttpServlet {
             ratingDAO rate = new ratingDAO();
             productDAO c = new productDAO();
             List<Rating> rating = rate.getRatingsByProductID(product_id);
+            double rating_ave = rate.calculateAverageRating(product_id);
+            int rating_count = rate.countRatingsByProductId(product_id);
             Entity.Product product = c.getProductByID(product_id);
             int category_id = product.getCate().getCategory_id();
             if(product.getQuantity()==0){
                  request.setAttribute("detail", "Mặt hàng này đã hết xin chọn loại khác!!!");
             }
             List<Entity.Product> productByCategory = c.getProductByCategory(category_id);
+            request.setAttribute("RatingAV", rating_ave);
+            request.setAttribute("RatingCount", rating_count);
             request.setAttribute("ReviewData", rating);
             request.setAttribute("ProductData", product);
             request.setAttribute("ProductByCategory", productByCategory);

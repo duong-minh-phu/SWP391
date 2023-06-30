@@ -54,6 +54,7 @@ public class InsertProduct extends HttpServlet {
                 dao.insertProduct(product);
 
                 // Chuyển hướng người dùng đến trang danh sách sản phẩm
+                request.getSession().setAttribute("successMessage", "Đã thêm sản phẩm thành công");
                 request.getRequestDispatcher("MainController?action=insert").forward(request, response);
             }
             if (fileName == null) {

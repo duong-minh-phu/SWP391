@@ -13,10 +13,13 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -89,6 +92,56 @@ public class ratingDAO {
             System.out.println(e);
         }
         return list;
+    }
+
+    public double calculateAverageRating(String product_id) {
+        String sql = "SELECT rate FROM dbo.rating WHERE product_id = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, product_id);
+            rs = ps.executeQuery();
+
+            int count = 0;
+            double totalRate = 0;
+
+            while (rs.next()) {
+                double rate = rs.getDouble("rate");
+                totalRate += rate;
+                count++;
+            }
+
+            if (count > 0) {
+                return totalRate / count;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Close connections and resources
+        }
+
+        return 0; // Trả về 0 nếu không tìm thấy đánh giá hoặc xảy ra lỗi
+    }
+
+    public int countRatingsByProductId(String product_id) {
+        String sql = "SELECT COUNT(*) AS count FROM dbo.rating WHERE product_id = ?";
+        int count = 0;
+
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, product_id);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                count = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception ex) {
+            Logger.getLogger(ratingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
     }
 
     public boolean insertRating(Rating rating) {

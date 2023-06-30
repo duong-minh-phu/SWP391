@@ -240,6 +240,18 @@ public class MainController extends HttpServlet {
             if (action.equals("ordershipdone")) {
                 url = "OrderShipDone";
             }
+            if (action.equals("categorymana")) {
+                url = "CategoryManager";
+            }
+            if (action.equals("deletecategory")) {
+                url = "DeleteCategory";
+            }
+            if (action.equals("categorydelete")) {
+                url = "CategoryDelete";
+            }
+            if (action.equals("recovercategory")){
+                url = "RecoveryCategory";
+            }
 
         } catch (Exception ex) {
             log("Error at: MainController" + ex.toString());
