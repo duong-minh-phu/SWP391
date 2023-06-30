@@ -6,8 +6,10 @@
 package MainController;
 
 import DAO.productDAO;
+import Entity.Category;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,35 +19,18 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Administrator
  */
-public class InsertCategory extends HttpServlet {
+public class CategoryDelete extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String name = request.getParameter("name");
-            productDAO dao = new productDAO();
-            Entity.Category existingCategory = dao.getCategoryByName1(name);
-
-            if (existingCategory != null) {
-                request.setAttribute("error", name + " đã tồn tại.Vui lòng nhập tên khác!");
-                request.getSession().setAttribute("failMessage", "Thêm danh mục thất bại !! vui lòng thử lại !!");
-                request.getRequestDispatcher("MainController?action=categorymana").forward(request, response);
-                
-            } else {
-                dao.insertCategory(name);
-                request.getSession().setAttribute("successMessage", "Đã thêm danh mục thành công");
-                request.getRequestDispatcher("MainController?action=categorymana").forward(request, response);
-            }
+            productDAO pro = new productDAO();
+            List<Category> categorysss = pro.getCategory2();
+            request.setAttribute("CategoryDelete", categorysss);
+            List<Category> category = pro.getCategory();
+            request.setAttribute("CategoryData", category);
+            request.getRequestDispatcher("admin/CategoryManager.jsp").forward(request, response);
         }
     }
 

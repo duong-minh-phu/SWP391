@@ -95,6 +95,20 @@
                                         <button class="button" type="submit">Thêm vào giở hàng</button>  
                                     </div>
                                 </c:if>
+                                <div class="product_price">
+                                    <label>Chất lượng : </label>
+                                    <% double rating = (double) request.getAttribute("RatingAV"); %>
+                                    <% int integerPart = (int) rating; %>
+                                    <% double decimalPart = rating - integerPart; %>
+                                    <% int roundedDecimalPart = (int) Math.round(decimalPart * 10); %>
+                                    <% for (int i = 0; i < integerPart; i++) { %>
+                                    <i class="fa fa-star"></i>
+                                    <% } %>
+                                    <% if (roundedDecimalPart > 0) {%>
+                                    <i class="fa fa-star-half-o"></i>
+                                    <span class="rating_number">( <%= String.format("%.1f", rating) %>)/ ${RatingCount} đánh giá </span>
+                                    <% } %>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -275,6 +289,13 @@
             .fa-star {
                 color: gold;
                 font-size: 20px;
+            }
+            .fa-star-half-o{
+                color: gold;
+                font-size: 20px;
+            }
+            .rating_number{
+                font-size: 18px;
             }
 
         </style>
