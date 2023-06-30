@@ -41,6 +41,7 @@ public class UpdateItemsInCart extends HttpServlet {
         try {
 
             String updated_quantity = request.getParameter("quantity");
+            int qua =Integer.parseInt(updated_quantity);
             String id = request.getParameter("id");
             System.out.println(id);
             HttpSession session = request.getSession();
@@ -51,7 +52,10 @@ public class UpdateItemsInCart extends HttpServlet {
                
             }
             Product product =  new productDAO().getProductByID(id);
-            cart.alterItem(product, Integer.parseInt(updated_quantity));   
+            if(qua>product.getQuantity()){
+                qua=product.getQuantity();
+            }
+            cart.alterItem(product, qua);   
             session.setAttribute("cart", cart);
             
             rowTotalPrice = (int) (cart.getItems().get(product) * product.getProduct_price());

@@ -65,8 +65,9 @@ public class PaymentBill extends HttpServlet {
                 request.setAttribute("phoneValue", phone);
                 request.getRequestDispatcher("payment.jsp").forward(request, response);
             }
-            User u = (User) session.getAttribute("user");
+            User u = (User) session.getAttribute("user");            
             LocalDate curDate = java.time.LocalDate.now(); 
+            u.setCart(cart);
             String date = curDate.toString();
             billDAO dao = new billDAO();             
             dao.addOrder(u, total_payment, payment, address,date, phone);
