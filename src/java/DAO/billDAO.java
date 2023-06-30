@@ -157,7 +157,7 @@ public class billDAO {
     public List<Bill> getBill() {
         List<Bill> list = new ArrayList<>();
         String sql = "select p.bill_id,c.user_name,p.total_money,p.payment,p.address,p.date,p.phone\n"
-                + "from bill p inner join users c on p.user_id=c.user_id and p.delivery_status='False'";
+                + "from bill p inner join users c on p.user_id=c.user_id and p.delivery_status='False' order by date desc ";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -192,7 +192,7 @@ public class billDAO {
 
     public List<Bill> getBillByDay() {
         List<Bill> list = new ArrayList<>();
-        String sql = "select b.bill_id, u.user_name,b.total_money,b.payment,b.address,b.date,b.phone from bill b inner join users u on b.user_id = u.user_id where date = cast(getdate() as Date) b.delivery_status='False'";
+        String sql = "select b.bill_id, u.user_name,b.total_money,b.payment,b.address,b.date,b.phone from bill b inner join users u on b.user_id = u.user_id where date = cast(getdate() as Date) and b.delivery_status='False'";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -279,7 +279,7 @@ public class billDAO {
     public List<Bill> getBillsByUserId(int user_id) throws Exception {
         List<Bill> bills = new ArrayList<>();
         try {
-            String sql = "SELECT bill_id, date, payment, address, total_money, phone, bill_status FROM bill WHERE user_id = ?";
+            String sql = "SELECT bill_id, date, payment, address, total_money, phone, bill_status FROM bill WHERE user_id = ? and delivery_status='False'";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, user_id);

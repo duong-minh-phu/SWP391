@@ -189,6 +189,10 @@ public class MainController extends HttpServlet {
                 
                 url = "UpdateBlog";
             }
+             if (action.equals("dashboard1")){
+                
+                url = "Dashboard1";
+            }       
             if (action.equals("updateBlog")){
                 String blog_id = request.getParameter("blog_id");
                 BlogDAO b = new BlogDAO();

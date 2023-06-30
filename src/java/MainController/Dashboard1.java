@@ -5,15 +5,17 @@
  */
 package MainController;
 
+import DAO.billDAO;
 import DAO.productDAO;
-import Entity.Cart;
+import DAO.userDAO;
 import Entity.Product;
 import Entity.User;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
+import java.util.Calendar;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,9 +23,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author luong
+ * @author ROG STRIX
  */
-public class AddToCart extends HttpServlet {
+@WebServlet(name = "Dashboard1", urlPatterns = {"/Dashboard1"})
+public class Dashboard1 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,43 +40,36 @@ public class AddToCart extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String URL = "MainController?action=productdetail&product_id=";
-        try{
-            String id = request.getParameter("product_id");
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-            URL += id;
-            
-            Product product = new productDAO().getProductByID(id);
+        try  {
             HttpSession session = request.getSession();
-            Cart cart = (Cart) session.getAttribute("cart");
-            User user = (User) session.getAttribute("user");            
-
-            if (user != null) {
-                cart = user.getCart();
-                if (cart == null) {
-                    cart = new Cart();
+            Entity.User user = (User) session.getAttribute("user");
+            if (user.getIsAdmin().equalsIgnoreCase("ADMIN")||user.getIsAdmin().equalsIgnoreCase("STAFF")) {
+                 userDAO dao = new userDAO();
+            List<User> user1 = dao.getUser();
+            productDAO p = new productDAO();
+            List<Product> products = p.getProduct();
+            billDAO dao1=new billDAO();           
+            List<Entity.Bill> bill=dao1.getBill();
+            List<Entity.Bill> billbyday=dao1.getBillByDay();
+            List<Product> pro50=p.getProduct50();
+            System.out.println(bill.size());
+                for (int i = 1; i < 12; i++) {
+                    System.out.println(dao1.moneymonth(i));
                 }
-                cart.addItem(product, quantity);
-                
-                user.setCart(cart);
-                session.setAttribute("user", user);
-            }else{
-                request.setAttribute("error", "Vui lòng Login trước khi mua hàng!!!!");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-                 
+            Calendar calendar = Calendar.getInstance();
+            int month = calendar.get(Calendar.MONTH) + 1;    
+            request.setAttribute("moneymonth", dao1.moneymonth(month));
+            request.setAttribute("size50", pro50.size());    
+            request.setAttribute("sizebill", bill.size());
+            request.setAttribute("sizepro", products.size());
+            request.setAttribute("sizeuser", user1.size());
+            request.setAttribute("billbyday", billbyday);
+                request.getRequestDispatcher("/admin/index_1.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("login");
             }
-                      
-//            if (cart == null){
-//                
-//                cart = new Cart();
-//            }
-//            cart.addItem(product, quantity);
-            session.setAttribute("size", cart.size());
-            session.setAttribute("cart", cart);
-            
-        }finally{
-            RequestDispatcher rd = request.getRequestDispatcher(URL);
-            rd.forward(request, response);
+        } catch (Exception e) {
+            response.sendRedirect("404.jsp");
         }
     }
 
