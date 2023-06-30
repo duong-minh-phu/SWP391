@@ -140,7 +140,7 @@ public class userDAO {
     
     public List<User> getUser() {
         List<User> list = new ArrayList<>();
-        String sql = "select * from users where role='ADMIN' or role='STAFF' or role='CUS'";
+        String sql = "select * from users where role='STAFF' or role='CUS'";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
