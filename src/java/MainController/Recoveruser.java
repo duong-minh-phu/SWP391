@@ -6,6 +6,8 @@
 package MainController;
 
 import DAO.userDAO;
+import Entity.Email;
+import Entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -38,6 +40,9 @@ public class Recoveruser extends HttpServlet {
                     int id=Integer.parseInt(user_id);
                     userDAO dao=new userDAO();
                     dao.Recoveruser(id);
+                    User user=dao.checkmailbyid(id);
+                    Email e=new Email();
+                    if(e.sendEmail(user.getUser_email(),"BMOS", "Chúng tôi đã phục hồi lại tài khoản cho bạn.Cảm ơn vì đã tham gia BMOS với chúng tôi(phumap942002@gmail.com)!!!!!!!"))                                        
                     response.sendRedirect("MainController?action=customermanager1");
         }catch(Exception ex){
             response.sendRedirect("404.jsp");

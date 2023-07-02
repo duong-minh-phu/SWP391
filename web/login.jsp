@@ -77,7 +77,7 @@
                                         <input name="user_pass" type="password" value="${cookie.pass.value}" required="">
                                     </p>   
                                     <div class="login_submit">
-                                        <a href="password.jsp">Quên mật khẩu</a></br>
+                                        
                                          <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8084/SWP/LoginGoogleHandler&response_type=code
 		   &client_id=160981741973-8um57h1knv86u9seeu7ddc3tpvcb6n0k.apps.googleusercontent.com&approval_prompt=force">Login With Google</a>
                                         <button type="submit" name="action" value="Login">Đăng nhập</button>

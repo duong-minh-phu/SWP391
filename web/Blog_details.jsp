@@ -107,7 +107,7 @@
             <div class="container">
 
                 <div class="row">
-                    <div class="col-lg-5 col-md-5">
+<!--                    <div class="col-lg-2 col-md-2">
                         <div class="product-details-tab">
 
                             <div id="img-1" class="zoomWrapper single-zoom">
@@ -116,11 +116,11 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
 
-                    <div class="col-lg-7 col-md-7">
-                        <div class="product_d_right">
-                            <form action="MainController?action=addToCart&&product_id=${BlogData.blog_id}" method="POST">
+                    <div class="col-lg-12 col-md-12">
+                        
+                            
                                 <h1>${BlogData.blog_name}</h1>
                                 <h1>người đăng: ${BlogData.user}</h1>
                                 <div class="product_price">
@@ -131,8 +131,8 @@
                                 </div>
                                 
                                 
-                            </form>
-                        </div>
+                            
+                        
                     </div>
                 </div>
             </div>    

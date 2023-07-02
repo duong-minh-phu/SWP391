@@ -73,6 +73,23 @@ public class userDAO {
             }
         return null;
     }
+        
+        public User checkAccGGdelete(String user_email,String pass){
+            try {
+                String query = "select * from users where user_email = ? and user_pass = ? and role!='FALSE'";
+                conn = new DBContext().getConnection();
+                ps = conn.prepareStatement(query);
+                ps.setString(1, user_email);
+                ps.setString(2,pass);
+                rs = ps.executeQuery();
+                while(rs.next()){
+                   User a = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6));
+                   return a;
+                }
+            } catch (Exception e) {
+            }
+        return null;
+    }
     
     public User checkAcc(String user_email){
             try {

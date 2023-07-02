@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-
+import java.nio.charset.StandardCharsets;
 /**
  *
  * @author ROG STRIX
@@ -32,8 +32,9 @@ public class Bloginsert extends HttpServlet {
         try {
               String name = request.getParameter("name");
               System.out.println(name);
-                String blog_describe = request.getParameter("describe");
-                System.out.println(blog_describe);
+                String blog_describe1 = request.getParameter("describe");
+                
+                String blog_describe=new String(blog_describe1.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
 //        Part img = request.getPart("img");
 //            System.out.println(img);
 //        String fileimg = img.getSubmittedFileName();

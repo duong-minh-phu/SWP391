@@ -284,7 +284,10 @@
                 readURL(imageURL, 'thumbimage');
             });
         </script>-->
-
+        <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+        <script>
+                        CKEDITOR.replace( 'update_describe' );
+                </script>
     </body>
 
 </html>

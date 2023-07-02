@@ -94,7 +94,7 @@
                                             <th>ID tác giả</th>
                                             <th>Ảnh</th>
                                             <th>Tên Blog</th>
-                                            <th>Chi tiết bài viết</th>
+                                            
                                             <th>Ngày đăng</th>
                                             <th>Chức năng</th>
                                         </tr>
@@ -106,7 +106,7 @@
                                                 <td>${b.user}</td>
                                                 <td><img src="${b.img}" alt=""height="150px;" width="100px;"></td>
                                                 <td>${b.blog_name}</td>
-                                                <td>${b.blog_describe}</td>
+                                                
                                                 <td>${b.date}</td>
 
                                                 <td>

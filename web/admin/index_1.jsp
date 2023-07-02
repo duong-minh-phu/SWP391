@@ -138,6 +138,15 @@
               </div>
             </div>
           </div>
+                
+           <div class="col-md-6">
+                <div class="widget-small primary coloured-icon"><i class='icon fa-3x bx bxs-chart' ></i>
+                    <div class="info">
+                        <h4>Tổng thu nhập</h4>
+                        <p><b>${requestScope.moneymonth} đ</b></p>
+                    </div>
+                </div>
+            </div>
            <!-- col-12 -->
            
            <div class="col-md-12">

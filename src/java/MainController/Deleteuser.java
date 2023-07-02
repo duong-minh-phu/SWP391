@@ -6,6 +6,8 @@
 package MainController;
 
 import DAO.userDAO;
+import Entity.Email;
+import Entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -38,6 +40,9 @@ public class Deleteuser extends HttpServlet {
                     int id=Integer.parseInt(user_id);
                     userDAO dao=new userDAO();
                     dao.deleteuser1(id);
+                     User user=dao.checkmailbyid(id);
+                    Email e=new Email();
+                    if(e.sendEmail(user.getUser_email(),"BMOS", "Vì 1 số vấn đề với tài khoản của bạn chúng tôi đã xóa nó nếu có vấn để xin hãy liên hệ lại với chúng tôi qua mail(phumap942002@gmail.com)!!!!!!!"))                    
                     response.sendRedirect("MainController?action=customermanager");
         }catch(Exception ex){
             response.sendRedirect("404.jsp");
