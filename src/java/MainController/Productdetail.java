@@ -44,6 +44,9 @@ public class Productdetail extends HttpServlet {
             double rating_ave = rate.calculateAverageRating(product_id);
             int rating_count = rate.countRatingsByProductId(product_id);
             Entity.Product product = c.getProductByID(product_id);
+            if(product==null){
+                response.sendRedirect("404.jsp");
+            }
             int category_id = product.getCate().getCategory_id();
             if(product.getQuantity()==0){
                  request.setAttribute("detail", "Mặt hàng này đã hết xin chọn loại khác!!!");

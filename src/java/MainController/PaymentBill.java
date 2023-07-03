@@ -71,8 +71,9 @@ public class PaymentBill extends HttpServlet {
             u.setCart(cart);
             String date = curDate.toString();
             billDAO dao = new billDAO();             
-                dao.addOrder(u, total_payment, payment, address,date, phone);
+            dao.addOrder(u, total_payment, payment, address,date, phone);
             dao.updatebilldely(dao.getbillid());
+            session.setAttribute("deletecart", date);
             session.removeAttribute("size");
             session.removeAttribute("cart");            
             if (payment_method.equals("cod")) {

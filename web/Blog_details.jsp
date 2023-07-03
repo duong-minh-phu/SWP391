@@ -46,7 +46,7 @@
                             <ul>
                                 <li><a href="home">home</a></li>
                                 <li>/</li>
-                                <li>product details</li>
+                                <li>Blog details</li>
                             </ul>
                         </div>
                     </div>
