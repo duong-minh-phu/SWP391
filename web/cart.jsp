@@ -38,6 +38,7 @@
                                 <li>/</li>
                                 <li>Giỏ hàng</li>
                             </ul>
+
                         </div>
                     </div>
                 </div>
@@ -50,131 +51,149 @@
             <div class="container">  
                 <form> 
                     <div class="row">
-                        <div class="col-12">
-                            <div class="table_desc">
-                                <div class="cart_page table-responsive">
-                                    <table>
-                                        <thead>
+                        <div class="col-12 text-right">
+                            <button class="product_remove" style="background-color: #e74c3c; color: #fff; padding: 7px 15px; border: none; border-radius: 5px;">
+                                <a onclick="confirmDelete1('${i.key.product_id}')" style="text-decoration: none; color: #fff;"> Clear Cart </a>
+                            </button>
+                        </div>
+                        <div class="table_desc">
+                            <div class="cart_page table-responsive">
+
+                                <table>
+                                    <thead>
+                                        <tr>
+
+                                            <th class="product_thumb">Image</th>
+                                            <th class="product_name">Product</th>
+                                            <th class="product-price">Price</th>
+                                            <th class="product_quantity">Quantity</th>
+                                            <th class="product_total">Total</th>
+                                            <th class="product_remove">Delete</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <c:forEach items="${sessionScope.cart.items}" var="i">
                                             <tr>
+                                                <td class="product_thumb"><a href="MainController?action=productdetail&product_id=${i.key.product_id}"><img src="${i.key.img}" alt=""></a></td>
+                                                <td class="product_name"><a href="MainController?action=productdetail&product_id=${i.key.product_id}">${i.key.product_name}</a></td>
+                                                <td class="product-price"><fmt:formatNumber pattern="##########" value="${i.key.product_price}"/></td>
 
-                                                <th class="product_thumb">Image</th>
-                                                <th class="product_name">Product</th>
-                                                <th class="product-price">Price</th>
-                                                <th class="product_quantity">Quantity</th>
-                                                <th class="product_total">Total</th>
-                                                <th class="product_remove">Delete</th>
+                                                <td class="product_quantity"><input name="quantity" min="1" max="100"  value="${(i.value)}" onchange="handleEvent(event, '${i.key.product_id}')" type="number"></td>
 
+                                                <td id ="demo3${i.key.product_id}" class="product_total"> <fmt:formatNumber pattern="##########" value="${i.key.product_price * i.value }"/></td>
+
+                                                <td class="product_remove"> <a href="#" onclick="confirmDelete('${i.key.product_id}')"> <i class="fa fa-trash-o"></i> </a> </t
                                             </tr>
-                                        </thead>
-                                        <tbody>
 
-                                            <c:forEach items="${sessionScope.cart.items}" var="i">
-                                                <tr>
-                                                    <td class="product_thumb"><a href="MainController?action=productdetail&product_id=${i.key.product_id}"><img src="${i.key.img}" alt=""></a></td>
-                                                    <td class="product_name"><a href="MainController?action=productdetail&product_id=${i.key.product_id}">${i.key.product_name}</a></td>
-                                                    <td class="product-price"><fmt:formatNumber pattern="##########" value="${i.key.product_price}"/></td>
 
-                                                    <td class="product_quantity"><input name="quantity" min="1" max="100"  value="${(i.value)}" onchange="handleEvent(event, '${i.key.product_id}')" type="number"></td>
-
-                                                    <td id ="demo3${i.key.product_id}" class="product_total"> <fmt:formatNumber pattern="##########" value="${i.key.product_price * i.value }"/></td>
-
-                                                    <td class="product_remove"> <a href="#" onclick="confirmDelete('${i.key.product_id}')"> <i class="fa fa-trash-o"></i> </a> </td>
-                                                </tr>
-                                                
-                                        
                                         </c:forEach>
 
 
-                                        </tbody>
-                                    </table>
+                                    </tbody>
+                                </table>
 
-                                        <script>
-                                                function confirmDelete(value) {
-                                                    var message = "Bạn có chắc chắn muốn loại bỏ sản phẩm khỏi giỏ hàng không?";
-                                                    var result = confirm(message);
-                                                    if (result) {
-                                                        // The user clicked OK, so delete the product.
-                                                        window.location.href = "MainController?action=deleteFromCart&product_id=" + value;
-                                                    } else {
-                                                        // The user clicked Cancel, so do nothing.
-                                                    }
-                                                }
-                                            </script>
-                                            
-                                            <script>
-                                                function update(product_id, quantity) {
-                                                    //gọi ra class XMLHTTPRequst() làm gì k cần biết
-                                                    const xhttp = new XMLHttpRequest();
+                                <script>
+                                    function confirmDelete(value) {
+                                        var message = "Bạn có chắc chắn muốn loại bỏ sản phẩm khỏi giỏ hàng không?";
+                                        var result = confirm(message);
+                                        if (result) {
+                                            // The user clicked OK, so delete the product.
+                                            window.location.href = "MainController?action=deleteFromCart&product_id=" + value;
+                                        } else {
+                                            // The user clicked Cancel, so do nothing.
+                                        }
+                                    }
+                                </script>
+                                <script>
+                                    function confirmDelete1(value) {
+                                        var message = "Bạn có chắc chắn muốn xóa tất cả khỏi giỏ hàng không?";
+                                        var result = confirm(message);
+                                        if (result) {
+                                            // The user clicked OK, so delete the product.
+                                            window.location.href = "MainController?action=deleteall&product_id=" + value;
+                                        } else {
+                                            // The user clicked Cancel, so do nothing.
+                                        }
+                                    }
+                                </script>
 
-                                                    // gắn function
-                                                    xhttp.onload = function () {
-                                                        //lấy phần tử có id là demo trong html, và thay đổi thành this response text
-                                                        document.getElementById("demo").innerHTML = this.responseText.split("|")[1];
-                                                        document.getElementById("demo2").innerHTML = parseInt(this.responseText.split("|")[1]) + 15000;
-                                                        const demo3 = "demo3" + product_id;
-                                                        document.getElementById(demo3).innerHTML = this.responseText.split("|")[0];
-                                                        
-                                                    }
-                                                    xhttp.open("GET", "UpdateItemsInCart?id=" + product_id + "&quantity=" + quantity);
-                                                    xhttp.send()
-                                                }
+                                <script>
+                                    function update(product_id, quantity) {
+                                        //gọi ra class XMLHTTPRequst() làm gì k cần biết
+                                        const xhttp = new XMLHttpRequest();
 
-                                                function handleEvent(event, value) {
-                                                    // Handle the event here, for example:
-                                                    update(value, event.target.value);
-                                                }
-                                            </script>
-                                    
-                                    
-                                    
-                                </div> 
-                            </div>
+                                        // gắn function
+                                        xhttp.onload = function () {
+                                            //lấy phần tử có id là demo trong html, và thay đổi thành this response text
+                                            document.getElementById("demo").innerHTML = this.responseText.split("|")[1];
+                                            document.getElementById("demo2").innerHTML = parseInt(this.responseText.split("|")[1]) + 30000;
+                                            const demo3 = "demo3" + product_id;
+                                            document.getElementById(demo3).innerHTML = this.responseText.split("|")[0];
+
+                                        }
+                                        xhttp.open("GET", "UpdateItemsInCart?id=" + product_id + "&quantity=" + quantity);
+                                        xhttp.send()
+                                    }
+
+                                    function handleEvent(event, value) {
+                                        // Handle the event here, for example:
+                                        update(value, event.target.value);
+                                    }
+                                </script>
+
+
+
+                            </div> 
                         </div>
                     </div>
+            </div>
 
-                    <!--coupon code area start-->
-                    <c:if test="${sessionScope.cart!=null}">
-                        <div class="coupon_area">
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12">
-                                    <div class="coupon_code right">
-                                        <h3>Hóa đơn</h3>
-                                        <div class="coupon_inner">
-                                            <div class="cart_subtotal">
-                                                <p>Tổng đơn hàng</p>
-                                                <p  id="demo"  class="cart_amount"><fmt:formatNumber pattern="##########" value="${sessionScope.cart.getTotalMoney()}"/></p>
-                                            </div>
-                                            <div class="cart_subtotal ">
-                                                <p>Phí ship</p>
-                                                <p class="cart_amount">15000</p>
-                                            </div>
+            <!--coupon code area start-->
+            <c:if test="${sessionScope.cart!=null}">
+                <div class="coupon_area">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="coupon_code right">
+                                <h3>Hóa đơn</h3>
+                                <div class="coupon_inner">
+                                    <div class="cart_subtotal">
+                                        <p>Tổng đơn hàng</p>
+                                        <p  id="demo"  class="cart_amount"><fmt:formatNumber pattern="##########" value="${sessionScope.cart.getTotalMoney()}"/></p>
+                                    </div>
+                                    <div class="cart_subtotal ">
+                                        <p>Phí ship</p>
+                                        <p class="cart_amount">15000</p>
+                                    </div>
 
-                                            <div class="cart_subtotal">
-                                                <p>Total</p>
-                                                <p id="demo2" class="cart_amount"><fmt:formatNumber pattern="##########" value="${sessionScope.cart.getTotalMoney() + 15000}"/></p>
-                                            </div>
-                                            <div class="checkout_btn">
-                                                <a href=payment.jsp>Thanh toán</a>
-                                            </div>
-                                        </div>
+                                    <div class="cart_subtotal">
+                                        <p>Total</p>
+                                        <p id="demo2" class="cart_amount"><fmt:formatNumber pattern="##########" value="${sessionScope.cart.getTotalMoney() + 15000}"/></p>
+                                    </div>
+                                    <div class="checkout_btn">
+                                        <a href=payment.jsp>Thanh toán</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </c:if>
-                    <!--coupon code area end-->
-                </form> 
-            </div>     
-        </div>
-        <!-- shopping cart area end -->
+                    </div>
+                </div>
+            </c:if>
+            <!--coupon code area end-->
+        </form> 
+    </div>     
+</div>
+<!-- shopping cart area end -->
 
-        <!--footer area start-->
-        <jsp:include page="layout/footer.jsp"/>
-        <!--footer area end-->
+<!--footer area start-->
+<jsp:include page="layout/footer.jsp"/>
+<!--footer area end-->
 
-        <!-- JS
-        ============================================ -->
+<!-- JS
+============================================ -->
 
-    </body>
+</body>
 
 </html>

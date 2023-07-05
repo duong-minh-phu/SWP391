@@ -33,32 +33,36 @@ public class Cart {
     public Cart() {
         items = new HashMap<>();
     }
-    
-    public void addItem(Product key, int value){
-       Integer currentValue = items.get(key);
-       if (currentValue == null){
-           items.put(key, value);
-       } else {
-           items.put(key, currentValue + value);
-       }
+
+    public void addItem(Product key, int value) {
+        Integer currentValue = items.get(key);
+        if (currentValue == null) {
+            items.put(key, value);
+        } else {
+            items.put(key, currentValue + value);
+        }
     }
-    
+
     public void alterItem(Product product, int updatedQuantity) {
-    items.put(product, updatedQuantity);
+        items.put(product, updatedQuantity);
     }
-    
-    public void deleteFromCart(Product key){
+
+    public void deleteFromCart(Product key) {
         items.remove(key);
     }
-    
-    public int size(){
-    return items.size();
+
+    public void deleteAll(Product key) {
+        items.clear();
     }
-    
-    public int getTotalMoney(){
+
+    public int size() {
+        return items.size();
+    }
+
+    public int getTotalMoney() {
         int result = 0;
-        for (Product product : items.keySet()){
-            result += product.getProduct_price()*items.get(product);
+        for (Product product : items.keySet()) {
+            result += product.getProduct_price() * items.get(product);
         }
         return result;
     }
