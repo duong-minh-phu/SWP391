@@ -60,24 +60,26 @@
                     <div class="row">
                         <!-- Tab panes -->
                         <div class="tab-content dashboard_content"> 
-                            <h3>Đơn hàng</h3>
-                            <div class="button-container" style="display: flex;">
-                                <div class="col-sm-2" style="flex-grow: 1;">
-                                    <a class="btn btn-add btn-sm" href="MainController?action=orderconfirm" >Đơn hàng chờ xác nhận</a>
-                                </div>
-
-                                <div class="col-sm-2" style="flex-grow: 1;">
-                                    <a class="btn btn-add btn-sm" href="MainController?action=orderprepared" >Đơn hàng đang chuẩn bị</a>
-                                </div>
-
-                                <div class="col-sm-2" style="flex-grow: 1;">
-                                    <a class="btn btn-add btn-sm" href="MainController?action=ordershipping" >Đang vận chuyển</a>
-                                </div>
-
-                                <div class="col-sm-2" style="flex-grow: 1;">
-                                    <a class="btn btn-add btn-sm" href="MainController?action=ordershipdone" >Đã giao hàng thành công</a>
-                                </div>
-                            </div>
+                            <h3> <a href="MainController?action=bill"> Đơn hàng </a> </h3>
+                            <table class="button-table">
+                                <tr>
+                                    <td>
+                                        <a class="btn btn-add btn-sm" href="MainController?action=orderconfirm">Đơn hàng chờ xác nhận</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-add btn-sm" href="MainController?action=orderprepared">Đơn hàng đang chuẩn bị</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-add btn-sm" href="MainController?action=ordershipping">Đang vận chuyển</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-add btn-sm" href="MainController?action=ordershipdone">Đã giao hàng thành công</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-add btn-sm" href="MainController?action=ordercancel">Đơn hàng đã hủy</a>
+                                    </td>
+                                </tr>
+                            </table>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -134,6 +136,17 @@
                                                 <td><a href="MainController?action=showdetailcus&bill_id=${b.getBill_id()}" class="view">view</a></td>
                                             </tr>
                                         </c:forEach>
+                                            
+                                        <c:forEach items="${requestScope.billstatus5}" var="b">
+                                            <tr>
+                                                <td>${b.getDate()}</td>
+                                                <td><span class="success">${b.getPayment()}</span></td>
+                                                <td>${b.getAddress()}</td>
+                                                <td>${b.getTotal()}</td>
+                                                <td>da huy</td>
+                                                <td><a href="MainController?action=showdetailcus&bill_id=${b.getBill_id()}" class="view">view</a></td>
+                                            </tr>
+                                        </c:forEach>
 
                                         <c:forEach items="${requestScope.bill}" var="b">
                                             <tr>
@@ -142,7 +155,7 @@
                                                 <td>${b.getAddress()}</td>
                                                 <td>${b.getTotal()}</td>
                                                 <td>${b.getBill_status()}</td>
-                                                
+
                                                 <td><a href="MainController?action=showdetailcus&bill_id=${b.getBill_id()}" class="view">view</a></td>
                                             </tr>
                                         </c:forEach>
@@ -167,8 +180,6 @@
 
         <!-- Main JS -->
         <script src="assets/js/main.js"></script>
-
-
 
     </body>
 

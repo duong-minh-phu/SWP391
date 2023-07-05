@@ -156,6 +156,14 @@
         <servlet-name>RecoveryCategory</servlet-name>
         <servlet-class>MainController.RecoveryCategory</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteAll</servlet-name>
+        <servlet-class>MainController.DeleteAll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderCancel</servlet-name>
+        <servlet-class>MainController.OrderCancel</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
@@ -319,6 +327,14 @@
     <servlet-mapping>
         <servlet-name>RecoveryCategory</servlet-name>
         <url-pattern>/RecoveryCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteAll</servlet-name>
+        <url-pattern>/DeleteAll</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderCancel</servlet-name>
+        <url-pattern>/OrderCancel</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

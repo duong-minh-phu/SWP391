@@ -12905,4 +12905,26 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     color: #ffffff;
 }
 
+.button-table {
+  width: 100%;
+  background-color: #f2f2f2;
+  border-collapse: collapse;
+}
+
+.button-table td {
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid black;
+}
+
+.button-table a {
+  display: block;
+  text-decoration: none;
+  color: #000;
+}
+
+.button-table a:hover {
+  background-color: #ddd;
+}
+
 /*# sourceMappingURL=style.css.map */

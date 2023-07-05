@@ -128,6 +128,9 @@ public class MainController extends HttpServlet {
             if (action.equals("deleteFromCart")) {
                 url = "DeleteFromCart";
             }
+            if (action.equals("deleteall")) {
+                url = "DeleteAll";
+            }
             if (action.equals("delivery")) {
                 url = "Delivery";
             }
@@ -243,6 +246,9 @@ public class MainController extends HttpServlet {
             }
             if (action.equals("ordershipdone")) {
                 url = "OrderShipDone";
+            }
+            if (action.equals("ordercancel")) {
+                url = "OrderCancel";
             }
             if (action.equals("categorymana")) {
                 url = "CategoryManager";
