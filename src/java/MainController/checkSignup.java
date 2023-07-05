@@ -28,11 +28,7 @@ public class checkSignup extends HttpServlet {
         try  {
            String user_email = request.getParameter("user_email");
             String user_pass = request.getParameter("user_pass");
-            String re_pass = request.getParameter("re_pass");
-            if(user_pass.length()==0||user_email.length()==0 ){
-                request.setAttribute("error_pass", "Xin hãy nhập thông tin!!!!");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-            }
+            String re_pass = request.getParameter("re_pass");            
             if(user_pass.length()<7){
                 request.setAttribute("error_pass1", "Xin hãy nhập mật khẩu ít nhất 8 kí tự!!!!!");
                 request.getRequestDispatcher("login.jsp").forward(request, response);

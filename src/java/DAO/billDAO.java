@@ -319,6 +319,24 @@ public class billDAO {
 
         return 0;
     }
+    
+    public String getstatus(int billid) {
+        try {
+            String sql = "select b.bill_status from bill b where b.bill_id=?";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, billid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String a = rs.getString(1);
+                return a;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
 
     public int getbillid() {
         try {

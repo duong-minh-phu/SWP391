@@ -38,9 +38,21 @@ public class Updatebill extends HttpServlet {
             String status = request.getParameter("permission");
             int id = Integer.parseInt(Bill_id);
                    billDAO dao=new billDAO();
-                   dao.updatebill(id, status);
-                   response.sendRedirect("MainController?action=billmana");
-                    
+                   System.out.println(dao.getstatus(id));
+                   String status1=dao.getstatus(id);
+                   if(status1.equals("xac nhan don")&& status.equals("cho lay hang")){
+                       dao.updatebill(id, status);
+                       response.sendRedirect("MainController?action=billmana");
+                   }else if(status1.equals("cho lay hang")&& status.equals("dang giao")){
+                       dao.updatebill(id, status);
+                       response.sendRedirect("MainController?action=billmana");
+                   }else if(status1.equals("dang giao")&& status.equals("hoan thanh")){
+                       dao.updatebill(id, status);
+                       response.sendRedirect("MainController?action=billmana");
+                   }else{
+                       response.sendRedirect("404.jsp");
+                   }
+                                                         
         }catch(Exception ex){
             response.sendRedirect("404.jsp");
         }
