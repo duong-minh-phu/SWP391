@@ -10,6 +10,7 @@ public class User {
     String isAdmin;
     String user_phone;
     Cart cart;
+    String address;
 
     public User() {
     }
@@ -28,6 +29,14 @@ public class User {
 
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
     public int getUser_id() {
         return user_id;
     }

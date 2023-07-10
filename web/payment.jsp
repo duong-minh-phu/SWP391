@@ -1,5 +1,3 @@
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -30,7 +28,7 @@
         <!-- Main Wrapper Start -->
         <!--Offcanvas menu area start-->
         <div class="off_canvars_overlay"></div>
-        <jsp:include page="layout/menu.jsp"/>
+        <jsp:include page="layout/menu.jsp" />
         <!--breadcrumbs area start-->
         <div class="breadcrumbs_area other_bread">
             <div class="container">
@@ -51,7 +49,7 @@
         <div class="Checkout_section" id="accordion">
             <div class="container">
                 <div class="checkout_form">
-                    <form action="MainController" method="POST"> 
+                    <form action="MainController" method="POST">
                         <div class="row">
                             <div class="col-lg-5 col-md-5">
                                 <h3>Chi tiết đơn hàng</h3>
@@ -66,18 +64,46 @@
                                         <input readonly="" value="${sessionScope.user.user_email}" type="text">
                                     </div>
                                     <div class="col-lg-12 mb-20">
-                                        <label>Địa chỉ<span>*</span></label>
-                                        <input required name="address" type="text">                                       
+                                        <label>Địa chỉ và số điện thoại<span>*</span></label>
                                     </div>
-                                    <c:if test="${not empty error1}">
-                                            <div class="error-message"><h4>${error1}</h4></div>
-                                    </c:if>
-                                    <div class="col-lg-12 mb-20">
-                                        <label>Số điện thoại<span>*</span></label>
-                                        <input required name="phone" type="number">                                    
+                                    <div>
+                                        <select required name="addressPhone" onchange="updateAddressPhone(this)">
+                                            <option value="">Chọn địa chỉ và số điện thoại</option>
+                                            <c:forEach items="${requestScope.addressPhoneList}" var="users">
+                                                <option value="${users.address},${users.user_phone}">
+                                                    ${users.address} - ${users.user_phone}
+                                                </option>
+                                            </c:forEach>
+                                            <input class= "add" name="address" id="address">
+                                            <input class= "add" name="phone" id="phone">
+                                        </select>
+                                    </div>
+                                    <style>
+                                        select {
+                                            width: 100%;
+                                            padding: 10px;
+                                            border: 1px solid #ccc;
+                                            border-radius: 4px;
+                                            background-color: #fff;
+                                            font-size: 14px;
+                                        }
+
+                                        select option {
+                                            padding: 5px;
+                                        }
+                                        input.add {
+                                            display: none;
+                                        }
+
+                                    </style>
+                                    <div style="margin-top: 15px;">
+                                        <button type="button" onclick="window.location.href = 'addmoreaddress.jsp'">Thêm địa chỉ và số điện thoại mới</button>
+<!--                                        <button type="button" onclick="deleteAddressPhone()">Xóa</button>-->
                                     </div>
                                     <c:if test="${not empty error}">
-                                            <div class="error-message"><h4>${error}</h4></div>
+                                        <div class="error-message">
+                                            <h4>${error}</h4>
+                                        </div>
                                     </c:if>
                                 </div>
                             </div>
@@ -94,12 +120,12 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:set var="o" value="${sessionScope.cart}"/>
+                                            <c:set var="o" value="${sessionScope.cart}" />
                                             <c:forEach items="${o.items}" var="i">
                                                 <tr>
-                                                    <td> ${i.key.product_name}</td>
-                                                    <td> ${i.value}</td>
-                                                    <td> ${i.key.product_price * i.value }</td>
+                                                    <td>${i.key.product_name}</td>
+                                                    <td>${i.value}</td>
+                                                    <td>${i.key.product_price * i.value}</td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -137,12 +163,24 @@
         </div>
         <!--Checkout page section end-->
         <!--footer area start-->
-        <jsp:include page="layout/footer.jsp"/>
+        <jsp:include page="layout/footer.jsp" />
         <!-- Plugins JS -->
         <script src="assets/js/plugins.js"></script>
 
         <!-- Main JS -->
         <script src="assets/js/main.js"></script>
+
+        <script>
+                                            function updateAddressPhone(selectElement) {
+                                                var selectedValue = selectElement.value;
+                                                var address = document.getElementById('address');
+                                                var phone = document.getElementById('phone');
+                                                var addressPhone = selectedValue.split(',');
+
+                                                address.value = addressPhone[0];
+                                                phone.value = addressPhone[1];
+                                            }
+        </script>
     </body>
 
 </html>
