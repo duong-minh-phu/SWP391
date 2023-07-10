@@ -34,6 +34,7 @@ public class UpdateProduct extends HttpServlet {
             String product_price = request.getParameter("update_price");
             String product_quantity = request.getParameter("update_quantity");
             String product_describe = request.getParameter("update_describe");
+            String company = request.getParameter("update_company");
             int quantity = Integer.parseInt(product_quantity);
             Float price = Float.parseFloat(product_price);
             int cid = Integer.parseInt(category_id);
@@ -48,7 +49,7 @@ public class UpdateProduct extends HttpServlet {
             System.out.println(fileName);
 
             if (fileName == "") {
-                Product product = new Product(cate, productId, product_name, price, product_describe, quantity);
+                Product product = new Product(cate, productId, product_name,company, price, product_describe, quantity);
                 dao.updateProduct2(product);
                 // Chuyển hướng người dùng đến trang danh sách sản phẩm
                 request.getSession().setAttribute("successMessage", "Đã chỉnh sửa sản phẩm thành công");
@@ -62,7 +63,7 @@ public class UpdateProduct extends HttpServlet {
                 String imagePath = "images/" + fileName;
                 System.out.println(imagePath);
 
-                Product product = new Product(cate, productId, product_name, price, product_describe, quantity, imagePath);
+                Product product = new Product(cate, productId, product_name,company, price, product_describe, quantity, imagePath);
 
                 dao.updateProduct(product);
 

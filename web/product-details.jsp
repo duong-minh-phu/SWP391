@@ -1,6 +1,4 @@
 
-
-<%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
@@ -75,6 +73,31 @@
                             <form action="MainController?action=addToCart&&product_id=${ProductData.product_id}" method="POST">
                                 <h1>${ProductData.product_name}</h1>
                                 <div class="product_price">
+                                    <label>Chất lượng : </label>
+                                    <% double rating = (double) request.getAttribute("RatingAV"); %>
+                                    <% int integerPart = (int) rating; %>
+                                    <% double decimalPart = rating - integerPart; %>
+                                    <% int roundedDecimalPart = (int) Math.round(decimalPart * 10); %>
+                                    <% for (int i = 0; i < integerPart; i++) { %>
+                                    <i class="fa fa-star"></i>
+                                    <% } %>
+                                    <% if (roundedDecimalPart > 0) {%>
+                                    <i class="fa fa-star-half-o"></i>
+                                    <span class="rating_number">( <%= String.format("%.1f", rating)%>)/ ${RatingCount} đánh giá </span>
+                                    <% } else {%>
+                                    <span class="rating_number">( <%= integerPart%>)/ ${RatingCount} đánh giá </span>
+                                    <% } %>
+                                </div>
+                                <div class="product_desc">
+                                    <p> Ngày sản xuất : ${ProductData.create_date}</p>
+                                </div>
+                                <div class="product_desc">
+                                    <p> Hạn sử dụng : ${ProductData.exp_date} (<span id="monthLeft"></span> tháng tính từ ngày sản xuất)</p>
+                                </div>
+                                <div class="product_desc">
+                                    <p> Nhà sản xuất : ${ProductData.company}</p>
+                                </div>
+                                <div class="product_price">
                                     <span class="current_price">${ProductData.product_price} VNĐ</span>
                                 </div>
                                 <div class="product_desc">
@@ -95,20 +118,7 @@
                                         <button class="button" type="submit">Thêm vào giở hàng</button>  
                                     </div>
                                 </c:if>
-                                <div class="product_price">
-                                    <label>Chất lượng : </label>
-                                    <% double rating = (double) request.getAttribute("RatingAV"); %>
-                                    <% int integerPart = (int) rating; %>
-                                    <% double decimalPart = rating - integerPart; %>
-                                    <% int roundedDecimalPart = (int) Math.round(decimalPart * 10); %>
-                                    <% for (int i = 0; i < integerPart; i++) { %>
-                                    <i class="fa fa-star"></i>
-                                    <% } %>
-                                    <% if (roundedDecimalPart > 0) {%>
-                                    <i class="fa fa-star-half-o"></i>
-                                    <span class="rating_number">( <%= String.format("%.1f", rating) %>)/ ${RatingCount} đánh giá </span>
-                                    <% } %>
-                                </div>
+
                             </form>
                         </div>
                     </div>
@@ -299,6 +309,22 @@
             }
 
         </style>
+        <script>
+            function calculateMonthLeft() {
+                var createDateStr = "${ProductData.create_date}";
+                var expDateStr = "${ProductData.exp_date}";
+
+                var createDate = new Date(createDateStr);
+                var expDate = new Date(expDateStr);
+
+                var timeDiff = expDate.getTime() - createDate.getTime();
+                var monthDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 30));
+
+                document.getElementById("monthLeft").innerHTML = monthDiff;
+            }
+
+            calculateMonthLeft();
+        </script>
     </body>
 
 </html>

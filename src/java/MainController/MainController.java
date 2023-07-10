@@ -147,7 +147,7 @@ public class MainController extends HttpServlet {
                 productDAO c = new productDAO();
                 List<Product> product = c.getProduct();
                 request.setAttribute("ProductData", product);
-                List<Category> category = c.getCategory();
+                List<Category> category = c.getCategory1();
                 request.setAttribute("CategoryData", category);
                 url = "admin/productInsert.jsp";
             }
@@ -251,6 +251,12 @@ public class MainController extends HttpServlet {
             }
             if (action.equals("recovercategory")){
                 url = "RecoveryCategory";
+            }
+            if (action.equals("productdate")){
+                url = "ProductDate";
+            }
+            if (action.equals("outdate")){
+                url = "OutDate";
             }
 
         } catch (Exception ex) {
