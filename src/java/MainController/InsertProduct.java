@@ -6,9 +6,6 @@ import Entity.Product;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -30,16 +27,6 @@ public class InsertProduct extends HttpServlet {
             String product_price = request.getParameter("price");
             String product_quantity = request.getParameter("quantity");
             String product_describe = request.getParameter("describe");
-            String company = request.getParameter("company");
-            String create_date = request.getParameter("createdate");
-            String exp_date = request.getParameter("expdate");
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            java.util.Date utilCreateDate = sdf.parse(create_date);
-            java.util.Date utilExpDate = sdf.parse(exp_date);
-
-            // Chuyển đổi java.util.Date thành java.sql.Date
-            java.sql.Date sqlCreateDate = new java.sql.Date(utilCreateDate.getTime());
-            java.sql.Date sqlExpDate = new java.sql.Date(utilExpDate.getTime());
             int quantity = Integer.parseInt(product_quantity);
             Float price = Float.parseFloat(product_price);
             int cid = Integer.parseInt(category_id);
@@ -62,7 +49,7 @@ public class InsertProduct extends HttpServlet {
                 String imagePath = "images/" + fileName;
                 System.out.println(imagePath);
 
-                Product product = new Product(cate, productId, product_name, price, product_describe, quantity, imagePath, sqlCreateDate, sqlExpDate, company);
+                Product product = new Product(cate, productId, product_name, price, product_describe, quantity, imagePath);
 
                 dao.insertProduct(product);
 

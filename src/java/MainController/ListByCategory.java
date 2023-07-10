@@ -35,18 +35,13 @@ public class ListByCategory extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
+        try  {
             /* TODO output your page here. You may use following sample code. */
             String category_id = request.getParameter("category_id");
             int category_id1 = Integer.parseInt(category_id);
             productDAO c = new productDAO();
-            List<Entity.Product> productList;
-            if (category_id1 == 19) {
-                productList = c.getProductByCategory2(category_id1);
-            } else {
-                productList = c.getProductByCategory1(category_id1);
-            }
-            List<Category> category = c.getCategoryTrue();
+            List<Entity.Product> productList = c.getProductByCategory(category_id1);
+            List<Category> category = c.getCategory();
             int page, numperpage = 9;
             int size = productList.size();
             int num = (size % 9 == 0 ? (size / 9) : ((size / 9)) + 1);//so trang
@@ -66,10 +61,10 @@ public class ListByCategory extends HttpServlet {
             request.setAttribute("CategoryData", category);
             request.setAttribute("ProductData", product);
             request.getRequestDispatcher("shop_category.jsp").forward(request, response);
-        } catch (Exception ex) {
-
+        }catch(Exception ex){
+            
         }
-
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

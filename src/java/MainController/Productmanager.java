@@ -27,7 +27,7 @@ public class Productmanager extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             productDAO p = new productDAO();
-            List<Product> products = p.getProduct1();
+            List<Product> products = p.getProduct();
             
             List<Category> category = p.getCategory();
             request.setAttribute("CategoryData", category);

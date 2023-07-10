@@ -37,8 +37,8 @@ public class Shop extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try  {
             productDAO c = new productDAO();
-            List<Entity.Product> productList = c.getProduct1();
-            List<Category> category = c.getCategoryTrue();
+            List<Entity.Product> productList = c.getProduct();
+            List<Category> category = c.getCategory();
             int page, numperpage = 9;
             int size = productList.size();
             int num = (size % 9 == 0 ? (size / 9) : ((size / 9)) + 1);//so trang

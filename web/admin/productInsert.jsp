@@ -226,18 +226,6 @@
                                     <label class="control-label">Số lượng</label>
                                     <input class="form-control" name="quantity" type="number">
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <label class="control-label">Ngày sản xuất</label>
-                                    <input class="form-control" name="createdate" type="date">
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label class="control-label">Hạn sử dụng</label>
-                                    <input class="form-control" name="expdate" type="date">
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label class="control-label">Hãng</label>
-                                    <input class="form-control" name="company" type="text">
-                                </div>
                                 <div class="form-group col-md-12">
                                     <label class="control-label">Ảnh sản phẩm</label>
                                     <div id="myfileupload">

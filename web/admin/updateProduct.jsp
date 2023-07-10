@@ -219,18 +219,6 @@
                                     <label class="control-label">Số lượng</label>
                                     <input class="form-control" name="update_quantity" type="number" value="${ProductIDDATA.quantity}">
                                 </div>
-                                <div class="form-group  col-md-3">
-                                    <label class="control-label">Ngày sản xuất</label>
-                                    <input class="form-control" value="${ProductIDDATA.create_date}" readonly>
-                                </div>
-                                <div class="form-group  col-md-3">
-                                    <label class="control-label">Hạn sử dụng</label>
-                                    <input class="form-control" value="${ProductIDDATA.exp_date}" readonly>
-                                </div>
-                                <div class="form-group  col-md-3">
-                                    <label class="control-label">Hãng</label>
-                                    <input class="form-control" name="update_company" type="text" value="${ProductIDDATA.company}">
-                                </div>
                                 <div class="form-group col-md-12">
                                     <label class="control-label">Ảnh sản phẩm</label>
                                     <div id="myfileupload">

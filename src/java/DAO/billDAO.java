@@ -372,16 +372,6 @@ public class billDAO {
         return 0;
     }
 
-    public String getLatestBillStatusDate(int billId) {
-        try {
-            String sql = "SELECT TOP 1 bs.Status FROM billstatus bs WHERE bs.bill_id = ? ORDER BY bs.date DESC ";
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, billId);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                String status = rs.getString("Status");
-                return status;
     public int quality(int month) {
         try {
             String sql = "select sum(d.quantity)\n"
@@ -399,71 +389,7 @@ public class billDAO {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return null;
-    }
-    public Date getDangGiao(int billId){
-         try {
-            String sql = "SELECT TOP 1 bs.date FROM billstatus bs WHERE bs.bill_id = ? AND bs.Status = 'dang giao' ORDER BY bs.date DESC";
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, billId);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Date date3 = rs.getDate("date");
-                return date3;
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-    public Date getXacNhanDon(int billId){
-         try {
-            String sql = "SELECT TOP 1 bs.date FROM billstatus bs WHERE bs.bill_id = ? AND bs.Status = 'xac nhan don' ORDER BY bs.date DESC";
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, billId);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Date date1 = rs.getDate("date");
-                return date1;
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-    public Date getChoLayHang(int billId){
-         try {
-            String sql = "SELECT TOP 1 bs.date FROM billstatus bs WHERE bs.bill_id = ? AND bs.Status = 'cho lay hang' ORDER BY bs.date DESC";
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, billId);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Date date2 = rs.getDate("date");
-                return date2;
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-    public Date getHoanThanh(int billId){
-         try {
-            String sql = "SELECT TOP 1 bs.date FROM billstatus bs WHERE bs.bill_id = ? AND bs.Status = 'hoan thanh' ORDER BY bs.date DESC";
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, billId);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Date date4 = rs.getDate("date");
-                return date4;
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return null;
+        return 0;
     }
 
     public List<Bill> getBillsStatus1(int user_id) throws Exception {

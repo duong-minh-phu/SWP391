@@ -13,8 +13,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -50,100 +48,6 @@ public class productDAO {
         return list;
     }
 
-    public List<Product> getProduct1() {
-        List<Product> list = new ArrayList<>();
-        String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img,p.company,p.create_date,p.exp_date from  \n"
-                + "product p inner join category c on p.category_id = c.category_id and p.status='TRUE'";
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Category c = new Category(rs.getString(1));
-                LocalDate createDate = rs.getDate(9).toLocalDate(); // Lấy create_date từ ResultSet
-                LocalDate expDate = rs.getDate(10).toLocalDate(); // Lấy exp_date từ ResultSet
-
-                long monthsRemaining = ChronoUnit.DAYS.between(LocalDate.now(), expDate);
-
-                if (monthsRemaining > 30) {
-                    list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8), monthsRemaining));
-                }
-            }
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return list;
-    }
-
-    public List<Product> getProduct2() {
-    List<Product> list = new ArrayList<>();
-    String sql = "SELECT c.category_name, p.product_id, p.product_name, p.product_price, p.product_describe, p.quantity, p.img, p.company, p.create_date, p.exp_date, p.discount "
-            + "FROM product p INNER JOIN category c ON p.category_id = c.category_id AND p.status = 'TRUE'";
-    try {
-        conn = new DBContext().getConnection();
-        ps = conn.prepareStatement(sql);
-        rs = ps.executeQuery();
-        while (rs.next()) {
-            Category c = new Category(rs.getString(1));
-            LocalDate createDate = rs.getDate(9).toLocalDate(); // Lấy create_date từ ResultSet
-            LocalDate expDate = rs.getDate(10).toLocalDate(); // Lấy exp_date từ ResultSet
-
-            long monthsRemaining = ChronoUnit.DAYS.between(LocalDate.now(), expDate);
-
-            boolean discount = rs.getBoolean("discount"); // Lấy giá trị cột discount từ ResultSet
-
-            if (monthsRemaining <= 30 && monthsRemaining > 0) {
-                if (discount) {
-                    list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8), monthsRemaining));
-                } else {
-                    // Cập nhật category_id của sản phẩm thành 19 và discount thành true
-                    String updateSql = "UPDATE product SET category_id = ?, product_price = ?, discount = ? WHERE product_id = ?";
-                    ps = conn.prepareStatement(updateSql);
-                    float originalPrice = rs.getFloat(4);
-                    float discountedPrice = originalPrice * 0.7f;
-                    ps.setInt(1, 19);
-                    ps.setFloat(2, discountedPrice);
-                    ps.setBoolean(3, true);
-                    ps.setString(4, rs.getString(2)); // Tham số 2 là product_id từ ResultSet
-                    ps.executeUpdate();
-                    list.add(new Product(c, rs.getString(2), rs.getString(3), discountedPrice, rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8), monthsRemaining));
-                }
-            }
-        }
-
-    } catch (Exception e) {
-        System.out.println(e);
-    }
-    return list;
-}
-
-    public List<Product> getProduct3() {
-        List<Product> list = new ArrayList<>();
-        String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img,p.create_date,p.exp_date , p.company from  \n"
-                + "product p inner join category c on p.category_id = c.category_id ";
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Category c = new Category(rs.getString(1));
-                LocalDate createDate = rs.getDate(8).toLocalDate(); // Lấy create_date từ ResultSet
-                LocalDate expDate = rs.getDate(9).toLocalDate(); // Lấy exp_date từ ResultSet
-
-                long monthsRemaining = ChronoUnit.DAYS.between(LocalDate.now(), expDate);
-
-                if (monthsRemaining <= 0) {
-                    list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getDate(8), rs.getDate(9), rs.getString(10)));
-                }
-            }
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return list;
-    }
-
     public List<Product> getProduct50() {
         List<Product> list = new ArrayList<>();
         String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from \n"
@@ -165,7 +69,7 @@ public class productDAO {
 
     public List<Product> getProductDelete() {
         List<Product> list = new ArrayList<>();
-        String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img,p.company,p.create_date,p.exp_date from  \n"
+        String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from  \n"
                 + "product p inner join category c on p.category_id = c.category_id and p.status='FALSE'";
         try {
             conn = new DBContext().getConnection();
@@ -173,14 +77,7 @@ public class productDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category c = new Category(rs.getString(1));
-                LocalDate createDate = rs.getDate(9).toLocalDate(); // Lấy create_date từ ResultSet
-                LocalDate expDate = rs.getDate(10).toLocalDate(); // Lấy exp_date từ ResultSet
-
-                long monthsRemaining = ChronoUnit.DAYS.between(LocalDate.now(), expDate);
-
-                if (monthsRemaining >= 0) {
-                    list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8), monthsRemaining));
-                }
+                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
             }
 
         } catch (Exception e) {
@@ -190,7 +87,7 @@ public class productDAO {
     }
 
     public void insertProduct(Product product) {
-        String sql = "insert dbo.product(product_id,category_id,product_name,product_price,product_describe,quantity,img,status,create_date,exp_date,company) values(?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert dbo.product(product_id,category_id,product_name,product_price,product_describe,quantity,img,status) values(?,?,?,?,?,?,?,?)";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -202,9 +99,6 @@ public class productDAO {
             ps.setInt(6, product.getQuantity());
             ps.setString(7, product.getImg());
             ps.setString(8, "TRUE");
-            ps.setDate(9, product.getCreate_date());
-            ps.setDate(10, product.getExp_date());
-            ps.setString(11, product.getCompany());
             ps.executeUpdate();
         } catch (Exception e) {
         }
@@ -229,12 +123,13 @@ public class productDAO {
     }
 
     public void RecoverProduct(String product_id) {
-        String sq = "update product set status=? where product_id = ?";
+        String sq = "update product set quantity=?,status=? where product_id = ?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sq);
-            ps.setString(1, "True");
-            ps.setString(2, product_id);
+            ps.setInt(1, 1);
+            ps.setString(2, "True");
+            ps.setString(3, product_id);
             ps.executeUpdate();
         } catch (Exception e) {
         }
@@ -242,12 +137,13 @@ public class productDAO {
     }
 
     public void deleteProduct(String product_id) {
-        String sq2 = "UPDATE product SET status = ? WHERE product_id = ?";
+        String sq2 = "UPDATE product SET quantity = ? , status = ? WHERE product_id = ?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sq2);
-            ps.setString(1, "FALSE");
-            ps.setString(2, product_id);
+            ps.setInt(1, 0);
+            ps.setString(2, "FALSE");
+            ps.setString(3, product_id);
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
@@ -255,35 +151,33 @@ public class productDAO {
     }
 
     public void updateProduct(Product product) {
-        String sq3 = "update product set category_id=? ,product_name=?,company=? ,product_price=? ,product_describe=? ,quantity=? ,img=? where product_id=? and status='TRUE'";
+        String sq3 = "update product set category_id=? ,product_name=? ,product_price=? ,product_describe=? ,quantity=? ,img=? where product_id=? and status='TRUE'";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sq3);
             ps.setInt(1, product.getCate().getCategory_id());
             ps.setString(2, product.getProduct_name());
-            ps.setString(3, product.getCompany());
-            ps.setFloat(4, product.getProduct_price());
-            ps.setString(5, product.getProduct_describe());
-            ps.setInt(6, product.getQuantity());
-            ps.setString(7, product.getImg());
-            ps.setString(8, product.getProduct_id());
+            ps.setFloat(3, product.getProduct_price());
+            ps.setString(4, product.getProduct_describe());
+            ps.setInt(5, product.getQuantity());
+            ps.setString(6, product.getImg());
+            ps.setString(7, product.getProduct_id());
             ps.executeUpdate();
         } catch (Exception e) {
         }
     }
 
     public void updateProduct2(Product product) {
-        String sq = "update product set category_id=? ,product_name=?,company=? ,product_price=? ,product_describe=? ,quantity=?  where product_id=? and status='TRUE'";
+        String sq = "update product set category_id=? ,product_name=? ,product_price=? ,product_describe=? ,quantity=?  where product_id=? and status='TRUE'";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sq);
             ps.setInt(1, product.getCate().getCategory_id());
             ps.setString(2, product.getProduct_name());
-            ps.setString(3, product.getCompany());
-            ps.setFloat(4, product.getProduct_price());
-            ps.setString(5, product.getProduct_describe());
-            ps.setInt(6, product.getQuantity());
-            ps.setString(7, product.getProduct_id());
+            ps.setFloat(3, product.getProduct_price());
+            ps.setString(4, product.getProduct_describe());
+            ps.setInt(5, product.getQuantity());
+            ps.setString(6, product.getProduct_id());
             ps.executeUpdate();
         } catch (Exception e) {
         }
@@ -304,53 +198,37 @@ public class productDAO {
         return list;
     }
 
-    public List<Category> getCategoryTrue() {
-        List<Category> list = new ArrayList<>();
-        String sql = "select * from category where category_status = 'True'";
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new Category(rs.getInt(1), rs.getString(2)));
-            }
-        } catch (Exception e) {
-        }
-        return list;
-    }
-
     public List<Category> getCategory1() {
         List<Category> list = new ArrayList<>();
-        String sql = "SELECT c.category_id, c.category_name, COUNT(p.product_id) AS product_count "
-                + "FROM category AS c "
-                + "LEFT JOIN product AS p ON c.category_id = p.category_id AND p.status = 'TRUE'"
-                + "WHERE c.category_status = 'True' "
-                + "GROUP BY c.category_id, c.category_name";
+           String sql = "SELECT c.category_id, c.category_name, COUNT(p.product_id) AS product_count "
+               + "FROM category AS c "
+               + "LEFT JOIN product AS p ON c.category_id = p.category_id AND p.status = 'TRUE'"
+               + "WHERE c.category_status = 'True' "
+               + "GROUP BY c.category_id, c.category_name";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Category(rs.getInt(1), rs.getString(2), rs.getInt(3)));
+                list.add(new Category(rs.getInt(1), rs.getString(2),rs.getInt(3)));
             }
         } catch (Exception e) {
         }
         return list;
     }
-
     public List<Category> getCategory2() {
         List<Category> list = new ArrayList<>();
-        String sql = "SELECT c.category_id, c.category_name, COUNT(p.product_id) AS product_count "
-                + "FROM category AS c "
-                + "LEFT JOIN product AS p ON c.category_id = p.category_id AND p.status = 'FALSE'"
-                + "WHERE c.category_status = 'False' "
-                + "GROUP BY c.category_id, c.category_name";
+         String sql = "SELECT c.category_id, c.category_name, COUNT(p.product_id) AS product_count "
+               + "FROM category AS c "
+               + "LEFT JOIN product AS p ON c.category_id = p.category_id AND p.status = 'FALSE'"
+               + "WHERE c.category_status = 'False' "
+               + "GROUP BY c.category_id, c.category_name";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Category(rs.getInt(1), rs.getString(2), rs.getInt(3)));
+                list.add(new Category(rs.getInt(1), rs.getString(2),rs.getInt(3)));
             }
         } catch (Exception e) {
         }
@@ -371,29 +249,28 @@ public class productDAO {
         }
         return null;
     }
-
     public Entity.Category getCategoryByName1(String category_name) {
-        String sql = "SELECT * FROM category WHERE category_name = ?";
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, category_name);
-            rs = ps.executeQuery();
+    String sql = "SELECT * FROM category WHERE category_name = ?";
+    try {
+        conn = new DBContext().getConnection();
+        ps = conn.prepareStatement(sql);
+        ps.setString(1, category_name);
+        rs = ps.executeQuery();
 
-            if (rs.next()) {
-                int categoryId = rs.getInt("category_id");
-                String categoryName = rs.getString("category_name");
+        if (rs.next()) {
+            int categoryId = rs.getInt("category_id");
+            String categoryName = rs.getString("category_name");
 
-                return new Entity.Category(categoryId, categoryName);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (Exception ex) {
+            return new Entity.Category(categoryId, categoryName);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }   catch (Exception ex) {
             Logger.getLogger(productDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return null;
-    }
+    return null;
+}
 
     public List<Product> getProductLow() {
         List<Product> list = new ArrayList<>();
@@ -486,54 +363,6 @@ public class productDAO {
         return list;
     }
 
-    public List<Product> getProductByCategory1(int category_id) {
-        List<Product> list = new ArrayList<>();
-        String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img,p.create_date,p.exp_date from product p inner join category c on p.category_id = c.category_id WHERE p.category_id=? and p.status='TRUE'";
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, category_id);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Category c = new Category(rs.getString(1));
-                LocalDate createDate = rs.getDate(8).toLocalDate(); // Lấy create_date từ ResultSet
-                LocalDate expDate = rs.getDate(9).toLocalDate(); // Lấy exp_date từ ResultSet
-
-                long monthsRemaining = ChronoUnit.DAYS.between(LocalDate.now(), expDate);
-                if (monthsRemaining > 30) {
-                    list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return list;
-    }
-
-    public List<Product> getProductByCategory2(int category_id) {
-        List<Product> list = new ArrayList<>();
-        String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img,p.create_date,p.exp_date from product p inner join category c on p.category_id = c.category_id WHERE p.category_id=? and p.status='TRUE'";
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, category_id);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Category c = new Category(rs.getString(1));
-                LocalDate createDate = rs.getDate(8).toLocalDate(); // Lấy create_date từ ResultSet
-                LocalDate expDate = rs.getDate(9).toLocalDate(); // Lấy exp_date từ ResultSet
-
-                long monthsRemaining = ChronoUnit.DAYS.between(LocalDate.now(), expDate);
-                if (monthsRemaining <= 30 && monthsRemaining > 0) {
-                    list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return list;
-    }
-
     public Product getProductByID(String product_id) {
         List<Product> list = new ArrayList<>();
         String sql = "select c.category_id, c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from product p inner join category c on p.category_id = c.category_id WHERE p.product_id=? and p.status='TRUE'";
@@ -553,7 +382,7 @@ public class productDAO {
     }
 
     public Product getProductByID2(String product_id) {
-        String sql = "select c.category_id, c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img,p.create_date,p.exp_date,p.company from product p inner join category c on p.category_id = c.category_id WHERE p.product_id=? and p.status='TRUE'";
+        String sql = "select c.category_id, c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from product p inner join category c on p.category_id = c.category_id WHERE p.product_id=? and p.status='TRUE'";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -561,24 +390,7 @@ public class productDAO {
             rs = ps.executeQuery();
             if (rs.next()) {
                 Category c = new Category(rs.getInt(1), rs.getString(2));
-                return new Product(c, rs.getString(3), rs.getString(4), rs.getFloat(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getDate(9), rs.getDate(10), rs.getString(11));
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return null;
-    }
-
-    public Product getProductByID3(String product_id) {
-        String sql = "select c.category_id, c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img,p.create_date,p.exp_date,p.company from product p inner join category c on p.category_id = c.category_id WHERE p.product_id=? and p.status='TRUE'";
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, product_id);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                Category c = new Category(rs.getInt(1), rs.getString(2));
-                return new Product(c, rs.getString(3), rs.getString(4), rs.getFloat(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getDate(9), rs.getDate(10), rs.getString(11));
+                return new Product(c, rs.getString(3), rs.getString(4), rs.getFloat(5), rs.getString(6), rs.getInt(7), rs.getString(8));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -727,7 +539,7 @@ public class productDAO {
 
         try {
             conn = new DBContext().getConnection();
-            conn.setAutoCommit(false);
+            conn.setAutoCommit(false); 
             ps = conn.prepareStatement(updateCategorySql);
             ps.setString(1, "False");
             ps.setString(2, category_id);
@@ -760,8 +572,7 @@ public class productDAO {
             }
         }
     }
-
-    public void RecoverCategory(String category_id) {
+     public void RecoverCategory(String category_id) {
         String sq = "update category set category_status = ? where category_id = ?";
         String sq1 = "UPDATE product SET status = ? WHERE category_id = ?";
         try {
@@ -771,21 +582,22 @@ public class productDAO {
             ps.setString(1, "True");
             ps.setString(2, category_id);
             ps.executeUpdate();
-
+            
+            
             ps = conn.prepareStatement(sq1);
             ps.setString(1, "TRUE");
             ps.setString(2, category_id);
             ps.executeUpdate();
-
+            
             conn.commit();
         } catch (Exception e) {
             try {
-                conn.rollback();
+                conn.rollback(); 
             } catch (SQLException ex) {
                 System.out.println("Error rolling back changes: " + ex.getMessage());
             }
             System.out.println("Error deleting category: " + e.getMessage());
-        } finally {
+        }finally {
             try {
                 if (ps != null) {
                     ps.close();

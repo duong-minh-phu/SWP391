@@ -86,12 +86,6 @@
                                     <a class="btn btn-add btn-sm" href="MainController?action=productdelete" >Sản phẩm đã hết hàng</a>
                                 </div>
                                 <div class="col-sm-2">
-                                    <a class="btn btn-add btn-sm" href="MainController?action=productdate" >Sản phẩm sắp đến hạn</a>
-                                </div>
-                                <div class="col-sm-2">
-                                    <a class="btn btn-add btn-sm" href="MainController?action=outdate" >Sản phẩm quá hạn</a>
-                                </div>
-                                <div class="col-sm-2">
                                     <a class="btn btn-add btn-sm" href="MainController?action=categorymana">Quản lý danh mục</a>
                                 </div>
                             </div>
@@ -104,8 +98,6 @@
                                             <th>Giá</th>
                                             <th>Thông tin</th>
                                             <th>Số lượng</th>
-                                            <th>Hạn</th>
-                                            <th>Hãng</th>
                                             <th>Ảnh</th>
                                             <th>Chức năng</th>
                                         </tr>
@@ -118,8 +110,6 @@
                                                 <td>${p.product_price}</td>
                                                 <td>${p.product_describe}</td>
                                                 <td>${p.quantity}</td>
-                                                <td>${p.count} ngày</td>
-                                                <td>${p.company}</td>
                                                 <td><img src="${p.img}" alt="" width="100px;"></td>
 
                                                 <td>
@@ -211,8 +201,6 @@
                                             <td>${p.product_price}</td>
                                             <td>${p.product_describe}</td>
                                             <td>${p.quantity}</td>
-                                            <td>${p.count} ngày</td>
-                                            <td>${p.company}</td>
                                             <td><img src="${p.img}" alt="" width="200px;"></td>
 
                                             <td>

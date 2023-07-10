@@ -5,7 +5,6 @@
  */
 package Entity;
 
-import java.sql.Date;
 import java.util.Objects;
 
 /**
@@ -20,15 +19,10 @@ public class Product {
     String product_describe;
     int quantity;
     String img;
-    Date create_date;
-    Date exp_date;
-    String company;
-    long count;
     
 
     public Product() {
     }
-    
 
     public Product(String product_name, Float product_price, String product_describe, int quantity, String img) {
         this.product_name = product_name;
@@ -43,26 +37,6 @@ public class Product {
         this.cate = cate;
         this.product_id = product_id;
         this.product_name = product_name;
-        this.product_price = product_price;
-        this.product_describe = product_describe;
-        this.quantity = quantity;
-        this.img = img;
-    }
-    public Product(Category cate, String product_id, String product_name,String company, Float product_price, String product_describe, int quantity) {
-        this.cate = cate;
-        this.product_id = product_id;
-        this.product_name = product_name;
-        this.company = company;
-        this.product_price = product_price;
-        this.product_describe = product_describe;
-        this.quantity = quantity;
-        
-    }
-    public Product(Category cate, String product_id, String product_name,String company, Float product_price, String product_describe, int quantity,String img) {
-        this.cate = cate;
-        this.product_id = product_id;
-        this.product_name = product_name;
-        this.company = company;
         this.product_price = product_price;
         this.product_describe = product_describe;
         this.quantity = quantity;
@@ -86,30 +60,6 @@ public class Product {
         this.quantity = quantity;
         this.img = img;
     }
-     public Product(Category cate, String product_id, String product_name, Float product_price, String product_describe, int quantity, String img , Date create_date,Date exp_date,String company) {
-        this.cate = cate;
-        this.product_id = product_id;
-        this.product_name = product_name;
-        this.product_price = product_price;
-        this.product_describe = product_describe;
-        this.quantity = quantity;
-        this.img = img;
-        this.create_date = create_date;
-        this.exp_date = exp_date;
-        this.company = company;
-    }
-      public Product(Category cate, String product_id, String product_name, Float product_price, String product_describe, int quantity, String img,String company,long count) {
-        this.cate = cate;
-        this.product_id = product_id;
-        this.product_name = product_name;
-        this.product_price = product_price;
-        this.product_describe = product_describe;
-        this.quantity = quantity;
-        this.img = img;
-        this.company = company;
-        this.count = count;
-    }
-
 
     public Product(Category cate, String product_id, String product_name, Float product_price, String product_describe, int quantity) {
         this.cate = cate;
@@ -169,39 +119,6 @@ public class Product {
         return true;
     }
 
-    public Date getCreate_date() {
-        return create_date;
-    }
-
-    public void setCreate_date(Date create_date) {
-        this.create_date = create_date;
-    }
-
-    public Date getExp_date() {
-        return exp_date;
-    }
-
-    public void setExp_date(Date exp_date) {
-        this.exp_date = exp_date;
-    }
-
-   
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
-    public long getCount() {
-        return count;
-    }
-
-    public void setCount(long count) {
-        this.count = count;
-    }
     public String getProduct_name() {
         return product_name;
     }
