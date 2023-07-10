@@ -69,15 +69,15 @@
                                     <div>
                                         <select required name="addressPhone" onchange="updateAddressPhone(this)">
                                             <option value="">Chọn địa chỉ và số điện thoại</option>
-                                            <c:forEach items="${requestScope.addressPhoneList}" var="users">
+                                            <c:forEach items="${Listaddress}" var="users">
                                                 <option value="${users.address},${users.user_phone}">
                                                     ${users.address} - ${users.user_phone}
                                                 </option>
                                             </c:forEach>
-                                            <input class= "add" name="address" id="address">
-                                            <input class= "add" name="phone" id="phone">
                                         </select>
                                     </div>
+                                    <input class= "add" name="address" id="address">
+                                    <input class= "add" name="phone" id="phone">
                                     <style>
                                         select {
                                             width: 100%;

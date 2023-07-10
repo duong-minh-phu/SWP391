@@ -173,7 +173,7 @@
                                         <p id="demo2" class="cart_amount"><fmt:formatNumber pattern="##########" value="${sessionScope.cart.getTotalMoney() + 15000}"/></p>
                                     </div>
                                     <div class="checkout_btn">
-                                        <a href=Payment>Thanh toán</a>
+                                        <a href=MainController?action=Payment>Thanh toán</a>
                                     </div>
                                 </div>
                             </div>
