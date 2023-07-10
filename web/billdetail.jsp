@@ -1,3 +1,4 @@
+<%@page import="java.sql.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -20,6 +21,8 @@
         <link rel="stylesheet" href="assets/css/plugins.css">
         <!-- Main Style CSS -->
         <link rel="stylesheet" href="assets/css/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+              rel="stylesheet">
     </head>
 
     <body>
@@ -77,6 +80,87 @@
                     </div>
                 </form> 
             </div>     
+        </div>
+        <div class="container">
+            <h2 style="font-weight: bold; margin-top: 14px;">Quá trình đơn hàng</h2>
+            <div class="row">
+                <div class="hh-grayBox pt45">
+                    <div class="row justify-content-between">
+                        <% String status = (String) request.getAttribute("BillNew");%>
+                        <% Date date3 = (Date) request.getAttribute("Date3");
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                            String formattedDate3 = (date3 != null) ? sdf.format(date3) : null;
+                        %>
+                        <% Date date2 = (Date) request.getAttribute("Date2");
+                            String formattedDate2 = (date2 != null) ? sdf.format(date2) : null;
+                        %>
+                        <% Date date1 = (Date) request.getAttribute("Date1");
+                            String formattedDate1 = (date1 != null) ? sdf.format(date1) : null;
+                        %>
+                        <% Date date4 = (Date) request.getAttribute("Date4");
+                            String formattedDate4 = (date4 != null) ? sdf.format(date4) : null;
+                        %>
+                        <div class="order-tracking" id="confirm">
+                            <span class="is-complete"></span>
+                            <% if (formattedDate1 != null) {%>
+                            <p>Chờ xác nhận<br><%= formattedDate1%></p>
+                                <% } else { %>
+                            <p>Chờ xác nhận</p>
+                            <% } %>
+                        </div>
+
+                        <div class="order-tracking" id="pick">
+                            <span class="is-complete"></span>
+                            <% if (formattedDate2 != null) {%>
+                            <p>Đã lấy hàng<br><%= formattedDate2%></p>
+                                <% } else { %>
+                            <p>Đã lấy hàng</p>
+                            <% } %>
+                        </div>
+
+                        <div class="order-tracking" id="deliver">
+                            <span class="is-complete"></span>
+                            <% if (formattedDate3 != null) {%>
+                            <p>Đang giao<br><%= formattedDate3%></p>
+                                <% } else { %>
+                            <p>Đang giao</p>
+                            <% }%>
+                        </div>
+                        <div class="order-tracking" id="complete">
+                            <span class="is-complete"></span>
+                            <% if (formattedDate4 != null) {%>
+                            <p>Hoàn Thành<br><%= formattedDate4%></p>
+                                <% } else { %>
+                            <p>Hoàn Thành</p>
+                            <% }%>
+                        </div>
+
+                        <script>
+                            var status = '<%= status%>';
+
+                            if (status === 'hoan thanh') {
+                                document.getElementById('complete').classList.add('completed');
+                                document.getElementById('deliver').classList.add('completed');
+                                document.getElementById('pick').classList.add('completed');
+                                document.getElementById('confirm').classList.add('completed');
+                            }
+                            if (status === 'dang giao') {
+                                document.getElementById('deliver').classList.add('completed');
+                                document.getElementById('pick').classList.add('completed');
+                                document.getElementById('confirm').classList.add('completed');
+                            }
+                            if (status === 'cho lay hang') {
+                                document.getElementById('pick').classList.add('completed');
+                                document.getElementById('confirm').classList.add('completed');
+                            }
+                            if (status === 'xac nhan don') {
+                                document.getElementById('confirm').classList.add('completed');
+                            } else {
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="review_form_wrapper">
             <h3>Viết đánh giá của bạn</h3>
@@ -196,7 +280,85 @@
                 pointer-events: none; /* disable click events */
                 /* rest of the styles */
             }
-
+            .hh-grayBox {
+                background-color: #F8F8F8;
+                margin-bottom: 20px;
+                padding: 35px;
+                margin-top: 20px;
+            }
+            .pt45{padding-top:45px;}
+            .order-tracking{
+                text-align: center;
+                width: 25%;
+                position: relative;
+                display: block;
+            }
+            .order-tracking .is-complete{
+                display: block;
+                position: relative;
+                border-radius: 50%;
+                height: 30px;
+                width: 30px;
+                border: 0px solid #AFAFAF;
+                background-color: #f7be16;
+                margin: 0 auto;
+                transition: background 0.25s linear;
+                -webkit-transition: background 0.25s linear;
+                z-index: 2;
+            }
+            .order-tracking .is-complete:after {
+                display: block;
+                position: absolute;
+                content: '';
+                height: 14px;
+                width: 7px;
+                top: -2px;
+                bottom: 0;
+                left: 5px;
+                margin: auto 0;
+                border: 0px solid #AFAFAF;
+                border-width: 0px 2px 2px 0;
+                transform: rotate(45deg);
+                opacity: 0;
+            }
+            .order-tracking.completed .is-complete{
+                border-color: #27aa80;
+                border-width: 0px;
+                background-color: #27aa80;
+            }
+            .order-tracking.completed .is-complete:after {
+                border-color: #fff;
+                border-width: 0px 3px 3px 0;
+                width: 7px;
+                left: 11px;
+                opacity: 1;
+            }
+            .order-tracking p {
+                color: #A4A4A4;
+                font-size: 16px;
+                margin-top: 8px;
+                margin-bottom: 0;
+                line-height: 20px;
+            }
+            .order-tracking p span{font-size: 14px;}
+            .order-tracking.completed p{color: #000;}
+            .order-tracking::before {
+                content: '';
+                display: block;
+                height: 3px;
+                width: calc(100% - 40px);
+                background-color: #f7be16;
+                top: 13px;
+                position: absolute;
+                left: calc(-50% + 20px);
+                z-index: 0;
+            }
+            .order-tracking:first-child:before{display: none;}
+            .order-tracking.completed:before{background-color: #27aa80;}
+            h2 {
+                font-weight: bold;
+                margin-top: 30px;
+            }
         </style>
     </body>
 
