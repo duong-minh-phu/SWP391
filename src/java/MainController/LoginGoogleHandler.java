@@ -51,6 +51,8 @@ public class LoginGoogleHandler extends HttpServlet {
                 userDAO dao = new userDAO();
                 Entity.User a = dao.checkAccGG(user.getEmail(),user.getId());
                 HttpSession session = request.getSession();
+                Entity.User b = dao.checkAccGGdelete(user.getEmail(),user.getId());
+                if(b!=null){
                 if(a==null){
                     dao.signup(user.getEmail(), user.getId());
                     Entity.User user1 = dao.checkUser(user.getEmail(), user.getId());                
@@ -67,7 +69,10 @@ public class LoginGoogleHandler extends HttpServlet {
                     email.setMaxAge(0);
                     pass.setMaxAge(0);
                 }
-                
+                }else{
+                    request.setAttribute("error", "Tài khoản GG này của bạn đã bị khóa!!");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                }
                 
                 
                 request.getRequestDispatcher("home").forward(request, response);

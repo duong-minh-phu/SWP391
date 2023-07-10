@@ -688,6 +688,21 @@ public class productDAO {
         }
         return list;
     }
+    public List<Product> getTop5Product() {
+        List<Product> list = new ArrayList<>();
+        String sql = "SELECT TOP 5 p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img FROM product p where p.status='TRUE' ORDER BY NEWID()";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Product(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getString(4), rs.getInt(5), rs.getString(6)));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
 
     public List<Product> getTrendProduct() {
         List<Product> list = new ArrayList<>();

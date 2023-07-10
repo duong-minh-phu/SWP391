@@ -17,7 +17,7 @@ import DAO.BlogDAO;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Part;
-
+import java.nio.charset.StandardCharsets;
 /**
  *
  * @author luong
@@ -41,9 +41,10 @@ public class UpdateBlog extends HttpServlet {
             try{
                 int blog_id = Integer.parseInt(request.getParameter("blog_id"));
                 String blog_name = request.getParameter("update_name");
-                String blog_describe = request.getParameter("update_describe");
+                String blog_describe1 = request.getParameter("update_describe");
+                String blog_describe=new String(blog_describe1.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
                 BlogDAO dao = new BlogDAO();
-            
+                System.out.println(blog_describe);
             Part filePart = request.getPart("updatess_img");
             System.out.println(filePart);
             String realPath = request.getServletContext().getRealPath("/images/");

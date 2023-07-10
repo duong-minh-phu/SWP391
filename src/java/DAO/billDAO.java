@@ -157,7 +157,7 @@ public class billDAO {
     public List<Bill> getBill() {
         List<Bill> list = new ArrayList<>();
         String sql = "select p.bill_id,c.user_name,p.total_money,p.payment,p.address,p.date,p.phone\n"
-                + "from bill p inner join users c on p.user_id=c.user_id and p.delivery_status='False'";
+                + "from bill p inner join users c on p.user_id=c.user_id and p.delivery_status='False' order by date desc ";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -192,7 +192,7 @@ public class billDAO {
 
     public List<Bill> getBillByDay() {
         List<Bill> list = new ArrayList<>();
-        String sql = "select b.bill_id, u.user_name,b.total_money,b.payment,b.address,b.date,b.phone from bill b inner join users u on b.user_id = u.user_id where date = cast(getdate() as Date) b.delivery_status='False'";
+        String sql = "select b.bill_id, u.user_name,b.total_money,b.payment,b.address,b.date,b.phone from bill b inner join users u on b.user_id = u.user_id where date = cast(getdate() as Date) and b.delivery_status='False'";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -279,7 +279,7 @@ public class billDAO {
     public List<Bill> getBillsByUserId(int user_id) throws Exception {
         List<Bill> bills = new ArrayList<>();
         try {
-            String sql = "SELECT bill_id, date, payment, address, total_money, phone, bill_status FROM bill WHERE user_id = ?";
+            String sql = "SELECT bill_id, date, payment, address, total_money, phone, bill_status FROM bill WHERE user_id = ? and delivery_status='False' ORDER BY date DESC";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, user_id);
@@ -318,6 +318,24 @@ public class billDAO {
         }
 
         return 0;
+    }
+    
+    public String getstatus(int billid) {
+        try {
+            String sql = "select b.bill_status from bill b where b.bill_id=?";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, billid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String a = rs.getString(1);
+                return a;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
     }
 
     public int getbillid() {
@@ -364,6 +382,19 @@ public class billDAO {
             while (rs.next()) {
                 String status = rs.getString("Status");
                 return status;
+    public int quality(int month) {
+        try {
+            String sql = "select sum(d.quantity)\n"
+                    + "  from bill b inner join bill_detail d\n"
+                    + "  on b.bill_id=d.bill_id\n"
+                    + "  where MONTH(b.date)=? and b.delivery_status='False'";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, month);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int a = rs.getInt(1);
+                return a;
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -441,7 +472,8 @@ public class billDAO {
             String sql = "SELECT bill_id, date, payment, address, total_money, bill_status\n"
                     + "FROM bill\n"
                     + "WHERE bill_status = 'xac nhan don'\n"
-                    + "AND user_id = ?";
+                    + "AND user_id = ?\n"
+                    + "ORDER BY date DESC";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, user_id);
@@ -461,7 +493,8 @@ public class billDAO {
             String sql = "SELECT bill_id, date, payment, address, total_money, bill_status\n"
                     + "FROM bill\n"
                     + "WHERE bill_status = 'cho lay hang'\n"
-                    + "AND user_id = ?";
+                    + "AND user_id = ?\n"
+                    + "ORDER BY date DESC";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, user_id);
@@ -481,7 +514,8 @@ public class billDAO {
             String sql = "SELECT bill_id, date, payment, address, total_money, bill_status\n"
                     + "FROM bill\n"
                     + "WHERE bill_status = 'dang giao'\n"
-                    + "AND user_id = ?";
+                    + "AND user_id = ?\n"
+                    + "ORDER BY date DESC";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, user_id);
@@ -501,7 +535,29 @@ public class billDAO {
             String sql = "SELECT bill_id, date, payment, address, total_money, bill_status\n"
                     + "FROM bill\n"
                     + "WHERE bill_status = 'hoan thanh'\n"
-                    + "AND user_id = ?";
+                    + "AND user_id = ?\n"
+                    + "ORDER BY date DESC";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, user_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                bills.add(new Bill(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getString(4), rs.getFloat(5), rs.getString(6)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bills;
+    }
+
+    public List<Bill> getBillsStatus5(int user_id) throws Exception {
+        List<Bill> bills = new ArrayList<>();
+        try {
+            String sql = "SELECT bill_id, date, payment, address, total_money, bill_status\n"
+                    + "FROM bill\n"
+                    + "WHERE delivery_status = 'True'\n"
+                    + "AND user_id = ?\n"
+                    + "ORDER BY date DESC";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, user_id);

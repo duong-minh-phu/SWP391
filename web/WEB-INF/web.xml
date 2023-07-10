@@ -163,6 +163,12 @@
     <servlet>
         <servlet-name>OutDate</servlet-name>
         <servlet-class>MainController.OutDate</servlet-class>
+        <servlet-name>DeleteAll</servlet-name>
+        <servlet-class>MainController.DeleteAll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderCancel</servlet-name>
+        <servlet-class>MainController.OrderCancel</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
@@ -329,12 +335,20 @@
         <url-pattern>/RecoveryCategory</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>ProductDate</servlet-name>
         <url-pattern>/ProductDate</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OutDate</servlet-name>
         <url-pattern>/OutDate</url-pattern>
+
+        <servlet-name>DeleteAll</servlet-name>
+        <url-pattern>/DeleteAll</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderCancel</servlet-name>
+        <url-pattern>/OrderCancel</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

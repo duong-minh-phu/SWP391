@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import java.nio.charset.StandardCharsets;
 
 /**
  *
@@ -30,11 +31,13 @@ public class UpdateProduct extends HttpServlet {
         try {
             String category_id = request.getParameter("update_category_id");
             String productId = request.getParameter("product_id");
-            String product_name = request.getParameter("update_name");
+            String product_name1 = request.getParameter("update_name");
+            String product_name=new String(product_name1.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
             String product_price = request.getParameter("update_price");
             String product_quantity = request.getParameter("update_quantity");
-            String product_describe = request.getParameter("update_describe");
             String company = request.getParameter("update_company");
+            String product_describe1 = request.getParameter("update_describe");
+            String product_describe=new String(product_describe1.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
             int quantity = Integer.parseInt(product_quantity);
             Float price = Float.parseFloat(product_price);
             int cid = Integer.parseInt(category_id);

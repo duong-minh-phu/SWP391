@@ -46,9 +46,14 @@ public class AddToCart extends HttpServlet {
             Product product = new productDAO().getProductByID(id);
             HttpSession session = request.getSession();
             Cart cart = (Cart) session.getAttribute("cart");
-            User user = (User) session.getAttribute("user");
-            
-            if (user != null) {
+            User user = (User) session.getAttribute("user");            
+            String a=(String) session.getAttribute("deletecart");
+            if(a!=null){
+                cart = new Cart();
+                user.setCart(cart);
+                session.removeAttribute("deletecart");
+            }
+            if (user != null) {                
                 cart = user.getCart();
                 if (cart == null) {
                     cart = new Cart();
@@ -57,13 +62,18 @@ public class AddToCart extends HttpServlet {
                 
                 user.setCart(cart);
                 session.setAttribute("user", user);
+            }else{
+                request.setAttribute("error", "Vui lòng Login trước khi mua hàng!!!!");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                 
             }
-            
-            if (cart == null){
-                
-                cart = new Cart();
-            }
-            cart.addItem(product, quantity);   
+                      
+//            if (cart == null){
+//                
+//                cart = new Cart();
+//            }
+//            cart.addItem(product, quantity);
+            System.out.println(a);
             session.setAttribute("size", cart.size());
             session.setAttribute("cart", cart);
             

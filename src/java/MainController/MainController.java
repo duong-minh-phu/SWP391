@@ -128,6 +128,9 @@ public class MainController extends HttpServlet {
             if (action.equals("deleteFromCart")) {
                 url = "DeleteFromCart";
             }
+            if (action.equals("deleteall")) {
+                url = "DeleteAll";
+            }
             if (action.equals("delivery")) {
                 url = "Delivery";
             }
@@ -189,6 +192,10 @@ public class MainController extends HttpServlet {
                 
                 url = "UpdateBlog";
             }
+             if (action.equals("dashboard1")){
+                
+                url = "Dashboard1";
+            }       
             if (action.equals("updateBlog")){
                 String blog_id = request.getParameter("blog_id");
                 BlogDAO b = new BlogDAO();
@@ -239,6 +246,9 @@ public class MainController extends HttpServlet {
             }
             if (action.equals("ordershipdone")) {
                 url = "OrderShipDone";
+            }
+            if (action.equals("ordercancel")) {
+                url = "OrderCancel";
             }
             if (action.equals("categorymana")) {
                 url = "CategoryManager";

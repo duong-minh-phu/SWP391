@@ -66,7 +66,7 @@
                     <div class="col-lg-6 col-md-12">
                         <div class="contact_message form">
                             <h3>Gửi thông tin phản hồi</h3>   
-                            <form id="contact-form" method="GET" action="https://script.google.com/macros/s/AKfycbyBz7RsdBlLwdF_hZioXESzy0mGwVFHLVlSeJfkuzmV1KunA0qZUWoSYQJCdtfuhw_dHQ/exec">
+                            <form id="contact-form" method="GET" action="https://script.google.com/macros/s/AKfycbyeAEBJR9nsCWlK1RTsqjFOwi2-20hhS4iZ-nVEs3Z2ap0S_BVGAxLpoUpcwCgSZeGh/exec">
                                 <p>       
                                     <label>  Địa chỉ email</label>
                                     <input name="Email" id="Email" pattern="[^ @]*@[^ @]*" placeholder="Email *" required="" value="" type="email">
@@ -95,7 +95,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="map-area">
-                            <iframe id="googleMap" style="border: none;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742.9298516338627!2d105.96738361530592!3d20.261743818893542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313679dd0a34002d%3A0xf4c06f1e513c7618!2zVHLhuqduIEjGsG5nIMSQ4bqhbywgVMOibiBUaMOgbmgsIFRwLiBOaW5oIELDrG5oLCBOaW5oIELDrG5oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1635102766441!5m2!1svi!2s"></iframe>
+                           
                         </div>
                     </div>
                 </div>

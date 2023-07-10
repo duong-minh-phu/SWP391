@@ -51,6 +51,8 @@
 
             <hr>
             <ul class="app-menu">
+                <li><a class="app-menu__item" href="MainController?action=dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
+                            class="app-menu__label">Bảng điều khiển</span></a></li>
                 <li><a class="app-menu__item" href="Productmanager"><i
                             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
                 <li><a class="app-menu__item" href="MainController?action=blogmanagement"><i
@@ -92,7 +94,7 @@
                                             <th>ID tác giả</th>
                                             <th>Ảnh</th>
                                             <th>Tên Blog</th>
-                                            <th>Chi tiết bài viết</th>
+                                            
                                             <th>Ngày đăng</th>
                                             <th>Chức năng</th>
                                         </tr>
@@ -104,7 +106,7 @@
                                                 <td>${b.user}</td>
                                                 <td><img src="${b.img}" alt=""height="150px;" width="100px;"></td>
                                                 <td>${b.blog_name}</td>
-                                                <td>${b.blog_describe}</td>
+                                                
                                                 <td>${b.date}</td>
 
                                                 <td>

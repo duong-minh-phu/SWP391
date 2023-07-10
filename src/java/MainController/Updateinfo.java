@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import java.nio.charset.StandardCharsets;
 /**
  *
  * @author ROG STRIX
@@ -39,12 +39,13 @@ public class Updateinfo extends HttpServlet {
                 Entity.User user = (Entity.User) session.getAttribute("user");
                 if (user != null) {
                     String user_name = request.getParameter("user_name");
+                    String usernamedecode=new String(user_name.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
                     String user_pass = request.getParameter("user_pass");
                     String user_phone = request.getParameter("user_phone");
                     int user_id = user.getUser_id();
                     userDAO dao = new userDAO();
-                    dao.updateUser(user_id, user_name, user.getUser_pass(),user_phone);
-                    Entity.User user1 = new Entity.User(user.getUser_id(), user_name, user.getUser_email(), user.getUser_pass(), user.getIsAdmin(),user_phone);
+                    dao.updateUser(user_id, usernamedecode, user.getUser_pass(),user_phone);
+                    Entity.User user1 = new Entity.User(user.getUser_id(), usernamedecode, user.getUser_email(), user.getUser_pass(), user.getIsAdmin(),user_phone);
                     session.setAttribute("user", user1);
                     request.setAttribute("infor", "Cập nhật thành công!!!");
                     request.getRequestDispatcher("my-account.jsp").forward(request, response);

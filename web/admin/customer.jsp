@@ -36,7 +36,7 @@
 
 
                 <!-- User Menu-->
-                <li><a class="app-nav__item" href="MainController?action=dashboard"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+                <li><a class="app-nav__item" href="MainController?action=logout"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
                 </li>
             </ul>
@@ -53,12 +53,14 @@
             </div>
             <hr>
             <ul class="app-menu">
-                <li><a class="app-menu__item" href="MainController?action=dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
+                <li><a class="app-menu__item" href="MainController?action=dashboard1"><i class='app-menu__icon bx bx-tachometer'></i><span
                             class="app-menu__label">Bảng điều khiển</span></a></li>
                 <li><a class="app-menu__item" href="MainController?action=customermanager"><i class='app-menu__icon bx bx-user-voice'></i><span
                             class="app-menu__label">Quản lý khách hàng</span></a></li>
                 <li><a class="app-menu__item" href="MainController?action=customermanager1"><i class='app-menu__icon bx bx-user-voice'></i><span
                             class="app-menu__label">Quản lý khách hàng đã xóa</span></a></li>
+                            <li><a class="app-menu__item" href="MainController?action=money"><i class='app-menu__icon bx bx-user-voice'></i><span
+                            class="app-menu__label">tiền</span></a></li>
                 
                 
             </ul>
