@@ -51,7 +51,7 @@ public class Cart {
         items.remove(key);
     }
 
-    public void deleteAll(Product key) {
+    public void deleteAll() {
         items.clear();
     }
 

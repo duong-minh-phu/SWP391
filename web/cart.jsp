@@ -51,11 +51,6 @@
             <div class="container">  
                 <form> 
                     <div class="row">
-                        <div class="col-12 text-right">
-                            <button class="product_remove" style="background-color: #e74c3c; color: #fff; padding: 7px 15px; border: none; border-radius: 5px;">
-                                <a onclick="confirmDelete1('${i.key.product_id}')" style="text-decoration: none; color: #fff;"> Clear Cart </a>
-                            </button>
-                        </div>
                         <div class="table_desc">
                             <div class="cart_page table-responsive">
 
@@ -108,19 +103,6 @@
                                     }
                                 </script>
                                 <script>
-                                    function confirmDelete1(value) {
-                                        var message = "Bạn có chắc chắn muốn xóa tất cả khỏi giỏ hàng không?";
-                                        var result = confirm(message);
-                                        if (result) {
-                                            // The user clicked OK, so delete the product.
-                                            window.location.href = "MainController?action=deleteall&product_id=" + value;
-                                        } else {
-                                            // The user clicked Cancel, so do nothing.
-                                        }
-                                    }
-                                </script>
-
-                                <script>
                                     function update(product_id, quantity) {
                                         //gọi ra class XMLHTTPRequst() làm gì k cần biết
                                         const xhttp = new XMLHttpRequest();
@@ -143,11 +125,28 @@
                                         update(value, event.target.value);
                                     }
                                 </script>
-
-
-
+                                
+                                <script>
+                                    function confirmDelete1() {
+                                        var message = "Bạn có chắc chắn muốn xóa tất cả khỏi giỏ hàng không?";
+                                        var result = confirm(message);
+                                        if (result) {
+                                            // The user clicked OK, so delete the product.
+                                            window.location.href = "MainController?action=deleteall";
+                                        } else {
+                                            // The user clicked Cancel, so do nothing.
+                                        }
+                                    }
+                                </script>
                             </div> 
+
+                            <div class="col-12 text-right">
+                                    <button class="product_remove" style="background-color: #e74c3c; color: #fff; padding: 7px 15px; border: none; border-radius: 5px;">
+                                        <a onclick="confirmDelete1()" style="text-decoration: none; color: #fff;"> Clear Cart </a>
+                                    </button>
+                            </div>
                         </div>
+
                     </div>
             </div>
 
