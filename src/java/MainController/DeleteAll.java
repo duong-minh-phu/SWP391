@@ -36,17 +36,14 @@ public class DeleteAll extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String URL = "cart.jsp";
-        try{
-            String id = request.getParameter("product_id");
-            Product product = new productDAO().getProductByID(id);
-            HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(false);
+            if (session != null) {
             Cart cart = (Cart) session.getAttribute("cart");
-            cart.deleteAll(product);
-            session.setAttribute("cart", cart);
-            session.setAttribute("size", cart.size());
-        }finally{
-            RequestDispatcher rd = request.getRequestDispatcher(URL);
-            rd.forward(request, response);
+            
+            if (cart != null) {
+                cart.deleteAll();
+                session.setAttribute("size", cart.size());
+            }
         }
     }
 
