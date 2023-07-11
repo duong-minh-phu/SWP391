@@ -42,11 +42,12 @@ public class PaymentBill extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            HttpSession session = request.getSession();         
+            HttpSession session = request.getSession();           
             String payment_method = request.getParameter("payment_method");
             Cart cart = (Cart) session.getAttribute("cart");
             float total_payment = cart.getTotalMoney();
-            String address = request.getParameter("address");
+            String address1 = request.getParameter("address");
+            String address=new String(address1.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
             String phone = request.getParameter("phone");
             String payment = null;
             if (payment_method.equals("cod")) {
@@ -57,7 +58,7 @@ public class PaymentBill extends HttpServlet {
             u.setCart(cart);
             String date = curDate.toString();
             billDAO dao = new billDAO();             
-            dao.addOrder(u, total_payment, payment, address,date, phone);
+            dao.addOrder(u, total_payment, payment, address, date, phone);
             dao.updatebilldely(dao.getbillid());
             session.setAttribute("deletecart", date);
             session.removeAttribute("size");
@@ -74,6 +75,7 @@ public class PaymentBill extends HttpServlet {
         }
         
     }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

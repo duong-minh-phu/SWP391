@@ -6,6 +6,7 @@ import Entity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,4 +67,28 @@ public class UserContactDAO {
         return addressPhoneList;
     }
 
+    public boolean checkDuplicateContact(String phone, String address) throws SQLException, Exception {
+        try {
+            String sql = "SELECT COUNT(*) FROM user_contact WHERE phone_number = ? AND address = ?";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, phone);
+            ps.setString(2, address);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return false;
+    }
 }
