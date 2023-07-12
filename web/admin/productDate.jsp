@@ -51,8 +51,6 @@
 
             <hr>
             <ul class="app-menu">
-                <li><a class="app-menu__item" href="MainController?action=dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
-                            class="app-menu__label">Bảng điều khiển</span></a></li>
                 <li><a class="app-menu__item" href="Productmanager"><i
                             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
                 <li><a class="app-menu__item" href="MainController?action=blogmanagement"><i
@@ -85,7 +83,7 @@
                                 <div class="col-sm-2">
                                     <a class="btn btn-add btn-sm" href="MainController?action=productdelete" >Sản phẩm đã hết hàng</a>
                                 </div>
-                                 <div class="col-sm-2">
+                                <div class="col-sm-2">
                                     <a class="btn btn-add btn-sm" href="MainController?action=productdate" >Sản phẩm sắp đến hạn</a>
                                 </div>
                                 <div class="col-sm-2">
@@ -101,7 +99,7 @@
                                         <tr>
                                             <th>Danh mục</th>
                                             <th>Tên sản phẩm</th>
-                                            <th>Giá</th>
+                                            <th>Giá Sale</th>
                                             <th>Thông tin</th>
                                             <th>Số lượng</th>
                                             <th>Hạn</th>
@@ -132,94 +130,28 @@
                                                     </button>
                                                 </td>
                                             </tr>
-
                                             <!--
                                             MODAL
                                             -->
 
-                                        <div class="modal fade" id="ModalUP${p.product_id}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-                                             data-keyboard="false">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        <div class="row">
-                                                            <div class="form-group  col-md-12">
-                                                                <span class="thong-tin-thanh-toan">
-                                                                    <h5>Chỉnh sửa thông tin sản phẩm</h5>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="form-group col-md-6">
-                                                                <label for="exampleSelect1" class="control-label">Danh mục</label>
-                                                                <select name="category_id" class="form-control" id="exampleSelect1" >
-                                                                    <option>-- Chọn danh mục --</option>
-                                                                    <c:forEach items="${CategoryData}" var="cat">
-                                                                        <option value="${cat.category_id}">${cat.category_name}</option>
-                                                                    </c:forEach>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group col-md-6">
-                                                                <label class="control-label">Tên sản phẩm</label>
-                                                                <input class="form-control" type="text" name="product_name" required value="${p.product_name}">
-                                                            </div>
-                                                            <div class="form-group col-md-6">
-                                                                <label class="control-label" >Giá</label>
-                                                                <input class="form-control" type="number" name="product_price" required value="${p.product_price}">
-                                                            </div>
-                                                            <div class="form-group col-md-6">
-                                                                <label class="control-label">Thông tin</label>
-                                                                <input class="form-control" type="text" name="product_describe" value="${p.product_describe}">
-                                                            </div>
 
-                                                            <div class="form-group col-md-6">
-                                                                <label class="control-label">Số lượng</label>
-                                                                <input class="form-control" type="text" name="product_quantity" value="${p.quantity}">
-                                                            </div>
-                                                            <!--anh san pham-->
-                                                            <div class="form-group col-md-12">
-                                                                <label class="control-label">Ảnh sản phẩm</label>
-                                                                <div id="myfileupload">
-                                                                    <input type="file" id="uploadfile" name="product_img" value="${p.img}" onchange="readURL(this);" />
-                                                                </div>
-                                                                <div id="thumbbox">
-                                                                    <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
-                                                                    <a class="removeimg" href="javascript:"></a>
-                                                                </div>
-                                                                <div id="boxchoice">
-                                                                    <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-                                                                    <p style="clear:both"></p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <BR>
-                                                        <button class="btn btn-save" type="submit" >Lưu lại</button>
-                                                        <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-                                                        <BR>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--
-                                      MODAL
-                                        -->
-                                    </c:forEach>
-                                    <c:forEach items="${ProductDelete}" var="p">
-                                        <tr>
-                                            <td>${p.cate.category_name}</td>
-                                            <td>${p.product_name}</td>
-                                            <td>${p.product_price}</td>
-                                            <td>${p.product_describe}</td>
-                                            <td>${p.quantity}</td>
-                                            <td>${p.count} ngày</td>
-                                            <td>${p.company}</td>
-                                            <td><img src="${p.img}" alt="" width="200px;"></td>
+                                        </c:forEach>
+                                        <c:forEach items="${ProductDelete}" var="p">
+                                            <tr>
+                                                <td>${p.cate.category_name}</td>
+                                                <td>${p.product_name}</td>
+                                                <td>${p.product_price}</td>
+                                                <td>${p.product_describe}</td>
+                                                <td>${p.quantity}</td>
+                                                <td>${p.count} ngày</td>
+                                                <td>${p.company}</td>
+                                                <td><img src="${p.img}" alt="" width="200px;"></td>
 
-                                            <td>
-                                                <button class="btn btn-primary btn-sm trash" type="button" title="Phục hồi" value="${p.product_id}"><i class="fa-solid fa-recycle"></i>
-                                                </button>  
-                                        </tr>
-                                    </c:forEach>
+                                                <td>
+                                                    <button class="btn btn-primary btn-sm trash" type="button" title="Phục hồi" value="${p.product_id}"><i class="fa-solid fa-recycle"></i>
+                                                    </button>  
+                                            </tr>
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </form>
@@ -251,7 +183,6 @@
                 background-color: rgba(0, 0, 0, 0.5);
                 z-index: 9999;
             }
-
             .popup-content {
                 position: fixed;
                 left: 50%;
@@ -264,7 +195,6 @@
                 border-radius: 8px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             }
-
             .close-button {
                 position: absolute;
                 top: -15px;
@@ -282,14 +212,12 @@
                 align-items: center;
                 z-index: 1;
             }
-
             .alert {
                 padding: 15px;
                 margin-bottom: 1px;
                 border: 1px solid transparent;
                 border-radius: 4px;
             }
-
             .alert-success {
                 color: #155724;
                 background-color: #d4edda;
@@ -300,10 +228,8 @@
             document.addEventListener("DOMContentLoaded", function () {
                 var popup = document.getElementById("popup");
                 var closeButton = document.querySelector(".close-button");
-
                 // Hiển thị popup
                 popup.style.display = "block";
-
                 // Xử lý sự kiện khi nhấp vào nút đóng
                 closeButton.addEventListener("click", function () {
                     popup.style.display = "none";
@@ -360,7 +286,6 @@
                         '</span>';
                 document.getElementById("clock").innerHTML = tmp;
                 clocktime = setTimeout("time()", "1000", "Javascript");
-
                 function checkTime(i) {
                     if (i < 10) {
                         i = "0" + i;
@@ -370,7 +295,6 @@
             }
         </script>
         <script>
-
             $(document).ready(jQuery(function () {
                 jQuery(".trash").click(function () {
                     swal({
@@ -389,7 +313,6 @@
             }));
         </script>
         <script>
-
             $(document).ready(jQuery(function () {
                 $('button[title="Phục hồi"]').click(function () {
                     swal({
@@ -423,12 +346,12 @@
                 $(".edit").click(function () {
                     // Get the product ID from the data-product-id attribute
                     var product_id = $(this).data("product-id");
-
                     // Redirect the user to the edit product page
                     window.location = "MainController?action=updateProduct&product_id=" + product_id;
                 });
             });
         </script>
+
     </body>
 
 </html>

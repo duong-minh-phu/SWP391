@@ -43,7 +43,7 @@ public class Productdetail extends HttpServlet {
             List<Rating> rating = rate.getRatingsByProductID(product_id);
             double rating_ave = rate.calculateAverageRating(product_id);
             int rating_count = rate.countRatingsByProductId(product_id);
-            Entity.Product product = c.getProductByID(product_id);
+            Entity.Product product = c.getProductByID3(product_id);
             if(product==null){
                 response.sendRedirect("404.jsp");
             }
