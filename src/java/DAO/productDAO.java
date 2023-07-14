@@ -693,6 +693,32 @@ public class productDAO {
         }
         return list;
     }
+    
+    public List<Product> getProduct4() {
+        List<Product> list = new ArrayList<>();
+        String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img,p.company,p.create_date,p.exp_date from  \n"
+                + "product p inner join category c on p.category_id = c.category_id and p.status='TRUE'";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Category c = new Category(rs.getString(1));
+                LocalDate createDate = rs.getDate(9).toLocalDate(); // Lấy create_date từ ResultSet
+                LocalDate expDate = rs.getDate(10).toLocalDate(); // Lấy exp_date từ ResultSet
+
+                long monthsRemaining = ChronoUnit.DAYS.between(LocalDate.now(), expDate);
+
+                if (monthsRemaining > 0) {
+                    list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8), monthsRemaining));
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
 
     public List<Product> getProduct3() {
         List<Product> list = new ArrayList<>();

@@ -172,6 +172,10 @@
         <servlet-name>ProductDate</servlet-name>
         <servlet-class>MainController.ProductDate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShopAll</servlet-name>
+        <servlet-class>MainController.ShopAll</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
@@ -351,6 +355,10 @@
     <servlet-mapping>
         <servlet-name>ProductDate</servlet-name>
         <url-pattern>/ProductDate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShopAll</servlet-name>
+        <url-pattern>/ShopAll</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

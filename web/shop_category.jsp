@@ -61,7 +61,7 @@
                                 <div class="widget_list widget_categories">
                                     <h2>Danh mục</h2>
                                     <ul>
-                                        <li><a href="MainController?action=product">TẤT CẢ</a></li>
+                                        <li><a href="MainController?action=productall">TẤT CẢ</a></li>
                                         <c:forEach items="${CategoryData}" var="c">
                                             <li><a href="MainController?action=listByCategory&category_id=${c.category_id}">${c.category_name}</a></li>
                                             </c:forEach>
