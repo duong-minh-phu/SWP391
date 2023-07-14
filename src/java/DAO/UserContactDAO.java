@@ -91,4 +91,23 @@ public class UserContactDAO {
 
         return false;
     }
+
+    public void deleteUserContact(int user_id, String address, String phone) throws Exception {
+        try {
+            String sql = "DELETE FROM user_contact WHERE user_id = ? AND address = ? AND phone_number = ?";           
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, user_id);
+            ps.setString(2, address);
+            ps.setString(3, phone);
+            ps.executeUpdate();
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
 }
