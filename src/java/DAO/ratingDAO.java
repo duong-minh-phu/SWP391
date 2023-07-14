@@ -65,7 +65,8 @@ public class ratingDAO {
                 + "FROM Rating r\n"
                 + "INNER JOIN product p ON r.product_id = p.product_id\n"
                 + "INNER JOIN users u ON r.user_id = u.user_id\n"
-                + "WHERE r.product_id = ?";
+                + "WHERE r.product_id = ?\n"
+                + "ORDER BY r.date DESC";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
