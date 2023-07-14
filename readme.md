@@ -1,5 +1,4 @@
-# Reid Shop Project 
-*Online fashion store project. The idea behind the project was to form a complete management program for the online store from sales to product, order and customer management. From there, the store owner will clearly grasp the information, shorten the sales cycle, and manage the store in the traditional way.* 
+ 
 ## Technology
 
 #### Front-End
@@ -20,7 +19,6 @@
 - Log in / sign up
 - Delegation of rights
 - Manage orders / Customers / Orders
-- Payment: COD, MOMO (QRCODE), VNPay
 - Cart
 - Purchase
 - Account Management
