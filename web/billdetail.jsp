@@ -72,6 +72,12 @@
                                                     <td> <a href="#" class="reviewBtn" data-product-id="${d.product_id}" data-bill-id="${d.bill_id}">Viết đánh giá</a></td>
                                                 </tr>
                                             </c:forEach>
+                                            <tr>
+                                                <th></th>
+                                                <th>Phí ship</th>
+                                                <th></th>
+                                                <td><strong>30000</strong></td>
+                                            </tr>
                                         </tbody>
                                     </table>   
                                 </div> 
@@ -279,7 +285,7 @@
                 pointer-events: none; /* disable click events */
                 /* rest of the styles */
             }
-             .hh-grayBox {
+            .hh-grayBox {
                 background-color: #F8F8F8;
                 margin-bottom: 20px;
                 padding: 35px;

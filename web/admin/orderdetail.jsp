@@ -86,7 +86,7 @@
                                         <th>Tên sản phẩm</th>                                        
                                         <th>Số lượng</th>
                                         <th>Đơn giá</th>
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -100,6 +100,13 @@
                                         </tr>
                                     </c:forEach>
                                 </tbody>
+                                                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th>Phí ship</th>
+                                        <th></th>
+                                        <td><strong>30000</strong></td>
+                                    </tr>
                             </table>
                         </div>
                     </div>

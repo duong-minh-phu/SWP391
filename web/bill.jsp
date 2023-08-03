@@ -98,7 +98,7 @@
                                                 <td>${b.getDate()}</td>
                                                 <td><span class="success">${b.getPayment()}</span></td>
                                                 <td>${b.getAddress()}</td>
-                                                <td>${b.getTotal()}</td>
+                                                <td>${b.getTotal()+30000}</td>
                                                 <td>${b.getBill_status()}</td>
                                                 <td><a href="MainController?action=showdetailcus&bill_id=${b.getBill_id()}" class="view">view</a></td>
                                             </tr>
@@ -109,7 +109,7 @@
                                                 <td>${b.getDate()}</td>
                                                 <td><span class="success">${b.getPayment()}</span></td>
                                                 <td>${b.getAddress()}</td>
-                                                <td>${b.getTotal()}</td>
+                                                <td>${b.getTotal()+30000}</td>
                                                 <td>${b.getBill_status()}</td>
                                                 <td><a href="MainController?action=showdetailcus&bill_id=${b.getBill_id()}" class="view">view</a></td>
                                             </tr>
@@ -120,7 +120,7 @@
                                                 <td>${b.getDate()}</td>
                                                 <td><span class="success">${b.getPayment()}</span></td>
                                                 <td>${b.getAddress()}</td>
-                                                <td>${b.getTotal()}</td>
+                                                <td>${b.getTotal()+30000}</td>
                                                 <td>${b.getBill_status()}</td>
                                                 <td><a href="MainController?action=showdetailcus&bill_id=${b.getBill_id()}" class="view">view</a></td>
                                             </tr>
@@ -131,7 +131,7 @@
                                                 <td>${b.getDate()}</td>
                                                 <td><span class="success">${b.getPayment()}</span></td>
                                                 <td>${b.getAddress()}</td>
-                                                <td>${b.getTotal()}</td>
+                                                <td>${b.getTotal()+30000}</td>
                                                 <td>${b.getBill_status()}</td>
                                                 <td><a href="MainController?action=showdetailcus&bill_id=${b.getBill_id()}" class="view">view</a></td>
                                             </tr>
@@ -142,7 +142,7 @@
                                                 <td>${b.getDate()}</td>
                                                 <td><span class="success">${b.getPayment()}</span></td>
                                                 <td>${b.getAddress()}</td>
-                                                <td>${b.getTotal()}</td>
+                                                <td>${b.getTotal()+30000}</td>
                                                 <td>da huy</td>
                                                 <td><a href="MainController?action=showdetailcus&bill_id=${b.getBill_id()}" class="view">view</a></td>
                                             </tr>
@@ -153,7 +153,7 @@
                                                 <td>${b.getDate()}</td>
                                                 <td><span class="success">${b.getPayment()}</span></td>
                                                 <td>${b.getAddress()}</td>
-                                                <td>${b.getTotal()}</td>
+                                                <td>${b.getTotal()+30000}</td>
                                                 <td>${b.getBill_status()}</td>
 
                                                 <td><a href="MainController?action=showdetailcus&bill_id=${b.getBill_id()}" class="view">view</a></td>
