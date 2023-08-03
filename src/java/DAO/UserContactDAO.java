@@ -67,13 +67,14 @@ public class UserContactDAO {
         return addressPhoneList;
     }
 
-    public boolean checkDuplicateContact(String phone, String address) throws SQLException, Exception {
+    public boolean checkDuplicateContact(int user_id,String phone, String address) throws SQLException, Exception {
         try {
-            String sql = "SELECT COUNT(*) FROM user_contact WHERE phone_number = ? AND address = ?";
+            String sql = "SELECT COUNT(*) FROM user_contact WHERE user_id = ? AND phone_number = ? AND address = ?";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, phone);
-            ps.setString(2, address);
+            ps.setInt(1, user_id);
+            ps.setString(2, phone);
+            ps.setString(3, address);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {

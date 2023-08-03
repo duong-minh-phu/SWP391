@@ -94,7 +94,6 @@
                                     </style>
                                     <div style="margin-top: 15px;">
                                         <button type="button" onclick="window.location.href = 'addmoreaddress.jsp'">Thêm địa chỉ và số điện thoại mới</button>
-                                        <button type="button" onclick="deleteAddressPhone()">Xóa địa chỉ và số điện thoại</button>
                                     </div>
                                     <c:if test="${not empty error}">
                                         <div class="error-message">
@@ -141,7 +140,7 @@
                             </div>
                             <div class="payment_method">
                                 <div class="panel-default">
-                                    <input id="payment_defult" value="cod" required name="payment_method" type="radio"
+                                    <input id="payment_defult" value="cod" required name="payment_method" type="checkbox"
                                            data-target="createp_account" />
                                     <label for="payment_defult" data-toggle="collapse" data-target="#collapsedefult"
                                            aria-controls="collapsedefult">Thanh toán khi nhận hàng <img src="assets/img/icon/papyel.png"

@@ -26,6 +26,7 @@ public class AddAddressServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
+        int u = user.getUser_id();
         if (user != null) {
             String address1 = request.getParameter("address");
             String address=new String(address1.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
@@ -44,7 +45,7 @@ public class AddAddressServlet extends HttpServlet {
                 return;
             }
             try {
-                if (userContactDAO.checkDuplicateContact(phone, address)) {
+                if (userContactDAO.checkDuplicateContact(u, phone, address)) {
                     request.setAttribute("error", "Số điện thoại và địa chỉ đã tồn tại.");
                     request.setAttribute("phone", phone);
                     request.setAttribute("address", address);
